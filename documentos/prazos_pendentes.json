@@ -1,0 +1,56 @@
+[
+  {
+    "numero": "7002410-25.2021.8.22.0021",
+    "tribunal": "TJRO",
+    "cliente": "— (verificar PJe)",
+    "tipo": "Criminal",
+    "orgao": "Buritis — Vara Criminal",
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "27/05/2026",
+      "data_prazo_final": "19/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
+  },
+  {
+    "numero": "7054209-31.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "cliente": "— (verificar PJe)",
+    "tipo": "Cível",
+    "orgao": "Porto Velho — 10ª Vara Cível",
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "26/05/2026",
+      "data_prazo_final": "18/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
+  },
+  {
+    "numero": "0021230-05.2025.8.04.9001",
+    "tribunal": "TJAM",
+    "cliente": "Jefferson Silva de Brito x Giuliano Quintino dos Santos",
+    "tipo": "Cível",
+    "orgao": "Des. Flávio Humberto Pascarelli Lopes",
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "31/05/2026",
+      "data_prazo_final": "23/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
+  }
+]

@@ -73,11 +73,15 @@
     "cliente": "— (verificar PJe)",
     "polo_ativo": "MP",
     "polo_passivo": "— (verificar PJe)",
-    "ultima_mov": "24/04/2026",
-    "mov_desc": "Documento | Expedição de documento | Movimentação processual",
+    "ultima_mov": "12/05/2026",
+    "mov_desc": "Outras Decisões",
     "prazo": "verificar",
     "status": "ATIVO",
     "andamentos": [
+      {
+        "data": "12/05/2026",
+        "descricao": "Outras Decisões"
+      },
       {
         "data": "24/04/2026",
         "descricao": "Documento | Expedição de documento | Movimentação processual"
@@ -85,10 +89,6 @@
       {
         "data": "29/01/2026",
         "descricao": "Mandado | Improcedência | Expedição de documento | Documento"
-      },
-      {
-        "data": "25/11/2025",
-        "descricao": "Manutenção da Prisão Preventiva"
       }
     ]
   },
@@ -133,24 +133,35 @@
     "cliente": "— (verificar PJe)",
     "polo_ativo": "—",
     "polo_passivo": "—",
-    "ultima_mov": "05/05/2026",
+    "ultima_mov": "27/05/2026",
     "mov_desc": "Mandado | Expedição de documento | Documento",
     "prazo": "ok",
     "status": "ATIVO",
     "andamentos": [
       {
-        "data": "05/05/2026",
+        "data": "27/05/2026",
         "descricao": "Mandado | Expedição de documento | Documento"
       },
       {
-        "data": "04/05/2026",
+        "data": "25/05/2026",
         "descricao": "Mandado | Expedição de documento | Documento"
       },
       {
-        "data": "16/04/2026",
+        "data": "22/05/2026",
         "descricao": "Mandado | Expedição de documento | Documento"
       }
-    ]
+    ],
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "27/05/2026",
+      "data_prazo_final": "19/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
   },
   {
     "numero": "0030474-74.2001.8.22.0019",
@@ -341,22 +352,22 @@
     "cliente": "— (verificar PJe)",
     "polo_ativo": "—",
     "polo_passivo": "—",
-    "ultima_mov": "10/03/2021",
-    "mov_desc": "Definitivo | Documento",
+    "ultima_mov": "28/05/2026",
+    "mov_desc": "Arquivamento | Expedição de documento",
     "prazo": "ok",
     "status": "ATIVO",
     "andamentos": [
       {
+        "data": "28/05/2026",
+        "descricao": "Arquivamento | Expedição de documento"
+      },
+      {
+        "data": "25/05/2026",
+        "descricao": "Desarquivamento"
+      },
+      {
         "data": "10/03/2021",
         "descricao": "Definitivo | Documento"
-      },
-      {
-        "data": "06/01/2021",
-        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
-      },
-      {
-        "data": "05/01/2021",
-        "descricao": "Não-Acolhimento de Embargos de Declaração | Expedição de documento"
       }
     ]
   },
@@ -393,22 +404,22 @@
     "cliente": "— (verificar PJe)",
     "polo_ativo": "—",
     "polo_passivo": "—",
-    "ultima_mov": "26/03/2026",
-    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "ultima_mov": "29/05/2026",
+    "mov_desc": "Improcedência | Expedição de documento",
     "prazo": "urgente",
     "status": "ATIVO",
     "andamentos": [
       {
+        "data": "29/05/2026",
+        "descricao": "Improcedência | Expedição de documento"
+      },
+      {
+        "data": "06/05/2026",
+        "descricao": "Recebimento do CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento"
+      },
+      {
         "data": "26/03/2026",
         "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
-      },
-      {
-        "data": "25/03/2026",
-        "descricao": "Recebimento no CEJUSC ou Centros de Conciliação/Mediação | Documento | Remessa para o CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento | de Conciliação | Movimentação processual"
-      },
-      {
-        "data": "06/03/2026",
-        "descricao": "Recebimento no CEJUSC ou Centros de Conciliação/Mediação | Remessa para o CEJUSC ou Centros de Conciliação/Mediação | Documento"
       }
     ]
   },
@@ -423,11 +434,15 @@
     "cliente": "— (verificar PJe)",
     "polo_ativo": "—",
     "polo_passivo": "—",
-    "ultima_mov": "11/03/2026",
-    "mov_desc": "Mandado",
+    "ultima_mov": "26/05/2026",
+    "mov_desc": "Mandado | Expedição de documento",
     "prazo": "atencao",
     "status": "ATIVO",
     "andamentos": [
+      {
+        "data": "26/05/2026",
+        "descricao": "Mandado | Expedição de documento"
+      },
       {
         "data": "11/03/2026",
         "descricao": "Mandado"
@@ -435,12 +450,19 @@
       {
         "data": "14/01/2026",
         "descricao": "Recebimento do CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento | Audiência do art. 334 CPC"
-      },
-      {
-        "data": "26/11/2025",
-        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
       }
-    ]
+    ],
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "26/05/2026",
+      "data_prazo_final": "18/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
   },
   {
     "numero": "7023346-63.2023.8.22.0001",
@@ -973,22 +995,22 @@
     "cliente": "Abrahao Custodio Ramos",
     "polo_ativo": "Estado / MP",
     "polo_passivo": "Abrahao Custodio Ramos",
-    "ultima_mov": "01/04/2026",
-    "mov_desc": "Recebimento | Documento",
+    "ultima_mov": "19/05/2026",
+    "mov_desc": "Petição | Ato ordinatório | Documento",
     "prazo": "ok",
     "status": "ATIVO",
     "andamentos": [
       {
-        "data": "01/04/2026",
+        "data": "19/05/2026",
+        "descricao": "Petição | Ato ordinatório | Documento"
+      },
+      {
+        "data": "18/05/2026",
         "descricao": "Recebimento | Documento"
       },
       {
-        "data": "30/03/2026",
-        "descricao": "Confirmada | Petição"
-      },
-      {
-        "data": "26/02/2026",
-        "descricao": "Ato ordinatório | Recebimento | Documento"
+        "data": "15/05/2026",
+        "descricao": "Confirmada"
       }
     ]
   },
@@ -1145,24 +1167,35 @@
     "cliente": "Jefferson Silva de Brito x Giuliano Quintino dos Santos",
     "polo_ativo": "Jefferson Silva de Brito",
     "polo_passivo": "Giuliano Quintino dos Santos / Michelle Moresco dos Santos",
-    "ultima_mov": "14/03/2026",
+    "ultima_mov": "31/05/2026",
     "mov_desc": "Disponibilização no Diário da Justiça Eletrônico",
     "prazo": "ok",
     "status": "ATIVO",
     "andamentos": [
       {
-        "data": "14/03/2026",
+        "data": "31/05/2026",
         "descricao": "Disponibilização no Diário da Justiça Eletrônico"
       },
       {
-        "data": "20/02/2026",
-        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Confirmada"
+        "data": "30/05/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
       },
       {
-        "data": "19/02/2026",
-        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+        "data": "25/05/2026",
+        "descricao": "Mero expediente | Expedição de documento"
       }
-    ]
+    ],
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "31/05/2026",
+      "data_prazo_final": "23/06/2026",
+      "urgente": false,
+      "calendar_ok": false
+    }
   },
   {
     "numero": "7013265-84.2025.8.22.0001",
