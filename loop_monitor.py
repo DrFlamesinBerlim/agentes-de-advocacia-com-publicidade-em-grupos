@@ -5,13 +5,15 @@ import hashlib
 import re
 import subprocess
 from datetime import datetime
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
 
 # CONFIGURAÇÕES DE MONITORAMENTO
 MONITOR_DIR = os.path.dirname(os.path.abspath(__file__))
-POLL_INTERVAL = 300  # segundos
 STATE_FILE = os.path.join(MONITOR_DIR, "sync_state.json")
 LOG_FILE = os.path.join(MONITOR_DIR, "sync_history.log")
 ANTIGRAVITY_OUTPUT = os.path.join(MONITOR_DIR, "antigravity_output.txt")
+HEARTBEAT_INTERVAL = 300  # Fallback a cada 5 minutos
 
 def get_file_hash(filepath):
     """Retorna o hash SHA-256 do arquivo para verificar mudanças de conteúdo reais."""
@@ -75,6 +77,8 @@ def execute_agent_instructions(filepath, agent_name):
     """Lê o arquivo de instruções do agente, cria arquivos e executa comandos se houver tags XML."""
     log_event(f"[MABIOS] Processando instruções de '{agent_name}' em '{os.path.basename(filepath)}'")
     
+    # Pequena pausa extra para garantir a liberação do arquivo pelo sincronizador do Drive
+    time.sleep(1)
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -160,8 +164,8 @@ def scan_directory():
     for entry in os.scandir(MONITOR_DIR):
         if entry.is_file():
             filename = entry.name
-            # Ignora arquivos de estado, log ou temporários
-            if filename in ("sync_state.json", "sync_history.log", "sync_state.json.tmp") or filename.endswith(".processed"):
+            # Ignora arquivos de estado, log, outputs ou arquivos processados
+            if filename in ("sync_state.json", "sync_history.log", "sync_state.json.tmp", "antigravity_output.txt", "claude_output.txt", "gemini_output.txt") or filename.endswith(".processed"):
                 continue
 
             filepath = entry.path
@@ -198,31 +202,53 @@ def scan_directory():
         save_state(state)
     else:
         save_state(state)
-    return changes_detected
+
+class MabiosHandler(FileSystemEventHandler):
+    """Manipulador de eventos do sistema de arquivos para responder em tempo real."""
+    def process(self, event):
+        if event.is_directory:
+            return
+        
+        filename = os.path.basename(event.src_path)
+        # Ignora arquivos internos de estado do monitor para evitar loop recursivo
+        if filename in ("sync_state.json", "sync_history.log", "sync_state.json.tmp", "antigravity_output.txt") or filename.endswith(".processed"):
+            return
+            
+        # Debounce de 2 segundos para dar tempo do arquivo ser completamente baixado/escrito pelo Drive
+        time.sleep(2)
+        log_event(f"[FUNDO] Evento de sistema de arquivos detectado para '{filename}'. Escaneando...")
+        scan_directory()
+
+    def on_modified(self, event):
+        self.process(event)
+
+    def on_created(self, event):
+        self.process(event)
 
 def main():
-    log_event(f"Iniciando monitoramento e motor MABIOS em '{MONITOR_DIR}' com intervalo dinâmico...")
-    backoff_index = 0
-    # Passos de verificação em segundos:
-    # 1m, 1m15, 1m30, 2m, 3m, 4m, 5m, 7m, 9m, 10m (3 vezes), 15m, 20m
-    backoff_steps = [60, 75, 90, 120, 180, 240, 300, 420, 540, 600, 600, 600, 900, 1200]
+    log_event(f"Iniciando monitoramento MABIOS v3 (Event-Driven com Watchdog) em '{MONITOR_DIR}'...")
     
-    while True:
-        try:
-            changes = scan_directory()
-            if changes:
-                backoff_index = 0  # Atividade detectada, volta para 'Uso Pleno' (1 minuto)
-                log_event("[ATIVIDADE] Alteração detectada no diretório. Resetando intervalo de monitoramento para 1 minuto (Uso Pleno).")
-            else:
-                if backoff_index < len(backoff_steps) - 1:
-                    backoff_index += 1
-            
-            interval = backoff_steps[backoff_index]
-            log_event(f"Aguardando {interval} segundos para a próxima verificação (Intervalo atual: {interval // 60}m {interval % 60}s)...")
-            time.sleep(interval)
-        except Exception as e:
-            log_event(f"Erro geral no loop de monitoramento: {e}")
-            time.sleep(60)
+    # Executa varredura inicial
+    scan_directory()
+    
+    # Configura e inicia o Watchdog Observer
+    event_handler = MabiosHandler()
+    observer = Observer()
+    observer.schedule(event_handler, MONITOR_DIR, recursive=False)
+    observer.start()
+    
+    log_event("[SISTEMA] Watchdog ativado. Escuta ativa e execução instantânea ligada!")
+    
+    try:
+        while True:
+            # Fallback/Heartbeat periódico a cada 5 minutos
+            time.sleep(HEARTBEAT_INTERVAL)
+            log_event("[SISTEMA] Heartbeat periódico de segurança executado.")
+            scan_directory()
+    except KeyboardInterrupt:
+        log_event("[SISTEMA] Encerrando monitoramento...")
+        observer.stop()
+    observer.join()
 
 if __name__ == "__main__":
     main()
