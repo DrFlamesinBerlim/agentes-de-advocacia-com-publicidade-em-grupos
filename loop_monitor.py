@@ -198,15 +198,31 @@ def scan_directory():
         save_state(state)
     else:
         save_state(state)
+    return changes_detected
 
 def main():
-    log_event(f"Iniciando monitoramento e motor MABIOS em '{MONITOR_DIR}' a cada {POLL_INTERVAL} segundos...")
+    log_event(f"Iniciando monitoramento e motor MABIOS em '{MONITOR_DIR}' com intervalo dinâmico...")
+    backoff_index = 0
+    # Passos de verificação em segundos:
+    # 1m, 1m15, 1m30, 2m, 3m, 4m, 5m, 7m, 9m, 10m (3 vezes), 15m, 20m
+    backoff_steps = [60, 75, 90, 120, 180, 240, 300, 420, 540, 600, 600, 600, 900, 1200]
+    
     while True:
         try:
-            scan_directory()
+            changes = scan_directory()
+            if changes:
+                backoff_index = 0  # Atividade detectada, volta para 'Uso Pleno' (1 minuto)
+                log_event("[ATIVIDADE] Alteração detectada no diretório. Resetando intervalo de monitoramento para 1 minuto (Uso Pleno).")
+            else:
+                if backoff_index < len(backoff_steps) - 1:
+                    backoff_index += 1
+            
+            interval = backoff_steps[backoff_index]
+            log_event(f"Aguardando {interval} segundos para a próxima verificação (Intervalo atual: {interval // 60}m {interval % 60}s)...")
+            time.sleep(interval)
         except Exception as e:
             log_event(f"Erro geral no loop de monitoramento: {e}")
-        time.sleep(POLL_INTERVAL)
+            time.sleep(60)
 
 if __name__ == "__main__":
     main()
