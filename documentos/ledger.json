@@ -1,0 +1,317 @@
+[
+    {
+        "timestamp": "2026-05-25T23:43:45.646520",
+        "agent": "Agente_Inferencia",
+        "action": "GERACAO_CONTEUDO",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "3e83a6ba97736ef85c906411e4909265781eac01c29eddc451ad21d6c8ec3c66"
+    },
+    {
+        "timestamp": "2026-05-25T23:43:45.667280",
+        "agent": "IA_Fiscalizadora",
+        "action": "FISCALIZACAO_[REJEITADO - ALUCINAÇÃO]",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "5c0a942784373010b9a9a774ead90eaf4a552691ead04d33ff2ba2465ef2121b"
+    },
+    {
+        "timestamp": "2026-05-25T23:43:45.669378",
+        "agent": "IA_Expurgadora",
+        "action": "EXPURGO_SABOTADOR",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "65008ac0eb3d20dab4962ab95b8fc1a424a477015110214076078283e7a83206"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.364544",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "gerador_graficos_radar.py",
+        "hash": "af529f5cb5f0545b9b84b311e91031c7badadb3f2f6987e42fdd3356f2b8016a"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.365829",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "simulador_retroativo.py",
+        "hash": "1418a77118f20d52184cbe45ec0a095b016183e06f20b904cf9e0d3028894a3c"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.366679",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "simulador_efeitos_hidraulicos.py",
+        "hash": "e3baad81df9cbfda10c6fca3db6c03fe8a7feb366ae91072ac9527590bf85d77"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.367215",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "simulador_estresse_coorte.py",
+        "hash": "bb7bb7d9229793ac0e149adc126de8f4af6b1d6a718e363a5ddb5ec9be4a6277"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.368357",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "visualizacao_graficos.md",
+        "hash": "fe57eb778d0a209c56e30e416a670a29cb56af6b43752ea23f31b919505b22d1"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.368821",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "ia_fiscalizadora_auditoria.md",
+        "hash": "4948b0b0a9555f5ae10aa9b56829575a6243f90b332573d9e1b31cd104d286ad"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.369669",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "relatorio_simulacao_retroativa.md",
+        "hash": "4d921832b162298e802a553e5004a2c70ad979666269754aab9727d02d2a42a0"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.370348",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "relatorio_efeitos_hidraulicos.md",
+        "hash": "73e54abeda059608af0c1783a43aca2f3e5da8f85c54420a6358c90b453b060b"
+    },
+    {
+        "timestamp": "2026-05-25T22:28:10.370699",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "relatorio_estresse_coorte.md",
+        "hash": "1e9f8d2ad3b997bc14536ed36413f5570c4dd1902e218333c56ba2181c7cee21"
+    },
+    {
+        "timestamp": "2026-05-26T04:08:20.873154",
+        "agent": "Motor_DEVORAC_Rondonia",
+        "action": "CONSOLIDACAO_RELATORIO_DEVORAC",
+        "target": "RELATORIO_CIDADES_INVISIVEIS_RONDONIA.md",
+        "hash": "f81aa4dad16cdd767899cc7bb726e5a073885b47ec9e928fddd8c8c1dd16abe8"
+    },
+    {
+        "timestamp": "2026-05-29T21:09:00.000000",
+        "agent": "IA_Antigravity",
+        "action": "VALIDACAO_CAPITULO_3_OPUS_VECTOR",
+        "target": "VALIDADO_capitulo3_opus_vector.md",
+        "hash": "37638872257a756d882e37efee528670f7e7214efadce1ff7fb52ba1f24e17ab"
+    },
+    {
+        "timestamp": "2026-05-29T21:13:30.000000",
+        "agent": "IA_Antigravity",
+        "action": "VALIDACAO_CAPITULO_4_OPUS_VECTOR",
+        "target": "VALIDADO_capitulo4_opus_vector.md",
+        "hash": "4138c9282a83735179b576fdad2da013bf1972820230dc21452f9e5df349895d"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.008058",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/00_HEADER_PROMPT_INJECTION_MASTER.md",
+        "hash": "7c17ef52563d5d2b24affa8fa26dc155164e3c9d83051241549dc1d4bc3743bd"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.016507",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/01_SUPEREGO_VALIDACAO_HUMANA.md",
+        "hash": "525e99eadfc492f6bd2cfc58053d964c8746020c535b7d75fff19c10cf6caa09"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.025273",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/02_LOGIN_ADMINISTRADOR_OPERADOR.md",
+        "hash": "6a37983de5aaf76db86d7118e8be35ec3bf6d9e48555d366d6a5e9bf44b376e5"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.031996",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/03_LOGIN_CONSULENTE_TOUR_METAMBIENTE.md",
+        "hash": "809349073429156c8959e885accd3f5f819f586902571ac72015ed08075c7edb"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.039263",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/04_LOGIN_VECTOR_SAPIENS_INVENTORALIS.md",
+        "hash": "584effc21997f5c568227171c3d9fc16a7764411b01fe277ae63a7f9c0f87f01"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.046179",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/05_IsOIAs_ECOSSISTEMA_INTERNET_DAS_IAS.md",
+        "hash": "f4dafa51e0962a90e7bd724ffffe07e09705ae519c28a59d6a262f9a48e50ac6"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.052660",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/06_LLMs_COMO_CPUs_FUNDAMENTO_TECNICO.md",
+        "hash": "a1647d4efc9c8822fb88d748c22f504032deed11f4fc84d64ee9cbb26a7c8f0c"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.059987",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/07_HOLOGRAFIA_SISTEMICA_INTRA_EXTRA_TRANS.md",
+        "hash": "6ba1c5bde78197d9af79241eb8da51e7915703d8a56f579e231db07984a46f43"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.061431",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/08_PROXIMOS_PASSOS_SESSAO_ATUAL.md",
+        "hash": "14f1ab7efa12ebecf36cb39bd2336d21f86e5f3a166ccdb2495246b93518398d"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.069127",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/09_OPUS_VECTOR_TOOL_1_0_APLICATIVO.md",
+        "hash": "e45ce93c2cba933a6fa0e7c516e4d3e1312dfc19c83a549be8fb0fb4f01a6ae0"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.076848",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/10_MECANICA_CARTORIO_INSCRICAO_FISCALIZACAO.md",
+        "hash": "0b63a170ff6a01949f2dfc1d839d12517619051c61d2ed9c8f6ead842683261e"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.083216",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/11_TOUR_HISTORICO_ROMA_WEIMAR_URSS.md",
+        "hash": "db0cdfafe18ee9e168987dafde242444a5cc50c7fc4a4ffcfc0bafab5bdcf694"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.090450",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/12_REPOSITORIOS_MODULOS_PIPELINES.md",
+        "hash": "07d3f316f068599cb6724489e8d9cb38f54aa64132dfb20abc5a03c47d1b27ff"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.096858",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/13_FUNDO_COOPERADOR_MODELO_COCRIACAO.md",
+        "hash": "4922dcc3e5c6ac5c20d1a093057fc71b0dca4aca04f986651a2714f6a660b8d7"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.103717",
+        "agent": "IA_Antigravity",
+        "action": "NOTARIZACAO_SISTEMA_ISOIAS",
+        "target": "IsOIAs_Sistema/14_EVOLUCAO_HISTORICA_TRANS_LLM.md",
+        "hash": "6cda440b48f76e21ab6a6a6c83b5fd683e7a72c3f05e87b35b7881e8e950db53"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.185150",
+        "agent": "Agente_Inferencia",
+        "action": "GERACAO_CONTEUDO",
+        "target": "IDEIA_holografia_sistemica_intra_extra_trans.md",
+        "hash": "84d345d058a9e7e3782ca36ae8f605f4be41a82e09e84a21b6ca9ea88e7875b3"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.195931",
+        "agent": "Agente_Inferencia",
+        "action": "GERACAO_CONTEUDO",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "e5059b0ddc16a47cbc6af8658961067f21de870064845a0283d363756d9584e5"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.204848",
+        "agent": "IA_Fiscalizadora",
+        "action": "FISCALIZACAO_[VALIDADO - CERTEZA HISTÓRICA]",
+        "target": "IDEIA_holografia_sistemica_intra_extra_trans.md",
+        "hash": "41a460f60b44617e75855963383faf32ecab0f2da711395e46d22ea19086212e"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.218856",
+        "agent": "IA_Fiscalizadora",
+        "action": "FISCALIZACAO_[REJEITADO - ALUCINAÇÃO]",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "fc2508fb043cf642dd9714127b8985d0f49dae7a9cc0f0e544b576d79416d0cf"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:00.220085",
+        "agent": "IA_Expurgadora",
+        "action": "EXPURGO_SABOTADOR",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "5dc68646aeb46001d23bc81e4cc32fa3c1f425a3962445f6d18ef5026516ef25"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:08.245295",
+        "agent": "Agente_Inferencia",
+        "action": "GERACAO_CONTEUDO",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "b48f2fd628429132c1eb2f4dc0aef77ab925c771f0a4d25d42a223347eddae51"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:08.246635",
+        "agent": "IA_Fiscalizadora",
+        "action": "FISCALIZACAO_[VALIDADO - CERTEZA HISTÓRICA]",
+        "target": "IDEIA_holografia_sistemica_intra_extra_trans.md",
+        "hash": "b88ba2b2ddae0a3335054b2d78d3245b231f0cda17dbeaa54f1d8eec2e9854a8"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:08.248230",
+        "agent": "IA_Fiscalizadora",
+        "action": "FISCALIZACAO_[REJEITADO - ALUCINAÇÃO]",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "a795b4f5f20f37f18242736f907d59796924b1ed4b75836564c85289ce73e567"
+    },
+    {
+        "timestamp": "2026-06-05T19:26:08.249249",
+        "agent": "IA_Expurgadora",
+        "action": "EXPURGO_SABOTADOR",
+        "target": "IDEIA_teste_alucinacao.md",
+        "hash": "431086b8bc0500841f16beed7100a37f477aa46f6f17193db568fc1e9263ac0b"
+    },
+    {
+        "timestamp": "2026-06-05T19:28:53.646061",
+        "agent": "Super_Ego_VSI",
+        "action": "ABSOLVICAO_E_PROMOCAO",
+        "target": "VALIDADO_teste_alucinacao.md",
+        "hash": "3b9e14b85c3a753f5e893977e1fcc36c21ed2d91d508f713addf1702e7f1bf86"
+    },
+    {
+        "timestamp": "2026-06-06T10:19:48.572955",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "lexico_anti_aluc.py",
+        "hash": "b032ac610156e587a9ae6e08793a93fb7ead8ef2f790c7cc410a31f895f797b2"
+    },
+    {
+        "timestamp": "2026-06-06T10:19:48.573117",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "ia_fiscalizadora.py",
+        "hash": "82a1d290745f8a570a03e2400b321b6950bffcfaf07a222a877183ad6b849c33"
+    },
+    {
+        "timestamp": "2026-06-06T10:19:48.573248",
+        "agent": "Blockchain_Cartorio",
+        "action": "NOTARIZACAO_VALIDADA",
+        "target": "PROMPT_MASTER_ATUAL.md",
+        "hash": "976018a1998524d9f3753fa6f5bf13e18101df616241624b4ddf618c3433bb2b"
+    },
+    {
+        "timestamp": "2026-06-06T14:41:13.776528+00:00",
+        "agent": "Aprendizagem_Lexico",
+        "action": "CANDIDATOS_GERADOS_30_AGUARDANDO_FIAT_VECTOR",
+        "target": "CANDIDATOS_LEXICO.md",
+        "hash": "7143ff2b6fd8d106014d65dda6999e782dfb47c039b7cb0e00d6c562447696f8"
+    },
+    {
+        "timestamp": "2026-06-20T21:14:25.181963+00:00",
+        "agent": "Gemini_Antigravity",
+        "action": "INTEGRACAO_E_ATUALIZACAO_REORGANIZACAO",
+        "target": "CORE_PP_DADOS/Consolidacao_Geral_Reorg_Junho2026",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+]

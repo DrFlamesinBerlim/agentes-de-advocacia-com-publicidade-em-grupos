@@ -8,7 +8,9 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 EMAIL = 'flamesinberlim@gmail.com'
 SENHA = 'ezaxgwekapoiewpm'
 
-with open('processos.json', encoding='utf-8') as f:
+from pathlib import Path
+PASTA_RAIZ = Path(__file__).resolve().parent.parent
+with open(PASTA_RAIZ / 'documentos' / 'processos.json', encoding='utf-8') as f:
     processos = json.load(f)
 
 hoje  = date.today().strftime('%d/%m/%Y')

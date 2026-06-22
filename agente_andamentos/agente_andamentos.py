@@ -45,9 +45,9 @@ CONFIG = {
     "cnj_api_key": "cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw==",  # Ver LEIAME.txt
 
     # Arquivos locais
-    "arquivo_processos": "processos.json",
-    "arquivo_historico": "historico_andamentos.json",
-    "pasta_relatorios": "relatorios",
+    "arquivo_processos": str(Path(__file__).resolve().parent.parent / "documentos" / "processos.json"),
+    "arquivo_historico": str(Path(__file__).resolve().parent.parent / "documentos" / "historico_andamentos.json"),
+    "pasta_relatorios": str(Path(__file__).resolve().parent.parent / "documentos" / "relatorios"),
 }
 
 # ─────────────────────────────────────────

@@ -28,8 +28,8 @@ from modulo_prazos import detectar_tipo_prazo, calcular_prazo_final, gerar_4_mar
 from modulo_calendar import autenticar_calendar, criar_todos_marcos
 from modulo_prazos import gerar_eventos_calendar
 
-PASTA   = Path(__file__).parent
-ARQUIVO = PASTA / 'processos.json'
+PASTA_RAIZ = Path(__file__).resolve().parent.parent
+ARQUIVO = PASTA_RAIZ / 'documentos' / 'processos.json'
 
 API_KEY = 'cDZHYzlZa0JadVREZDJCendQbXY6SkJlTzNjLV9TRENyQk1RdnFKZGRQdw=='
 HEADERS = {'Authorization': f'ApiKey {API_KEY}', 'Content-Type': 'application/json'}
@@ -241,12 +241,12 @@ def main():
         for p in processos
         if p.get('prazo_calculado') and not p['prazo_calculado'].get('calendar_ok')
     ]
-    pendentes_arquivo = PASTA / 'prazos_pendentes.json'
+    pendentes_arquivo = PASTA_RAIZ / 'documentos' / 'prazos_pendentes.json'
     with open(pendentes_arquivo, 'w', encoding='utf-8') as f:
         json.dump(pendentes, f, ensure_ascii=False, indent=2)
     if pendentes:
         print(f'\n[PENDENTE] {len(pendentes)} prazo(s) aguardando criacao no Calendar')
-        print(f'           Arquivo: prazos_pendentes.json')
+        print(f'           Arquivo: documentos/prazos_pendentes.json')
 
     print()
     print('=' * 60)
