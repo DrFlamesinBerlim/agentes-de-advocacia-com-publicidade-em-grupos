@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(python -c \"import requests; print\\('requests OK'\\)\")",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "WebSearch",
+      "WebFetch(domain:www.jusbrasil.com.br)",
+      "WebFetch(domain:www.oab.org.br)",
+      "WebFetch(domain:cna.oab.org.br)",
+      "WebFetch(domain:www.tjro.jus.br)",
+      "Bash(python enviar_email.py)",
+      "mcp__3c482dae-9e8f-4670-87d8-7465ae053ed5__create_event",
+      "Bash(pip install *)",
+      "WebFetch(domain:feriados.com.br)",
+      "WebFetch(domain:rondonia.ro.gov.br)",
+      "WebFetch(domain:www.portovelho.ro.gov.br)",
+      "Bash(python atualizar_processos.py)"
+    ]
+  }
+}

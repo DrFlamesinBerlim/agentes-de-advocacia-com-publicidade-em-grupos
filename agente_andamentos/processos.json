@@ -1,0 +1,1227 @@
+[
+  {
+    "numero": "7070726-82.2023.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "10/06/2026",
+    "mov_desc": "Juntada de Petição do MP",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "10/06/2026",
+        "descricao": "Juntada de Petição do MP"
+      }
+    ],
+    "prazo_calculado": {
+      "tipo": "resposta à acusação",
+      "descricao": "Resposta à Acusação (CPP art. 396-A)",
+      "fundamento": "Art. 396-A CPP",
+      "dias": 10,
+      "tipo_contagem": "corridos",
+      "data_publicacao": "10/06/2026",
+      "data_prazo_final": "20/06/2026",
+      "urgente": true,
+      "calendar_ok": true
+    }
+  },
+  {
+    "numero": "0010577-05.2020.8.22.0501",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Acordo de Não Persecução Penal",
+    "orgao": "Porto Velho — 1ª Vara de Garantias",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "24/04/2026",
+    "mov_desc": "Definitivo | Documento | Expedição de documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/04/2026",
+        "descricao": "Definitivo | Documento | Expedição de documento"
+      },
+      {
+        "data": "06/04/2026",
+        "descricao": "Arquivamento | Petição | Extinção de Punibilidade em Razão do Cumprimento de Acordo de Não Persecução Penal"
+      },
+      {
+        "data": "05/12/2025",
+        "descricao": "Por decisão judicial"
+      }
+    ]
+  },
+  {
+    "numero": "7005268-47.2025.8.22.0002",
+    "tribunal": "TJRO",
+    "comarca": "Ariquemes",
+    "tipo": "Criminal",
+    "classe": "Ação Penal — Procedimento Ordinário",
+    "orgao": "Ariquemes — 3ª Vara Criminal",
+    "assunto": "Tráfico / Colaboração com Organização",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "MP",
+    "polo_passivo": "— (verificar PJe)",
+    "ultima_mov": "24/04/2026",
+    "mov_desc": "Documento | Expedição de documento | Movimentação processual",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/04/2026",
+        "descricao": "Documento | Expedição de documento | Movimentação processual"
+      },
+      {
+        "data": "29/01/2026",
+        "descricao": "Mandado | Improcedência | Expedição de documento | Documento"
+      },
+      {
+        "data": "25/11/2025",
+        "descricao": "Manutenção da Prisão Preventiva"
+      }
+    ]
+  },
+  {
+    "numero": "7016474-92.2024.8.22.0002",
+    "tribunal": "TJRO",
+    "comarca": "Ariquemes",
+    "tipo": "Criminal",
+    "classe": "Ação Penal — Competência do Júri",
+    "orgao": "Ariquemes — 1ª Vara Criminal",
+    "assunto": "Homicídio Qualificado",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "MP",
+    "polo_passivo": "— (verificar PJe)",
+    "ultima_mov": "28/03/2026",
+    "mov_desc": "Manutenção da Prisão Preventiva | Expedição de documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "28/03/2026",
+        "descricao": "Manutenção da Prisão Preventiva | Expedição de documento"
+      },
+      {
+        "data": "26/03/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Petição | Conclusão | Documento | Publicação"
+      },
+      {
+        "data": "25/03/2026",
+        "descricao": "Mero expediente | Sessão do Tribunal do Júri | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "7002410-25.2021.8.22.0021",
+    "tribunal": "TJRO",
+    "comarca": "Buritis",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Buritis — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "05/05/2026",
+    "mov_desc": "Mandado | Expedição de documento | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "05/05/2026",
+        "descricao": "Mandado | Expedição de documento | Documento"
+      },
+      {
+        "data": "04/05/2026",
+        "descricao": "Mandado | Expedição de documento | Documento"
+      },
+      {
+        "data": "16/04/2026",
+        "descricao": "Mandado | Expedição de documento | Documento"
+      }
+    ]
+  },
+  {
+    "numero": "0030474-74.2001.8.22.0019",
+    "tribunal": "TJRO",
+    "comarca": "Machadinho do Oeste",
+    "tipo": "Criminal",
+    "classe": "Recurso em Sentido Estrito",
+    "orgao": "1ª Câmara Criminal — Des. Osny Claro de Oliveira",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "05/05/2026",
+    "mov_desc": "Mérito | Documento | Expedição de documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "05/05/2026",
+        "descricao": "Mérito | Documento | Expedição de documento"
+      },
+      {
+        "data": "10/04/2026",
+        "descricao": "Pedido de inclusão"
+      },
+      {
+        "data": "29/10/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      }
+    ]
+  },
+  {
+    "numero": "7032109-82.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "12/06/2026",
+    "mov_desc": "Mandado devolvido",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "12/06/2026",
+        "descricao": "Mandado devolvido"
+      }
+    ],
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "12/06/2026",
+      "data_prazo_final": "03/07/2026",
+      "urgente": false,
+      "calendar_ok": true
+    }
+  },
+  {
+    "numero": "7014226-25.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "12/06/2026",
+    "mov_desc": "Recebido Mandado p/ Cumprimento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "12/06/2026",
+        "descricao": "Recebido Mandado p/ Cumprimento"
+      }
+    ],
+    "prazo_calculado": {
+      "tipo": "intimação para manifestação",
+      "descricao": "Manifestação nos autos (CPC art. 218)",
+      "fundamento": "Art. 218 §3º CPC — prazo geral 15 dias",
+      "dias": 15,
+      "tipo_contagem": "uteis",
+      "data_publicacao": "12/06/2026",
+      "data_prazo_final": "03/07/2026",
+      "urgente": false,
+      "calendar_ok": true
+    }
+  },
+  {
+    "numero": "7021493-48.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Juizado Especial Cível",
+    "orgao": "Porto Velho — 1º JEC",
+    "assunto": "Obrigação de Fazer / Não Fazer",
+    "cliente": "Neiva Magalhães dos Santos x Jefferson Silva de Brito",
+    "polo_ativo": "Neiva Magalhães dos Santos",
+    "polo_passivo": "Jefferson Silva de Brito",
+    "ultima_mov": "04/05/2026",
+    "mov_desc": "Mero expediente | Expedição de documento",
+    "prazo": "urgente",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "04/05/2026",
+        "descricao": "Mero expediente | Expedição de documento"
+      },
+      {
+        "data": "28/01/2026",
+        "descricao": "Outras Decisões | Recebimento do CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento | Conclusão"
+      },
+      {
+        "data": "07/01/2026",
+        "descricao": "Recebimento no CEJUSC ou Centros de Conciliação/Mediação | Recebimento do CEJUSC ou Centros de Conciliação/Mediação | Remessa para o CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "7010669-93.2026.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "09/06/2026",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "09/06/2026",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "7010679-40.2026.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Inquérito Policial",
+    "orgao": "Porto Velho — 1ª Vara de Garantias",
+    "assunto": "Tráfico de Drogas e Condutas Afins",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "Delegacia / MP",
+    "polo_passivo": "— (verificar PJe)",
+    "ultima_mov": "11/05/2026",
+    "mov_desc": "Intimação | Expedição de documento | Petição",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "11/05/2026",
+        "descricao": "Intimação | Expedição de documento | Petição"
+      },
+      {
+        "data": "06/03/2026",
+        "descricao": "Intimação | Expedição de documento | Petição"
+      },
+      {
+        "data": "28/02/2026",
+        "descricao": "Mandado | Processo devolvido à Secretaria | Incompetência |  | Determinada a Redistribuição | Expedição de documento | Documento | Liberdade provisória | Audiência | Petição | Conclusão | Redistribuição"
+      }
+    ]
+  },
+  {
+    "numero": "0007734-98.2009.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "10/03/2021",
+    "mov_desc": "Definitivo | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "10/03/2021",
+        "descricao": "Definitivo | Documento"
+      },
+      {
+        "data": "06/01/2021",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "05/01/2021",
+        "descricao": "Não-Acolhimento de Embargos de Declaração | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "7012658-71.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "02/06/2026",
+    "mov_desc": "Conclusos para despacho",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "02/06/2026",
+        "descricao": "Conclusos para despacho"
+      }
+    ]
+  },
+  {
+    "numero": "7007424-74.2026.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Juizado Especial Cível",
+    "orgao": "Porto Velho — 5º JEC",
+    "assunto": "Transporte Rodoviário — Indenização por Dano Moral",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "26/03/2026",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "urgente",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "26/03/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "25/03/2026",
+        "descricao": "Recebimento no CEJUSC ou Centros de Conciliação/Mediação | Documento | Remessa para o CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento | de Conciliação | Movimentação processual"
+      },
+      {
+        "data": "06/03/2026",
+        "descricao": "Recebimento no CEJUSC ou Centros de Conciliação/Mediação | Remessa para o CEJUSC ou Centros de Conciliação/Mediação | Documento"
+      }
+    ]
+  },
+  {
+    "numero": "7054209-31.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Consignação em Pagamento",
+    "orgao": "Porto Velho — 10ª Vara Cível",
+    "assunto": "Compra e Venda — Nota Promissória",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "11/03/2026",
+    "mov_desc": "Mandado",
+    "prazo": "atencao",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "11/03/2026",
+        "descricao": "Mandado"
+      },
+      {
+        "data": "14/01/2026",
+        "descricao": "Recebimento do CEJUSC ou Centros de Conciliação/Mediação | Expedição de documento | Audiência do art. 334 CPC"
+      },
+      {
+        "data": "26/11/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      }
+    ]
+  },
+  {
+    "numero": "7023346-63.2023.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Cumprimento de Sentença",
+    "orgao": "Porto Velho — 3ª Vara Cível",
+    "assunto": "Cobrança de Aluguéis — Locação de Móvel",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "24/03/2026",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/03/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "23/03/2026",
+        "descricao": "Execução frustrada | Expedição de documento"
+      },
+      {
+        "data": "11/02/2026",
+        "descricao": "Outras Decisões | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "7032995-81.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "28/04/2026",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "28/04/2026",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "0017005-42.2016.8.22.0501",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Apelação Criminal — 2º Grau",
+    "orgao": "1ª Câmara Criminal — Des. Aldemir de Oliveira",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "10/07/2025",
+    "mov_desc": "Definitivo | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "10/07/2025",
+        "descricao": "Definitivo | Documento"
+      },
+      {
+        "data": "27/06/2025",
+        "descricao": "Mero expediente"
+      },
+      {
+        "data": "14/05/2025",
+        "descricao": "Atualização de conta | Expedição de documento | Documento"
+      }
+    ]
+  },
+  {
+    "numero": "7057519-45.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Embargos de Declaração — Turma Recursal",
+    "orgao": "Porto Velho — 4º JEC",
+    "assunto": "Esbulho / Turbação / Ameaça — Aquisição",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "02/03/2026",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "urgente",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "02/03/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "27/02/2026",
+        "descricao": "Outras Decisões | Expedição de documento"
+      },
+      {
+        "data": "03/02/2026",
+        "descricao": "Intimação | Expedição de documento | Petição"
+      }
+    ]
+  },
+  {
+    "numero": "7077392-31.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "11/02/2026",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "11/02/2026",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "7059550-38.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "05/01/2026",
+    "mov_desc": "Juntada de Petição",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "05/01/2026",
+        "descricao": "Juntada de Petição"
+      }
+    ]
+  },
+  {
+    "numero": "7014892-26.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "18/11/2025",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "18/11/2025",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "7025458-68.2024.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — 4ª Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "03/06/2025",
+    "mov_desc": "Juntada de Petição",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "03/06/2025",
+        "descricao": "Juntada de Petição"
+      }
+    ]
+  },
+  {
+    "numero": "7026053-67.2024.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Comunicado de Mandado de Prisão",
+    "orgao": "Porto Velho — 4ª Vara Criminal",
+    "assunto": "Receptação",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "23/05/2024",
+    "mov_desc": "Definitivo | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "23/05/2024",
+        "descricao": "Definitivo | Documento"
+      },
+      {
+        "data": "22/05/2024",
+        "descricao": "Arquivamento | Documento"
+      },
+      {
+        "data": "19/05/2024",
+        "descricao": "Outras Decisões | Audiência | Documento | Petição | Distribuição"
+      }
+    ]
+  },
+  {
+    "numero": "7004257-61.2022.8.22.0010",
+    "tribunal": "TJRO",
+    "comarca": "Rolim de Moura",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Rolim de Moura — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "15/04/2025",
+    "mov_desc": "Juntada de carta",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "15/04/2025",
+        "descricao": "Juntada de carta"
+      }
+    ]
+  },
+  {
+    "numero": "0000558-26.2018.8.22.0010",
+    "tribunal": "TJRO",
+    "comarca": "Rolim de Moura",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Rolim de Moura — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "08/08/2023",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "08/08/2023",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "0000711-18.2016.8.22.0014",
+    "tribunal": "TJRO",
+    "comarca": "Vilhena",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Vilhena — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "28/11/2022",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "28/11/2022",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "25/11/2022",
+        "descricao": "Definitivo | Decisão Interlocutória de Mérito | Documento | Expedição de documento | Conclusão"
+      },
+      {
+        "data": "13/10/2022",
+        "descricao": "Outras Decisões"
+      }
+    ]
+  },
+  {
+    "numero": "7050343-88.2020.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Interdito Proibitório",
+    "orgao": "Porto Velho — Vara Cível",
+    "assunto": "Aquisição — Esbulho / Turbação",
+    "cliente": "Jefferson Silva de Brito x Marcos Dione Alves de Oliveira",
+    "polo_ativo": "Jefferson Silva de Brito",
+    "polo_passivo": "Marcos Dione Alves de Oliveira",
+    "ultima_mov": "08/07/2021",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "08/07/2021",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "07/07/2021",
+        "descricao": "Definitivo | Homologação de Transação | Expedição de documento"
+      },
+      {
+        "data": "05/04/2021",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      }
+    ]
+  },
+  {
+    "numero": "0002928-44.2014.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Ação Penal",
+    "orgao": "Porto Velho — Vara Criminal",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "26/06/2018",
+    "mov_desc": "Decorrido prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "26/06/2018",
+        "descricao": "Decorrido prazo"
+      }
+    ]
+  },
+  {
+    "numero": "0806296-79.2024.8.22.0000",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Agravo de Execução Penal — 2º Grau",
+    "orgao": "Gabinete Des. Francisco Borges",
+    "assunto": "Regime inicial",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "26/07/2024",
+    "mov_desc": "Definitivo | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "26/07/2024",
+        "descricao": "Definitivo | Documento"
+      },
+      {
+        "data": "01/07/2024",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Expedição de documento | Publicação"
+      },
+      {
+        "data": "24/06/2024",
+        "descricao": "Mérito | Documento"
+      }
+    ]
+  },
+  {
+    "numero": "0800556-72.2026.8.22.0000",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Revisão Criminal — 2º Grau",
+    "orgao": "Câmaras Criminais Reunidas — Des. Adolfo Naujorks Neto",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "02/06/2026",
+    "mov_desc": "Juntada de certidão",
+    "prazo": "atencao",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "02/06/2026",
+        "descricao": "Juntada de certidão"
+      }
+    ]
+  },
+  {
+    "numero": "0003825-85.2018.8.22.0501",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Recurso em Sentido Estrito — 2º Grau",
+    "orgao": "2ª Câmara Criminal — Des. José Jorge Ribeiro",
+    "assunto": "Criminal",
+    "cliente": "— (verificar PJe)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "07/07/2025",
+    "mov_desc": "Definitivo | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "07/07/2025",
+        "descricao": "Definitivo | Documento"
+      },
+      {
+        "data": "30/04/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "10/03/2025",
+        "descricao": "Outras Decisões | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "4000186-51.2023.8.22.0004",
+    "tribunal": "TJRO",
+    "comarca": "Ouro Preto do Oeste",
+    "tipo": "Criminal",
+    "classe": "Execução da Pena",
+    "orgao": "Ouro Preto do Oeste — 1ª Vara Criminal",
+    "assunto": "Homicídio Qualificado — Pena Privativa de Liberdade",
+    "cliente": "Alberi Rodrigues dos Santos",
+    "polo_ativo": "Estado / MP",
+    "polo_passivo": "Alberi Rodrigues dos Santos",
+    "ultima_mov": "18/08/2025",
+    "mov_desc": "Recebimento | Remessa | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "18/08/2025",
+        "descricao": "Recebimento | Remessa | Documento"
+      },
+      {
+        "data": "13/08/2025",
+        "descricao": "Confirmada | Decurso de Prazo"
+      },
+      {
+        "data": "08/08/2025",
+        "descricao": "Outras Decisões | Conclusão"
+      }
+    ]
+  },
+  {
+    "numero": "4000311-20.2022.8.22.0015",
+    "tribunal": "TJRO",
+    "comarca": "Guajará-Mirim",
+    "tipo": "Criminal",
+    "classe": "Execução da Pena",
+    "orgao": "Guajará-Mirim — 1ª Vara Criminal",
+    "assunto": "Pena Privativa de Liberdade",
+    "cliente": "Leandro Pereira Cardoso",
+    "polo_ativo": "Estado / MP",
+    "polo_passivo": "Leandro Pereira Cardoso",
+    "ultima_mov": "05/05/2026",
+    "mov_desc": "Decurso de Prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "05/05/2026",
+        "descricao": "Decurso de Prazo"
+      },
+      {
+        "data": "30/04/2026",
+        "descricao": "Recebimento | Conclusão | Documento"
+      },
+      {
+        "data": "27/04/2026",
+        "descricao": "Confirmada"
+      }
+    ]
+  },
+  {
+    "numero": "4000536-43.2022.8.22.0014",
+    "tribunal": "TJRO",
+    "comarca": "Vilhena",
+    "tipo": "Criminal",
+    "classe": "Execução da Pena",
+    "orgao": "Vilhena — 1ª Vara Criminal",
+    "assunto": "Pena Privativa de Liberdade",
+    "cliente": "Idamir Rossaci",
+    "polo_ativo": "Estado / MP",
+    "polo_passivo": "Idamir Rossaci",
+    "ultima_mov": "25/11/2022",
+    "mov_desc": "Petição",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "25/11/2022",
+        "descricao": "Petição"
+      }
+    ]
+  },
+  {
+    "numero": "4002488-80.2024.8.22.0501",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Criminal",
+    "classe": "Execução da Pena",
+    "orgao": "Porto Velho — 1ª VEP",
+    "assunto": "Pena Privativa de Liberdade",
+    "cliente": "Abrahao Custodio Ramos",
+    "polo_ativo": "Estado / MP",
+    "polo_passivo": "Abrahao Custodio Ramos",
+    "ultima_mov": "01/04/2026",
+    "mov_desc": "Recebimento | Documento",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "01/04/2026",
+        "descricao": "Recebimento | Documento"
+      },
+      {
+        "data": "30/03/2026",
+        "descricao": "Confirmada | Petição"
+      },
+      {
+        "data": "26/02/2026",
+        "descricao": "Ato ordinatório | Recebimento | Documento"
+      }
+    ]
+  },
+  {
+    "numero": "0600344-22.2023.8.04.5600",
+    "tribunal": "TJAM",
+    "comarca": "Humaitá (AM)",
+    "tipo": "Cível",
+    "classe": "Procedimento Comum Cível",
+    "orgao": "1ª Vara da Comarca de Humaitá",
+    "assunto": "Reconhecimento / Dissolução de União Estável",
+    "cliente": "Luciana de Souza Tavares x Altamiro Rodrigues dos Santos",
+    "polo_ativo": "Luciana de Souza Tavares",
+    "polo_passivo": "Altamiro Rodrigues dos Santos",
+    "ultima_mov": "—",
+    "mov_desc": "Ativo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "—",
+        "descricao": "Ativo"
+      }
+    ]
+  },
+  {
+    "numero": "0601654-29.2024.8.04.5600",
+    "tribunal": "TJAM",
+    "comarca": "Manicoré (AM)",
+    "tipo": "Criminal",
+    "classe": "Medidas Protetivas de Urgência — Lei Maria da Penha",
+    "orgao": "1ª Vara da Comarca de Manicoré",
+    "assunto": "Violência Doméstica contra a Mulher",
+    "cliente": "SSP/AM x Jocemar de Queiros",
+    "polo_ativo": "SSP/AM",
+    "polo_passivo": "Jocemar de Queiros",
+    "ultima_mov": "24/04/2026",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/04/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+      },
+      {
+        "data": "21/01/2026",
+        "descricao": "Recebimento | Confirmada"
+      },
+      {
+        "data": "20/01/2026",
+        "descricao": "Cumprimento de Levantamento da Suspensão  | Mandado | Documento | Entrega em carga/vista | Expedição de documento"
+      }
+    ]
+  },
+  {
+    "numero": "0611323-54.2023.8.04.4400",
+    "tribunal": "TJAM",
+    "comarca": "Humaitá (AM)",
+    "tipo": "Criminal",
+    "classe": "Pedido de Providências",
+    "orgao": "1ª Vara da Comarca de Humaitá",
+    "assunto": "Homicídio Simples",
+    "cliente": "SSP/AM x Alexandre Marques de Campos",
+    "polo_ativo": "SSP/AM",
+    "polo_passivo": "Alexandre Marques de Campos",
+    "ultima_mov": "13/12/2023",
+    "mov_desc": "Recebimento | Decurso de Prazo",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "13/12/2023",
+        "descricao": "Recebimento | Decurso de Prazo"
+      },
+      {
+        "data": "12/12/2023",
+        "descricao": "Confirmada"
+      },
+      {
+        "data": "06/12/2023",
+        "descricao": "Definitivo | Ato ordinatório"
+      }
+    ]
+  },
+  {
+    "numero": "0611436-08.2023.8.04.4400",
+    "tribunal": "TJAM",
+    "comarca": "Humaitá (AM)",
+    "tipo": "Criminal",
+    "classe": "Ação Penal — Procedimento Ordinário",
+    "orgao": "1ª Vara da Comarca de Humaitá",
+    "assunto": "Lesão Corporal Leve",
+    "cliente": "MP/AM x Isaque Goncalves de Souza",
+    "polo_ativo": "MP/AM",
+    "polo_passivo": "Isaque Goncalves de Souza",
+    "ultima_mov": "13/06/2025",
+    "mov_desc": "Ato ordinatório",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "13/06/2025",
+        "descricao": "Ato ordinatório"
+      },
+      {
+        "data": "18/07/2024",
+        "descricao": "Confirmada"
+      },
+      {
+        "data": "27/06/2024",
+        "descricao": "Decisão Interlocutória de Mérito"
+      }
+    ]
+  },
+  {
+    "numero": "4005214-81.2021.8.04.0000",
+    "tribunal": "TJAM",
+    "comarca": "Manaus (AM)",
+    "tipo": "Cível",
+    "classe": "Ação Rescisória — 2º Grau",
+    "orgao": "Des. Flávio Humberto Pascarelli Lopes",
+    "assunto": "Esbulho / Turbação / Ameaça",
+    "cliente": "Jefferson Silva de Brito x Giuliano Quintino dos Santos",
+    "polo_ativo": "Jefferson Silva de Brito",
+    "polo_passivo": "Giuliano Quintino dos Santos / Michelle Caroline Moresco",
+    "ultima_mov": "07/10/2025",
+    "mov_desc": "A depender do julgamento de outra causa, de outro juízo ou declaração incidente",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "07/10/2025",
+        "descricao": "A depender do julgamento de outra causa, de outro juízo ou declaração incidente"
+      },
+      {
+        "data": "26/09/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+      },
+      {
+        "data": "25/09/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+      }
+    ]
+  },
+  {
+    "numero": "0021230-05.2025.8.04.9001",
+    "tribunal": "TJAM",
+    "comarca": "Manaus (AM)",
+    "tipo": "Cível",
+    "classe": "Embargos de Declaração — 2º Grau",
+    "orgao": "Des. Flávio Humberto Pascarelli Lopes",
+    "assunto": "Esbulho / Turbação / Ameaça",
+    "cliente": "Jefferson Silva de Brito x Giuliano Quintino dos Santos",
+    "polo_ativo": "Jefferson Silva de Brito",
+    "polo_passivo": "Giuliano Quintino dos Santos / Michelle Moresco dos Santos",
+    "ultima_mov": "14/03/2026",
+    "mov_desc": "Disponibilização no Diário da Justiça Eletrônico",
+    "prazo": "ok",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "14/03/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+      },
+      {
+        "data": "20/02/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Confirmada"
+      },
+      {
+        "data": "19/02/2026",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico"
+      }
+    ]
+  },
+  {
+    "numero": "7013265-84.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Procedimento Comum Cível",
+    "orgao": "Porto Velho — 3ª Vara de Família",
+    "assunto": "Indenização por Dano Moral",
+    "cliente": "Neiva Magalhães dos Santos x Jefferson Silva de Brito",
+    "polo_ativo": "Neiva Magalhães dos Santos",
+    "polo_passivo": "Jefferson Silva de Brito",
+    "ultima_mov": "17/03/2025",
+    "mov_desc": "Definitivo | Disponibilização no Diário da Justiça Eletrônico | Publicação",
+    "prazo": "urgente",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "17/03/2025",
+        "descricao": "Definitivo | Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "14/03/2025",
+        "descricao": "Desistência | Arquivamento | Expedição de documento"
+      },
+      {
+        "data": "20/03/2025",
+        "descricao": "Decurso de Prazo"
+      }
+    ]
+  },
+  {
+    "numero": "7013339-41.2025.8.22.0001",
+    "tribunal": "TJRO",
+    "comarca": "Porto Velho",
+    "tipo": "Cível",
+    "classe": "Procedimento Comum Cível",
+    "orgao": "Porto Velho — 2ª Vara Cível",
+    "assunto": "Interpretação / Revisão de Contrato",
+    "cliente": "Neiva Magalhães dos Santos x Jefferson Silva de Brito",
+    "polo_ativo": "Neiva Magalhães dos Santos",
+    "polo_passivo": "Jefferson Silva de Brito",
+    "ultima_mov": "24/04/2025",
+    "mov_desc": "Definitivo | Decurso de Prazo",
+    "prazo": "urgente",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/04/2025",
+        "descricao": "Definitivo | Decurso de Prazo"
+      },
+      {
+        "data": "23/04/2025",
+        "descricao": "Disponibilização no Diário da Justiça Eletrônico | Publicação"
+      },
+      {
+        "data": "22/04/2025",
+        "descricao": "Arquivamento | Desistência | Expedição de documento"
+      }
+    ]
+  }
+]

@@ -1,0 +1,126 @@
+# AGENTE DE ANDAMENTOS PROCESSUAIS
+## De Brito Advocacia | Dr. Jefferson Silva de Brito | OAB/RO 2952
+
+---
+
+## O QUE ESSE SISTEMA FAZ
+
+Todo dia às 07h00, o agente:
+1. Lê os processos do arquivo `processos.json`
+2. Consulta o CNJ DataJud por movimentações novas
+3. Detecta se há prazo correndo (intimação, citação, etc.)
+4. Salva relatório JSON local na pasta `relatorios/`
+5. Envia e-mail para `flamesinberlim@gmail.com` com resumo formatado
+
+---
+
+## INSTALAÇÃO (uma vez só)
+
+### Passo 1 — Python
+Baixe e instale o Python 3.10 ou superior:
+https://www.python.org/downloads/
+
+Durante a instalação, marque: ✅ "Add Python to PATH"
+
+### Passo 2 — Dependências
+Abra o CMD na pasta do agente e rode:
+```
+pip install requests
+```
+
+### Passo 3 — API Key do CNJ DataJud (GRATUITA)
+1. Acesse: https://datajud-wiki.cnj.jus.br/api-publica/acesso
+2. Clique em "Solicitar Acesso"
+3. Preencha com seus dados (OAB/RO 2952)
+4. Recebe a API Key por e-mail em até 24h
+5. Cole a chave no arquivo `agente_andamentos.py`, linha:
+   `"cnj_api_key": "COLE_AQUI_SUA_API_KEY_CNJ"`
+
+### Passo 4 — Senha de App do Gmail
+O Gmail não aceita sua senha normal via SMTP. Precisa de uma "Senha de App":
+
+1. Acesse: https://myaccount.google.com/security
+2. Ative "Verificação em 2 etapas" (se não tiver)
+3. Volte em Segurança > "Senhas de app"
+4. Crie uma senha para "Email" / "Windows"
+5. Copie a senha de 16 caracteres gerada
+6. Cole no arquivo `agente_andamentos.py`, linha:
+   `"email_senha_app": "COLE_AQUI_SENHA_DE_APP_GMAIL"`
+
+---
+
+## ADICIONAR/EDITAR PROCESSOS
+
+Edite o arquivo `processos.json`. Exemplo:
+
+```json
+[
+  {
+    "numero": "7001234-12.2024.8.22.0001",
+    "cliente": "Charles Novais de Almeida",
+    "tipo": "Civil — Caminhão + Moto",
+    "tribunal": "TJRO"
+  },
+  {
+    "numero": "0001234-56.2023.5.14.0001",
+    "cliente": "Cliente Trabalhista",
+    "tipo": "Trabalhista",
+    "tribunal": "TRT14"
+  }
+]
+```
+
+### Tribunais disponíveis:
+- `TJRO` — Tribunal de Justiça de Rondônia
+- `TRT14` — Tribunal Regional do Trabalho 14ª Região (RO/AC)
+- `STJ` — Superior Tribunal de Justiça
+- `STF` — Supremo Tribunal Federal
+- `TST` — Tribunal Superior do Trabalho
+
+---
+
+## AGENDAR EXECUÇÃO AUTOMÁTICA (Windows)
+
+1. Abra "Agendador de Tarefas" (Task Scheduler) no Windows
+2. Clique em "Criar Tarefa Básica"
+3. Nome: `Agente Andamentos De Brito`
+4. Disparador: **Diariamente às 07:00**
+5. Ação: **Iniciar um programa**
+6. Programa: navegue até `rodar_agente.bat` nesta pasta
+7. Conclua
+
+Pronto. Vai rodar sozinho todo dia às 7h.
+
+---
+
+## ESTRUTURA DE ARQUIVOS
+
+```
+agente_andamentos/
+├── agente_andamentos.py     ← Script principal
+├── processos.json           ← Lista de processos monitorados
+├── historico_andamentos.json← Criado automaticamente
+├── rodar_agente.bat         ← Arquivo para agendar no Windows
+├── LEIAME.txt               ← Este arquivo
+├── relatorios/              ← Relatórios JSON diários
+└── logs/                    ← Logs de execução
+```
+
+---
+
+## E-MAIL QUE VOCÊ RECEBE
+
+**Assunto dinâmico:**
+- `✅ Andamentos 14/06/2026 — Sem novidades`
+- `📋 Andamentos 14/06/2026 — 2 movimentação(ões)`
+- `⚠️ PRAZO! Andamentos 14/06/2026 — 1 movimentação(ões)` ← quando detecta intimação/citação
+
+---
+
+## SUPORTE
+
+Em caso de erro, verifique o arquivo `logs/agente.log`.
+Os erros mais comuns são:
+- API Key do CNJ incorreta → verifique o arquivo de configuração
+- Senha de App do Gmail incorreta → gere uma nova no Google
+- Número de processo no formato errado → use o formato CNJ: `0000000-00.0000.8.22.0001`
