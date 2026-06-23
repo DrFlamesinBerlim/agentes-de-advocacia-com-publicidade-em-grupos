@@ -16,7 +16,8 @@
 | M-004 | Verificar emails que Antigravity está processando | Antigravity | 🟡 ALTA | Antigravity mencionou estar buscando emails |
 | M-005 | Commitar inventário do que Antigravity instalou | Antigravity | 🟡 ALTA | `INVENTARIO_INSTALACOES.md` ausente no repo |
 | M-006 | Manifestação TJAM 0021230-05.2025.8.04.9001 | Dr. Jefferson | 🔴 URGENTE | Prazo VENCE HOJE 23/06/2026 |
-| M-008 | Exportar WhatsApp (conversa/mídia) | Dr. Jefferson | 🟡 ALTA | Finalidade a confirmar: prova processual ou backup? |
+| M-008 | Exportar WhatsApp grupo Auzier Pereira | Dr. Jefferson | 🟡 ALTA | `exportar_whatsapp_auzier.py` já existe na Pasta X — rodar Playwright via Antigravity |
+| M-009 | Memorial Defensivo — Jonair Alves Ferreira | Dr. Jefferson | 🔴 URGENTE | Revisão Criminal 0800556-72.2026.8.22.0000 — refutar parecer MPRO (Des. Adolfo Naujorks Neto) |
 
 ---
 

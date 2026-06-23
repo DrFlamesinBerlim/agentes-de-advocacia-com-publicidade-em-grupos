@@ -34,6 +34,22 @@
 - **Status:** `sync_github.py` criado — aguardando Antigravity rodar
 - **Ação:** Executar `python agente_andamentos/sync_github.py` em paralelo com `loop_monitor.py`
 
+### [PEND-005] Memorial Defensivo — Jonair Alves Ferreira (URGENTE)
+- **Status:** Aguardando confirmação do Dr. Jefferson para Claude redigir
+- **Processo Revisão Criminal:** `0800556-72.2026.8.22.0000` (TJRO 2º Grau)
+- **Processo Origem:** `7006336-97.2023.8.22.0003` (1ª Vara Criminal Jaru/RO)
+- **Relator:** Des. Adolfo Theodoro Naujorks Neto
+- **Condenação:** 22 anos 6 meses — Estupro de Vulnerável — Trânsito em julgado: 26/06/2025
+- **Parecer MPRO (19/02/2026):** Procuradora Andréa Luciana Damacena Ferreira Engel → NÃO CONHECIMENTO / NÃO PROVIMENTO
+- **Tese central a refutar:** Pena-base exasperada por tentativa de suicídio SEM laudo técnico (ilegal — viola CP art. 59 + direito à prova)
+- **Ação Antigravity:** Verificar andamentos atuais no PJe (segredo de justiça — DataJud retorna 0 hits) e commitar em `processos.json`
+- **Ação Claude:** Redigir Memorial Defensivo assim que Dr. Jefferson confirmar
+
+### [PEND-006] Exportação WhatsApp — Auzier Pereira
+- **Status:** Script já existe em `C:\Users\advog\Meu Drive\X\exportar_whatsapp_auzier.py`
+- **Ação:** Antigravity executar script (Playwright via Edge CDP porta 9222), commitar saída
+- **Nota:** `agente_whatsapp.py` no repo trata o .txt exportado — módulos complementares
+
 ---
 
 ## 🟢 O QUE CLAUDE PODE FAZER AGORA SEM ANTIGRAVITY
