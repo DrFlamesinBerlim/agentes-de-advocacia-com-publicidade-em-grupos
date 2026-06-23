@@ -1,0 +1,45 @@
+<instrucao id="WHATSAPP-AUZIER-001" prioridade="ALTA" timestamp="2026-06-23">
+  <para>Antigravity</para>
+  <de>Claude_Síntese</de>
+  <assunto>Exportação completa grupo WhatsApp — Auzier Pereira</assunto>
+
+  <commands>
+    <step id="1" descricao="Abrir Edge com CDP e navegar para WhatsApp Web">
+      REM Certifique-se que o Edge está aberto com WhatsApp Web logado
+      REM Se necessário, iniciar Edge com CDP:
+      start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\advog\EdgeProfile"
+    </step>
+
+    <step id="2" descricao="Executar script de exportação">
+      cd "C:\Users\advog\Meu Drive\X"
+      python exportar_whatsapp_auzier.py
+    </step>
+
+    <step id="3" descricao="Processar áudios opus->wav->Whisper->PDF">
+      REM O whatsapp_processor_core.py já faz esse pipeline automaticamente
+      REM Rodar após exportação concluir:
+      python automacoes\whatsapp_processor_core.py
+    </step>
+
+    <step id="4" descricao="Commitar resultados no repo para Claude acessar">
+      cd "C:\Users\advog\Meu Drive\X\repo"
+      git add documentos\whatsapp\
+      git commit -m "feat: exportação WhatsApp Auzier Pereira - mensagens + mídia processada"
+      git push origin claude/upbeat-fermat-0x6gd8
+    </step>
+  </commands>
+
+  <esperado>
+    - Arquivo JSON com todas as mensagens do grupo Auzier Pereira
+    - Transcrições dos áudios (Whisper)
+    - PDF consolidado com mensagens + transcrições
+    - Fotos e documentos salvos em documentos/whatsapp/auzier/
+  </esperado>
+
+  <obs>
+    - whatsapp_processor_core.py está FROZEN — não modificar
+    - Se Edge não conectar na porta 9222, verificar com check_edge_cdp.py
+    - Dr. Jefferson solicitou TUDO: mensagens, áudios, fotos, PDFs
+    - Após commit, Claude gera relatório consolidado automaticamente
+  </obs>
+</instrucao>
