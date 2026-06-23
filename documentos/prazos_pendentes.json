@@ -1,0 +1,35 @@
+{
+  "atualizado_em": "2026-06-23T00:00:00+00:00",
+  "prazos": [
+    {
+      "numero": "7002410-25.2021.8.22.0021",
+      "tribunal": "TJRO",
+      "data_movimento": "2026-05-27",
+      "tipo_movimento": "Mandado | Expedição de documento | Documento",
+      "dias_uteis": 15,
+      "vencimento": "2026-06-19",
+      "status": "VENCIDO",
+      "calendar_id": ""
+    },
+    {
+      "numero": "7054209-31.2025.8.22.0001",
+      "tribunal": "TJRO",
+      "data_movimento": "2026-05-26",
+      "tipo_movimento": "Mandado | Expedição de documento",
+      "dias_uteis": 15,
+      "vencimento": "2026-06-18",
+      "status": "VENCIDO",
+      "calendar_id": ""
+    },
+    {
+      "numero": "0021230-05.2025.8.04.9001",
+      "tribunal": "TJAM",
+      "data_movimento": "2026-05-31",
+      "tipo_movimento": "Disponibilização no Diário da Justiça Eletrônico",
+      "dias_uteis": 15,
+      "vencimento": "2026-06-23",
+      "status": "VENCE_HOJE",
+      "calendar_id": ""
+    }
+  ]
+}
