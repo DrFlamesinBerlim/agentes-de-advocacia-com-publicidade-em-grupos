@@ -118,7 +118,7 @@ def consultar_datajud(numero_processo):
     payload = {
         "query": {
             "match": {
-                "numeroProcesso": numero_processo
+                "numeroProcesso": numero_limpo
             }
         }
     }
@@ -146,6 +146,7 @@ def get_url_tribunal(tribunal):
     urls = {
         "TJRO":  "https://api-publica.datajud.cnj.jus.br/api_publica_tjro/_search",
         "TJAM":  "https://api-publica.datajud.cnj.jus.br/api_publica_tjam/_search",
+        "TJES":  "https://api-publica.datajud.cnj.jus.br/api_publica_tjes/_search",
         "TRT14": "https://api-publica.datajud.cnj.jus.br/api_publica_trt14/_search",
         "TRF1":  "https://api-publica.datajud.cnj.jus.br/api_publica_trf1/_search",
         "STJ":   "https://api-publica.datajud.cnj.jus.br/api_publica_stj/_search",
@@ -166,10 +167,11 @@ def consultar_processo_completo(processo_info):
         "Content-Type": "application/json"
     }
 
+    numero_limpo = numero.replace(".", "").replace("-", "")
     payload = {
         "query": {
             "match": {
-                "numeroProcesso": numero
+                "numeroProcesso": numero_limpo
             }
         }
     }
