@@ -1223,5 +1223,112 @@
         "descricao": "Arquivamento | Desistência | Expedição de documento"
       }
     ]
+  },
+  {
+    "numero": "5017826-72.2026.8.08.0024",
+    "tribunal": "TJES",
+    "comarca": "Vitória",
+    "tipo": "Cível",
+    "classe": "Procedimento Comum Cível",
+    "orgao": "6ª VARA CÍVEL - VITORIA",
+    "assunto": "Perda da Propriedade",
+    "cliente": "Cli Keila Pastorini",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "13/06/2026",
+    "mov_desc": "Expedida/Certificada",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "13/06/2026",
+        "descricao": "Expedida/Certificada"
+      },
+      {
+        "data": "02/06/2026",
+        "descricao": "Expedição de documento"
+      },
+      {
+        "data": "05/05/2026",
+        "descricao": "Retificação de Classe Processual"
+      }
+    ]
+  },
+  {
+    "numero": "0004019-56.2015.8.08.0024",
+    "tribunal": "TJES",
+    "comarca": "Vitória",
+    "tipo": "Cível",
+    "classe": "Usucapião",
+    "orgao": "2ª VARA CÍVEL - VITORIA",
+    "assunto": "Usucapião Especial (Constitucional)",
+    "cliente": "Cli Keila Pastorini",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "24/08/2016",
+    "mov_desc": "Recebimento",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "24/08/2016",
+        "descricao": "Recebimento | Remessa | Redistribuição"
+      },
+      {
+        "data": "14/08/2019",
+        "descricao": "Recebimento | Protocolo de Petição | "
+      },
+      {
+        "data": "12/03/2018",
+        "descricao": "Recebimento | Protocolo de Petição | Ato ordinatório | "
+      }
+    ]
+  },
+  {
+    "numero": "0030142-28.2014.8.08.0024",
+    "tribunal": "TJES",
+    "comarca": "Vitória",
+    "tipo": "Cível",
+    "classe": "Imissão na Posse",
+    "orgao": "2ª VARA CÍVEL - VITORIA",
+    "assunto": "Imissão",
+    "cliente": "Cli Keila Pastorini",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "03/08/2022",
+    "mov_desc": "Recebimento",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": [
+      {
+        "data": "03/08/2022",
+        "descricao": "Recebimento"
+      },
+      {
+        "data": "12/03/2018",
+        "descricao": "Recebimento"
+      },
+      {
+        "data": "27/07/2017",
+        "descricao": "Recebimento | Protocolo de Petição |  | Petição"
+      }
+    ]
+  },
+  {
+    "numero": "0000230-80.2020.8.08.0054",
+    "tribunal": "TJES",
+    "comarca": "Viana",
+    "tipo": "Cível",
+    "classe": "Não Informada",
+    "orgao": "Não Informado",
+    "assunto": "Não Informado",
+    "cliente": "Ricardo (Espólio)",
+    "polo_ativo": "—",
+    "polo_passivo": "—",
+    "ultima_mov": "Não Localizado",
+    "mov_desc": "Processo não retornado pela API pública do TJES",
+    "prazo": "verificar",
+    "status": "ATIVO",
+    "andamentos": []
   }
 ]
