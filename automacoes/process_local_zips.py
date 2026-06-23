@@ -1,5 +1,6 @@
-import os
 import sys
+sys.path.insert(0, r"C:\Users\advog\Meu Drive\@ PROJETOS IAS\@ cópia de publicidade\whatsweb_bot\.venv\Lib\site-packages")
+import os
 
 # Garante que o diretório automacoes esteja no sys.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))

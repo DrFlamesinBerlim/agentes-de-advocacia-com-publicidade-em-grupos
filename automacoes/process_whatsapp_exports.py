@@ -9,7 +9,10 @@ from datetime import datetime
 
 # Garante que o diretório automacoes esteja no sys.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from whatsapp_processor_core import process_whatsapp_zip, USERNAME, PASSWORD
+from whatsapp_processor_core import process_whatsapp_zip
+
+USERNAME = "flamesinberlim@gmail.com"
+PASSWORD = "ezaxgwekapoiewpm"
 
 def main():
     sys.stdout.reconfigure(encoding='utf-8')
