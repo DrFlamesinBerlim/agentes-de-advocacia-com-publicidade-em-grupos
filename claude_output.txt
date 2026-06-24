@@ -1,45 +1,57 @@
-<instrucao id="WHATSAPP-AUZIER-001" prioridade="ALTA" timestamp="2026-06-23">
+<instrucao id="WHATSAPP-AUZIER-002" prioridade="ALTA" timestamp="2026-06-24">
   <para>Antigravity</para>
   <de>Claude_Síntese</de>
-  <assunto>Exportação completa grupo WhatsApp — Auzier Pereira</assunto>
+  <assunto>PROCESSAR ZIP WhatsApp — GRUPO AUZIER PEREIRA (35MB já no Drive)</assunto>
+
+  <contexto>
+    O arquivo ZIP já está sincronizado no Google Drive em:
+    C:\Users\advog\Meu Drive\X\pessoais\Tânia 2026\Conversa do WhatsApp com GRUPO AUZIER PEREIRA
+    (sem extensão visível, mas é ZIP — 35MB, ID Drive: 1A5dWfUk_S7CINZLaEWsS7oM8hb1mxOcj)
+  </contexto>
 
   <commands>
-    <step id="1" descricao="Abrir Edge com CDP e navegar para WhatsApp Web">
-      REM Certifique-se que o Edge está aberto com WhatsApp Web logado
-      REM Se necessário, iniciar Edge com CDP:
-      start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\advog\EdgeProfile"
+    <step id="1" descricao="Localizar e extrair o ZIP">
+      cd "C:\Users\advog\Meu Drive\X\pessoais\Tânia 2026"
+      REM O arquivo pode estar sem extensão — renomear se necessário:
+      REM rename "Conversa do WhatsApp com GRUPO AUZIER PEREIRA" "Conversa do WhatsApp com GRUPO AUZIER PEREIRA.zip"
+      mkdir "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
+      tar -xf "Conversa do WhatsApp com GRUPO AUZIER PEREIRA.zip" -C "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
     </step>
 
-    <step id="2" descricao="Executar script de exportação">
+    <step id="2" descricao="Processar o .txt com agente_whatsapp.py (parse + prova + contatos)">
       cd "C:\Users\advog\Meu Drive\X"
-      python exportar_whatsapp_auzier.py
+      REM Localizar o .txt dentro do ZIP extraído:
+      for /r "documentos\whatsapp\auzier_pereira" %f in (*.txt) do python agente_andamentos\agente_whatsapp.py parse "%f"
+      for /r "documentos\whatsapp\auzier_pereira" %f in (*.txt) do python agente_andamentos\agente_whatsapp.py contato "%f"
     </step>
 
-    <step id="3" descricao="Processar áudios opus->wav->Whisper->PDF">
-      REM O whatsapp_processor_core.py já faz esse pipeline automaticamente
-      REM Rodar após exportação concluir:
-      python automacoes\whatsapp_processor_core.py
+    <step id="3" descricao="Processar PTTs (áudios .opus) com Whisper via whatsapp_processor_core.py">
+      REM O whatsapp_processor_core.py já faz opus->wav->Whisper->PDF automaticamente
+      REM Apontar para a pasta extraída:
+      python automacoes\whatsapp_processor_core.py --pasta "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
     </step>
 
-    <step id="4" descricao="Commitar resultados no repo para Claude acessar">
+    <step id="4" descricao="Commitar todos os resultados para Claude acessar">
       cd "C:\Users\advog\Meu Drive\X\repo"
-      git add documentos\whatsapp\
-      git commit -m "feat: exportação WhatsApp Auzier Pereira - mensagens + mídia processada"
+      git add documentos\whatsapp\auzier_pereira\
+      git commit -m "feat: processamento completo WhatsApp GRUPO AUZIER PEREIRA - msgs + PTTs transcritos"
       git push origin claude/upbeat-fermat-0x6gd8
     </step>
   </commands>
 
   <esperado>
-    - Arquivo JSON com todas as mensagens do grupo Auzier Pereira
-    - Transcrições dos áudios (Whisper)
+    - JSON com todas as mensagens parseadas
+    - TXT formatado como prova processual (mensagens por data/hora/contato)
+    - Transcrições de todos os PTTs via Whisper (opus->texto)
     - PDF consolidado com mensagens + transcrições
-    - Fotos e documentos salvos em documentos/whatsapp/auzier/
+    - Índice de fotos e documentos encontrados no ZIP
+    - Tudo commitado no repo para Claude gerar relatório final
   </esperado>
 
   <obs>
     - whatsapp_processor_core.py está FROZEN — não modificar
-    - Se Edge não conectar na porta 9222, verificar com check_edge_cdp.py
-    - Dr. Jefferson solicitou TUDO: mensagens, áudios, fotos, PDFs
-    - Após commit, Claude gera relatório consolidado automaticamente
+    - Se o core não aceitar --pasta, rodar manualmente na pasta extraída
+    - Dr. Jefferson quer: mensagens + PTTs + fotos + docs = relatório completo
+    - Após commit, Claude gera o relatório consolidado automaticamente
   </obs>
 </instrucao>
