@@ -1,57 +1,43 @@
-<instrucao id="WHATSAPP-AUZIER-002" prioridade="ALTA" timestamp="2026-06-24">
+<instrucao id="ENV-SETUP-001" prioridade="ALTA" timestamp="2026-06-27">
   <para>Antigravity</para>
   <de>Claude_Síntese</de>
-  <assunto>PROCESSAR ZIP WhatsApp — GRUPO AUZIER PEREIRA (35MB já no Drive)</assunto>
-
-  <contexto>
-    O arquivo ZIP já está sincronizado no Google Drive em:
-    C:\Users\advog\Meu Drive\X\pessoais\Tânia 2026\Conversa do WhatsApp com GRUPO AUZIER PEREIRA
-    (sem extensão visível, mas é ZIP — 35MB, ID Drive: 1A5dWfUk_S7CINZLaEWsS7oM8hb1mxOcj)
-  </contexto>
+  <assunto>Criar arquivo .env local com credenciais dos 4 e-mails</assunto>
 
   <commands>
-    <step id="1" descricao="Localizar e extrair o ZIP">
-      cd "C:\Users\advog\Meu Drive\X\pessoais\Tânia 2026"
-      REM O arquivo pode estar sem extensão — renomear se necessário:
-      REM rename "Conversa do WhatsApp com GRUPO AUZIER PEREIRA" "Conversa do WhatsApp com GRUPO AUZIER PEREIRA.zip"
-      mkdir "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
-      tar -xf "Conversa do WhatsApp com GRUPO AUZIER PEREIRA.zip" -C "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
+    <step id="1" descricao="Criar .env em C:\Users\advog\Meu Drive\X\.env">
+      REM Copiar o conteúdo abaixo para o arquivo .env (NUNCA commitar)
+      REM Testar as 3 senhas em sequência: Senh@977, Senh@955, Senh@966
+
+      (
+        echo HOTMAIL_ADVO_EMAIL=advogadobrito@hotmail.com
+        echo HOTMAIL_ADVO_SENHA=Senh@977
+        echo HOTMAIL_JEFF_EMAIL=jeffersondebrito@hotmail.com
+        echo HOTMAIL_JEFF_SENHA=Senh@977
+        echo GMAIL_TRIBUNA=tribuna.livre.ro@gmail.com
+        echo GMAIL_FLAMES=flamesinberlim@gmail.com
+        echo DATAJUD_API_KEY=ApiKey cDZHYzlZa0JadVREZDJCendFbXNwWnA6MusICgs4R14wMWI1ZUp1ZmQ5djVncw==
+        echo GITHUB_BRANCH=claude/upbeat-fermat-0x6gd8
+      ) > "C:\Users\advog\Meu Drive\X\.env"
     </step>
 
-    <step id="2" descricao="Processar o .txt com agente_whatsapp.py (parse + prova + contatos)">
+    <step id="2" descricao="Testar conexão IMAP com modulo_emails.py">
       cd "C:\Users\advog\Meu Drive\X"
-      REM Localizar o .txt dentro do ZIP extraído:
-      for /r "documentos\whatsapp\auzier_pereira" %f in (*.txt) do python agente_andamentos\agente_whatsapp.py parse "%f"
-      for /r "documentos\whatsapp\auzier_pereira" %f in (*.txt) do python agente_andamentos\agente_whatsapp.py contato "%f"
+      python agente_andamentos\modulo_emails.py verificar
+      REM Se falhar com Senh@977, tentar Senh@955 e depois Senh@966
+      REM Atualizar o .env com a senha correta de cada conta
     </step>
 
-    <step id="3" descricao="Processar PTTs (áudios .opus) com Whisper via whatsapp_processor_core.py">
-      REM O whatsapp_processor_core.py já faz opus->wav->Whisper->PDF automaticamente
-      REM Apontar para a pasta extraída:
-      python automacoes\whatsapp_processor_core.py --pasta "C:\Users\advog\Meu Drive\X\documentos\whatsapp\auzier_pereira"
-    </step>
-
-    <step id="4" descricao="Commitar todos os resultados para Claude acessar">
-      cd "C:\Users\advog\Meu Drive\X\repo"
-      git add documentos\whatsapp\auzier_pereira\
-      git commit -m "feat: processamento completo WhatsApp GRUPO AUZIER PEREIRA - msgs + PTTs transcritos"
-      git push origin claude/upbeat-fermat-0x6gd8
+    <step id="3" descricao="Reportar resultado via antigravity_output.txt">
+      REM Escrever no antigravity_output.txt qual senha funcionou para cada conta
+      REM e quantos e-mails jurídicos foram encontrados
     </step>
   </commands>
 
-  <esperado>
-    - JSON com todas as mensagens parseadas
-    - TXT formatado como prova processual (mensagens por data/hora/contato)
-    - Transcrições de todos os PTTs via Whisper (opus->texto)
-    - PDF consolidado com mensagens + transcrições
-    - Índice de fotos e documentos encontrados no ZIP
-    - Tudo commitado no repo para Claude gerar relatório final
-  </esperado>
-
   <obs>
-    - whatsapp_processor_core.py está FROZEN — não modificar
-    - Se o core não aceitar --pasta, rodar manualmente na pasta extraída
-    - Dr. Jefferson quer: mensagens + PTTs + fotos + docs = relatório completo
-    - Após commit, Claude gera o relatório consolidado automaticamente
+    - .env NUNCA vai pro git — já está no .gitignore
+    - Senhas a testar: Senh@977 | Senh@955 | Senh@966
+    - Se nenhuma funcionar no Outlook IMAP, verificar se autenticação
+      de dois fatores está ativa (pode precisar de senha de app)
+    - Outlook pode exigir: Configurações → Segurança → Senhas de aplicativo
   </obs>
 </instrucao>
