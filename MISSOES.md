@@ -18,6 +18,8 @@
 | M-006 | Manifestação TJAM 0021230-05.2025.8.04.9001 | Dr. Jefferson | 🔴 URGENTE | Prazo VENCE HOJE 23/06/2026 |
 | M-008 | Exportar WhatsApp grupo Auzier Pereira | Dr. Jefferson | 🟡 ALTA | `exportar_whatsapp_auzier.py` já existe na Pasta X — rodar Playwright via Antigravity |
 | M-009 | Memorial Defensivo — Jonair Alves Ferreira | Dr. Jefferson | 🔴 URGENTE | Revisão Criminal 0800556-72.2026.8.22.0000 — refutar parecer MPRO (Des. Adolfo Naujorks Neto) |
+| M-010 | Sustentar oral ou destacar — EDCiv 7057519-45.2025.8.22.0001 | Dr. Jefferson | 🔴 URGENTE | Prazo: 30/06/2026 — email 2turmarecursal@tjro.jus.br — Sessão n. 109 (06-10/07) |
+| M-011 | Sistema controle de tarefas — extração automática prazos/intimações | Dr. Jefferson | 🟡 ALTA | Extrair prazos, intimações, citações do DJE automaticamente |
 
 ---
 

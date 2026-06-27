@@ -1,6 +1,29 @@
 {
-  "atualizado_em": "2026-06-23T00:00:00+00:00",
+  "atualizado_em": "2026-06-27T16:13:00+00:00",
   "prazos": [
+    {
+      "numero": "7057519-45.2025.8.22.0001",
+      "tribunal": "TJRO",
+      "data_movimento": "2026-06-26",
+      "tipo_movimento": "Inclusão Pauta Eletrônica n. 109 — DJE 115",
+      "dias_uteis": 2,
+      "vencimento": "2026-06-30",
+      "descricao": "PRAZO FATAL — Inscrição sustentação oral (art. 28 Res. 335/2024-TJRO)",
+      "email_acao": "2turmarecursal@tjro.jus.br",
+      "status": "URGENTE",
+      "calendar_id": "rg25uq0f1ia9t11bafh3re295c"
+    },
+    {
+      "numero": "7057519-45.2025.8.22.0001",
+      "tribunal": "TJRO",
+      "data_movimento": "2026-07-06",
+      "tipo_movimento": "Sessão Eletrônica n. 109 — Abertura",
+      "dias_uteis": 0,
+      "vencimento": "2026-07-10",
+      "descricao": "Encerramento sessão às 14h — julgamento do EDCiv",
+      "status": "PENDENTE",
+      "calendar_id": "nc22pjs6var1341308p9626e7s"
+    },
     {
       "numero": "7002410-25.2021.8.22.0021",
       "tribunal": "TJRO",
@@ -28,7 +51,7 @@
       "tipo_movimento": "Disponibilização no Diário da Justiça Eletrônico",
       "dias_uteis": 15,
       "vencimento": "2026-06-23",
-      "status": "VENCE_HOJE",
+      "status": "VENCIDO",
       "calendar_id": ""
     }
   ]

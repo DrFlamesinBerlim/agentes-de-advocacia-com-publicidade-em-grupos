@@ -46,6 +46,38 @@
       ]
     },
     {
+      "numero": "7057519-45.2025.8.22.0001",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "2ª Turma Recursal",
+      "classe": "EDCiv — Embargos de Declaração Cível",
+      "partes": {
+        "autor": "ALESSANDRA VIEIRA LEMOS",
+        "reu": "HENRIQUE LUCAS ASSUNCAO DE AMORIM",
+        "advogado_autor": "",
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [
+        {
+          "data": "2026-06-26",
+          "movimento": "Inclusão em Pauta Eletrônica n. 109 — DJE n. 115 págs. 93-125",
+          "prazo_calculado": "2026-06-30",
+          "prazo_tipo": "Inscrição sustentação oral (art. 28 Res. 335/2024-TJRO)",
+          "prazo_status": "URGENTE",
+          "calendar_id": "rg25uq0f1ia9t11bafh3re295c"
+        },
+        {
+          "data": "2026-07-06",
+          "movimento": "Sessão Eletrônica n. 109 — abertura 07h",
+          "prazo_calculado": "2026-07-10",
+          "prazo_tipo": "Encerramento sessão eletrônica às 14h",
+          "prazo_status": "PENDENTE",
+          "calendar_id": "nc22pjs6var1341308p9626e7s"
+        }
+      ],
+      "obs": "Email sustentação oral: 2turmarecursal@tjro.jus.br | Sessão eletrônica 06-10/07/2026"
+    },
+    {
       "numero": "0021230-05.2025.8.04.9001",
       "tribunal": "TJAM",
       "comarca": "Manaus",
