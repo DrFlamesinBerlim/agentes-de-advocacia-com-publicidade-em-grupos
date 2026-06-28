@@ -1,188 +1,240 @@
-# 🔌 PENDRIVE MABIOS V3 — Manual de Instalação e Protocolo
+# PENDRIVE MABIOS V3 — Manual de Instalação e Protocolo
 **De Brito Advocacia | Ecossistema Trans-LLM**
-*Versão: 3.0 | Última revisão: 2026-06-23*
+*Versão: 3.1 | Última revisão: 2026-06-28*
 
 ---
 
-## 📦 O QUE É O PENDRIVE MABIOS
+## O QUE É O PENDRIVE MABIOS
 
 O Pendrive MABIOS (Multi-Agent Bridge I/O System) é o kit de bootstrap portátil que inicializa o ecossistema Trans-LLM em qualquer máquina do escritório. Ele contém todos os scripts, dependências e configurações necessárias para que o **Antigravity (Agente Local)** entre em operação em minutos.
 
 ---
 
-## 🗂️ ESTRUTURA DO PENDRIVE
+## ESTRUTURA DO PENDRIVE / REPOSITÓRIO
 
 ```
 MABIOS_V3/
-├── install.bat                  ← Instalador principal (rodar como Admin)
-├── requirements.txt             ← Dependências Python
-├── setup_pasta_x.py             ← Cria estrutura da Pasta X no Drive
-├── loop_monitor.py              ← Watchdog principal (daemon)
-├── agente_andamentos/
-│   ├── agente_andamentos.py
-│   ├── atualizar_processos.py
-│   ├── modulo_prazos.py
-│   └── modulo_calendar.py
-├── config/
-│   ├── config.json              ← Configurações do ambiente
-│   └── credenciais_pje.enc      ← Credenciais criptografadas (AES-256)
-└── docs/
-    └── PENDRIVE_MABIOS_V3.md    ← Este arquivo
+├── install.bat                     ← Instalador principal (rodar como Admin)
+├── requirements.txt                ← Dependências Python
+├── setup_pasta_x.py                ← Cria estrutura da Pasta X (roda UMA vez)
+├── loop_monitor.py                 ← Watchdog principal (daemon permanente)
+├── claude_output.txt               ← Canal Claude → Antigravity (não editar manualmente)
+├── antigravity_output.txt          ← Canal Antigravity → Claude (não editar manualmente)
+├── .env.template                   ← Template de variáveis (copiar para .env local)
+│
+├── agente_andamentos/              ← Todos os módulos do agente
+│   ├── agente_andamentos.py        ← ORQUESTRADOR — ponto de entrada principal
+│   ├── atualizar_processos.py      ← Pipeline: DataJud → prazos → partes → calendar
+│   ├── modulo_prazos.py            ← Cálculo de prazos CPC (CONGELADO — não modificar)
+│   ├── modulo_calendar.py          ← Sincronização com Google Calendar
+│   ├── modulo_partes_datajud.py    ← Consulta partes no DataJud CNJ
+│   ├── modulo_emails.py            ← Extração de e-mails jurídicos (IMAP Hotmail)
+│   ├── modulo_mabios_email.py      ← Processador de rascunhos MABIOS_ACTION
+│   ├── modulo_tarefas.py           ← Gestão de tarefas jurídicas (ciclo de vida)
+│   ├── sync_github.py              ← Ponte GitHub: push/pull automático
+│   ├── agente_whatsapp.py          ← Exportador WhatsApp (CONGELADO — não modificar)
+│   └── __init__.py
+│
+├── documentos/                     ← Dados persistentes (sincronizados via GitHub)
+│   ├── processos.json              ← Cadastro de processos (status: ATIVO/CONFERIDO/ARQUIVADO)
+│   ├── prazos_pendentes.json       ← Prazos calculados aguardando ação/calendar
+│   └── tarefas.json                ← Tarefas jurídicas abertas e em andamento
+│
+├── config/                         ← Credenciais LOCAIS (nunca no git)
+│   ├── credentials.json            ← OAuth Google (nunca commitar)
+│   ├── token.json                  ← Token Google gerado (nunca commitar)
+│   └── credenciais_pje.enc         ← Credenciais PJe AES-256
+│
+└── agentes/
+    └── PENDRIVE_MABIOS_V3.md       ← Este arquivo (manifesto do sistema)
 ```
 
 ---
 
-## ⚙️ INSTALAÇÕES NECESSÁRIAS (PRÉ-REQUISITOS)
+## MÓDULOS — RESPONSABILIDADES
 
-### 1. Python 3.11+
+| Arquivo | Responsabilidade | Alterar? |
+|---|---|---|
+| `agente_andamentos.py` | Orquestrador: chama todos os módulos | Sim |
+| `atualizar_processos.py` | Pipeline DataJud + prazos | Sim |
+| `modulo_prazos.py` | Cálculo CPC art. 218 | **NÃO — CONGELADO** |
+| `modulo_calendar.py` | Google Calendar sync | Sim |
+| `modulo_partes_datajud.py` | Busca partes no DataJud | Sim |
+| `modulo_emails.py` | IMAP Hotmail + extração jurídica | Sim |
+| `modulo_mabios_email.py` | Rascunhos MABIOS_ACTION → processos.json | Sim |
+| `modulo_tarefas.py` | CRUD de tarefas jurídicas | Sim |
+| `sync_github.py` | Push/pull GitHub automático | Sim |
+| `agente_whatsapp.py` | WhatsApp export/PTT | **NÃO — CONGELADO** |
+| `setup_pasta_x.py` | Setup inicial (roda uma vez) | Não necessário |
+
+**Regra:** se a funcionalidade já tem um módulo, melhore o módulo existente. Não crie `modulo_emails_v2.py` nem `modulo_mabios_novo.py`.
+
+---
+
+## COMANDOS DO ORQUESTRADOR
+
 ```powershell
-# Verificar se já está instalado
-python --version
+cd "C:\Users\advog\Meu Drive\X"
 
-# Se não estiver: baixar em https://www.python.org/downloads/
-# IMPORTANTE: marcar "Add Python to PATH" durante a instalação
-```
-
-### 2. Dependências Python
-```powershell
-cd "MABIOS_V3"
-pip install -r requirements.txt
-```
-
-**`requirements.txt` completo:**
-```
-watchdog>=4.0.0        # Monitor de arquivos em tempo real
-requests>=2.31.0       # Requisições HTTP para PJe/APIs
-python-dotenv>=1.0.0   # Variáveis de ambiente
-schedule>=1.2.0        # Agendamento de tarefas
-cryptography>=41.0.0   # Criptografia de credenciais
-google-auth>=2.23.0    # Autenticação Google Drive
-google-auth-oauthlib>=1.1.0
-google-api-python-client>=2.100.0
-pywin32>=306           # Integração Windows (notificações, serviços)
-psutil>=5.9.0          # Monitoramento de processos do sistema
-```
-
-### 3. Google Drive (credenciais OAuth)
-```powershell
-# Colocar o arquivo credentials.json do Google Cloud Console em:
-# C:\Users\advog\Meu Drive\X\config\credentials.json
-#
-# Na primeira execução, abrirá o browser para autenticação.
-# O token será salvo em token.json automaticamente.
-```
-
-### 4. Variáveis de Ambiente (`.env`)
-Criar o arquivo `C:\Users\advog\Meu Drive\X\.env`:
-```env
-PJE_LOGIN=seu_cpf_ou_login
-PJE_SENHA=sua_senha_pje
-GOOGLE_CREDENTIALS_PATH=C:/Users/advog/Meu Drive/X/config/credentials.json
-BASE_PATH=C:/Users/advog/Meu Drive/X
-LOG_LEVEL=INFO
-MONITOR_INTERVAL=5
+python agente_andamentos\agente_andamentos.py status     # resumo geral
+python agente_andamentos\agente_andamentos.py tudo       # ciclo completo
+python agente_andamentos\agente_andamentos.py mabios     # processar rascunhos MABIOS
+python agente_andamentos\agente_andamentos.py urgentes   # tarefas urgentes
+python agente_andamentos\agente_andamentos.py atualizar  # DataJud + prazos
+python agente_andamentos\agente_andamentos.py emails     # varrer e-mails
+python agente_andamentos\agente_andamentos.py calendar   # sync calendar
+python agente_andamentos\agente_andamentos.py partes     # partes DataJud
+python agente_andamentos\agente_andamentos.py tarefas    # painel de tarefas
 ```
 
 ---
 
-## 🚀 INSTALAÇÃO RÁPIDA (PASSO A PASSO)
+## PROTOCOLO DE COMUNICAÇÃO MABIOS
+
+### Fluxo de dados:
+
+```
+Dr. Jefferson (celular/Outlook)
+       │  cria rascunho: MABIOS_ACTION:TIPO:NUMERO
+       ▼
+ flamesinberlim@gmail.com (Rascunhos)
+       │  Claude lê via Gmail MCP
+       ▼
+   Claude (Web/Nuvem)
+       │  escreve instruções XML em
+       ▼
+ claude_output.txt  →  GitHub  →  Pasta X local
+       │  loop_monitor detecta mudança
+       ▼
+ loop_monitor.py (Antigravity)
+       │  executa modulo_mabios_email.py processar
+       ▼
+ processos.json / tarefas.json atualizados
+       │  Antigravity reporta resultado em
+       ▼
+ antigravity_output.txt  →  GitHub  →  Claude lê
+```
+
+### Protocolo MABIOS_ACTION (rascunhos Gmail):
+
+```
+Assunto: MABIOS_ACTION:TIPO:NUMERO_PROCESSO
+Corpo:   observação livre (opcional)
+```
+
+| Tipo | Efeito |
+|---|---|
+| `CONFERIDO` | Processo some dos relatórios ativos |
+| `ARQUIVAR` | Processo arquivado definitivamente |
+| `ATIVO` | Reativa processo conferido/arquivado |
+| `URGENTE` | Eleva todas as tarefas do processo para URGENTE |
+| `NOTA` | Adiciona nota ao processo (corpo do rascunho) |
+| `CONCLUIR` | Conclui tarefa (NUMERO = ID da tarefa, ex: T-001) |
+
+### Tags XML no claude_output.txt:
+
+```xml
+<!-- Executar script -->
+<commands>
+python agente_andamentos\agente_andamentos.py tudo
+</commands>
+
+<!-- Gravar arquivo -->
+<write_file path="C:/Users/advog/Meu Drive/X/documentos/processos.json">
+{ ... }
+</write_file>
+
+<!-- Ler arquivo -->
+<read_file path="C:/Users/advog/Meu Drive/X/antigravity_output.txt"/>
+
+<!-- Status -->
+<status>[ANTIGRAVITY:READY] Aguardando instruções.</status>
+```
+
+---
+
+## INSTALAÇÃO RÁPIDA
 
 ```powershell
-# PASSO 1 — Abrir PowerShell como Administrador
+# 1. Abrir PowerShell como Administrador
 
-# PASSO 2 — Navegar até o pendrive (ajuste a letra do drive)
+# 2. Navegar até o pendrive (ajustar letra do drive)
 cd "E:\MABIOS_V3"
 
-# PASSO 3 — Rodar o instalador automático
+# 3. Rodar instalador
 .\install.bat
 
-# PASSO 4 — Inicializar a Pasta X (apenas na primeira vez)
+# 4. Inicializar Pasta X (apenas na primeira vez)
 python setup_pasta_x.py
 
-# PASSO 5 — Iniciar o monitor em segundo plano
+# 5. Iniciar o monitor em segundo plano
 python loop_monitor.py
 ```
 
 ---
 
-## 🔄 PROTOCOLO DE COMUNICAÇÃO MABIOS
+## VARIÁVEIS DE AMBIENTE (.env local — nunca no git)
 
-### Fluxo de dados:
-```
-Dr. Jefferson (VSI)
-       │
-       ▼
-   Claude (Web)
-       │  escreve instruções XML em
-       ▼
- claude_output.txt
-       │  watchdog detecta mudança
-       ▼
- loop_monitor.py (Antigravity)
-       │  executa e reporta em
-       ▼
- antigravity_output.txt
-       │  Claude lê no próximo turno
-       ▼
-   Claude (Web)
-```
+```env
+HOTMAIL_ADVO_EMAIL=advogadobrito@hotmail.com
+HOTMAIL_ADVO_SENHA=PREENCHER_LOCALMENTE
 
-### Tags XML suportadas pelo Antigravity:
+HOTMAIL_JEFF_EMAIL=jeffersondebrito@hotmail.com
+HOTMAIL_JEFF_SENHA=PREENCHER_LOCALMENTE
 
-#### Gravar arquivo:
-```xml
-<write_file path="C:/Users/advog/Meu Drive/X/caminho/arquivo.ext">
-conteúdo completo do arquivo aqui
-</write_file>
-```
+GMAIL_TRIBUNA=tribuna.livre.ro@gmail.com
+GMAIL_FLAMES=flamesinberlim@gmail.com
 
-#### Executar comando PowerShell:
-```xml
-<commands>
-python agente_andamentos/atualizar_processos.py
-</commands>
-```
+DATAJUD_API_KEY=ApiKey cDZHYzlZa0JadVREZDJCendFbXNwWnA6MusICgs4R14wMWI1ZUp1ZmQ5djVncw==
 
-#### Ler arquivo e retornar conteúdo:
-```xml
-<read_file path="C:/Users/advog/Meu Drive/X/documentos/processos.json"/>
-```
-
-#### Notificação de status:
-```xml
-<status>
-[ANTIGRAVITY:READY] Sistema operacional. Aguardando instruções.
-</status>
+GITHUB_BRANCH=claude/upbeat-fermat-0x6gd8
+GITHUB_REPO=https://github.com/DrFlamesinBerlim/agentes-de-advocacia-com-publicidade-em-grupos.git
 ```
 
 ---
 
-## 🔐 SEGURANÇA
+## DEPENDÊNCIAS (requirements.txt)
+
+```
+watchdog>=4.0.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+schedule>=1.2.0
+cryptography>=41.0.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.1.0
+google-api-python-client>=2.100.0
+pywin32>=306
+psutil>=5.9.0
+```
+
+---
+
+## SEGURANÇA
 
 | Item | Padrão |
-|------|--------|
-| Credenciais PJe | AES-256 criptografado em `credenciais_pje.enc` |
-| Token Google | OAuth 2.0, salvo localmente em `token.json` |
-| Arquivo `.env` | Nunca commitar no Git (está no `.gitignore`) |
-| Logs | Rotação automática a cada 7 dias |
-| Acesso remoto | Somente via chave SSH autorizada pelo VSI |
+|---|---|
+| Credenciais PJe | AES-256 em `credenciais_pje.enc` |
+| Token Google | OAuth 2.0 local em `token.json` |
+| Senhas e-mail | Apenas no `.env` local — nunca no git |
+| Logs | `antigravity_output.txt` — rotação manual |
 
 ---
 
-## 🩺 DIAGNÓSTICO RÁPIDO
+## DIAGNÓSTICO RÁPIDO
 
 ```powershell
-# Verificar se o monitor está rodando
-Get-Process python | Where-Object {$_.MainWindowTitle -like "*monitor*"}
-
 # Ver últimas linhas do log
 Get-Content "C:\Users\advog\Meu Drive\X\antigravity_output.txt" -Tail 20
 
-# Verificar se a Pasta X está íntegra
+# Status geral do sistema
+python agente_andamentos\agente_andamentos.py status
+
+# Verificar integridade da Pasta X
 python -c "
 from pathlib import Path
 base = Path(r'C:/Users/advog/Meu Drive/X')
-arquivos = ['antigravity_output.txt','claude_output.txt','STATUS_OFFICE.md','documentos/processos.json']
+arquivos = ['antigravity_output.txt','claude_output.txt','documentos/processos.json','documentos/tarefas.json']
 for a in arquivos:
     p = base / a
     print('OK' if p.exists() else 'FALTANDO', a)
@@ -191,27 +243,14 @@ for a in arquivos:
 
 ---
 
-## 🔁 REINICIAR O SISTEMA
-
-```powershell
-# Parar o monitor
-Stop-Process -Name python -Force
-
-# Reiniciar
-cd "C:\Users\advog\Meu Drive\X"
-Start-Process python -ArgumentList "loop_monitor.py" -WindowStyle Hidden
-```
-
----
-
-## 📞 SUPORTE
+## SUPORTE
 
 | Agente | Canal | Função |
-|--------|-------|--------|
-| Dr. Jefferson (VSI) | Presencial | Orquestrador e tomador de decisão |
-| Antigravity | `antigravity_output.txt` | Executor local |
-| Claude | `claude_output.txt` | Síntese, redação, análise |
+|---|---|---|
+| Dr. Jefferson | Rascunhos Gmail (MABIOS_ACTION) | Orquestrador e tomador de decisão |
+| Claude (nuvem) | `claude_output.txt` / GitHub | Síntese, redação, análise, MABIOS |
+| Antigravity (local) | `antigravity_output.txt` | Executor local, DataJud, IMAP |
 
 ---
 
-*MABIOS V3 — De Brito Advocacia © 2026*
+*MABIOS V3.1 — De Brito Advocacia © 2026*
