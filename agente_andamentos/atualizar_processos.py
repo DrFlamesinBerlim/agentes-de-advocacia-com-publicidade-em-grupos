@@ -83,6 +83,10 @@ def processar() -> None:
     novas_movimentacoes = 0
 
     for proc in dados["processos"]:
+        # Não consulta DataJud para processos encerrados
+        if proc.get("status") in ("ARQUIVADO", "CONFERIDO"):
+            continue
+
         numero   = proc["numero"]
         tribunal = proc.get("tribunal", "")
         andamentos_anteriores = {a["data"] for a in proc.get("andamentos", [])}

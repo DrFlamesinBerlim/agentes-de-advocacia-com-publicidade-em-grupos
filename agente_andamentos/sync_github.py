@@ -13,13 +13,12 @@ Resultado: Claude e Antigravity falam a mesma língua via GitHub.
 
 import subprocess
 import time
-import shutil
 import logging
 from pathlib import Path
 from datetime import datetime, timezone
 
 BASE = Path(r"C:/Users/advog/Meu Drive/X")
-REPO_DIR = BASE / "repo"  # git clone do repositório aqui
+REPO_DIR = BASE  # a Pasta X É o repositório git (sem clone separado)
 LOG_FILE = BASE / "antigravity_output.txt"
 
 REPO_URL = "https://github.com/DrFlamesinBerlim/agentes-de-advocacia-com-publicidade-em-grupos.git"
@@ -28,6 +27,7 @@ BRANCH = "claude/upbeat-fermat-0x6gd8"
 ARQUIVOS_SYNC_PUSH = [
     "antigravity_output.txt",
     "documentos/processos.json",
+    "documentos/tarefas.json",
     "documentos/prazos_pendentes.json",
     "sync_state.json",
     "STATUS_OFFICE.md",
@@ -63,43 +63,31 @@ def clone_ou_pull():
 
 
 def push_para_github():
-    """Copia arquivos locais da Pasta X para o repo e faz push."""
+    """Faz git add/commit/push dos arquivos de dados para o GitHub."""
     alterou = False
     for arquivo in ARQUIVOS_SYNC_PUSH:
-        origem = BASE / arquivo
-        destino = REPO_DIR / arquivo
-        if not origem.exists():
+        if not (REPO_DIR / arquivo).exists():
             continue
-        destino.parent.mkdir(parents=True, exist_ok=True)
-        if not destino.exists() or origem.read_bytes() != destino.read_bytes():
-            shutil.copy2(origem, destino)
+        saida = run(["git", "diff", "--name-only", arquivo])
+        saida_staged = run(["git", "diff", "--cached", "--name-only", arquivo])
+        if saida or saida_staged or run(["git", "status", "--short", arquivo]):
             run(["git", "add", arquivo])
             alterou = True
-            log.info("STAGED para push: %s", arquivo)
+            log.info("STAGED: %s", arquivo)
 
     if alterou:
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-        run(["git", "commit", "-m", f"sync(antigravity): atualização automática {ts}"])
+        run(["git", "commit", "-m", f"sync(antigravity): {ts}"])
         run(["git", "push", "origin", BRANCH])
-        log.info("PUSH concluído para GitHub")
+        log.info("PUSH concluído")
     else:
-        log.info("Nenhuma alteração para push")
+        log.info("Sem alterações para push")
 
 
 def pull_do_github():
-    """Faz pull e copia claude_output.txt do repo para a Pasta X local."""
+    """Faz pull — como Pasta X é o próprio repo, já está atualizado após o pull."""
     run(["git", "pull", "origin", BRANCH])
-    for arquivo in ARQUIVOS_SYNC_PULL:
-        origem = REPO_DIR / arquivo
-        destino = BASE / arquivo
-        if not origem.exists():
-            continue
-        destino.parent.mkdir(parents=True, exist_ok=True)
-        conteudo_novo = origem.read_bytes()
-        conteudo_atual = destino.read_bytes() if destino.exists() else b""
-        if conteudo_novo != conteudo_atual:
-            shutil.copy2(origem, destino)
-            log.info("PULL aplicado localmente: %s", arquivo)
+    log.info("PULL concluído")
 
 
 def loop(intervalo: int = 10):
