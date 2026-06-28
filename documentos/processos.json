@@ -1,29 +1,6 @@
 {
-  "atualizado_em": "2026-06-28T17:00:00+00:00",
+  "atualizado_em": "2026-06-28T20:00:00+00:00",
   "processos": [
-    {
-      "numero": "7002410-25.2021.8.22.0021",
-      "status": "ATIVO",
-      "tribunal": "TJRO",
-      "comarca": "Buritis",
-      "vara": "Vara Criminal",
-      "classe": "Ação Penal",
-      "partes": {
-        "autor": "",
-        "reu": "",
-        "advogado_autor": "",
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
-      "andamentos": [
-        {
-          "data": "2026-05-27",
-          "movimento": "Mandado | Expedição de documento | Documento",
-          "prazo_calculado": "2026-06-19",
-          "prazo_tipo": "Manifestação nos autos (CPC art. 218)",
-          "prazo_status": "VENCIDO"
-        }
-      ]
-    },
     {
       "numero": "7054209-31.2025.8.22.0001",
       "status": "ATIVO",
@@ -31,12 +8,7 @@
       "comarca": "Porto Velho",
       "vara": "10ª Vara Cível",
       "classe": "",
-      "partes": {
-        "autor": "",
-        "reu": "",
-        "advogado_autor": "",
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"autor": "", "reu": "", "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [
         {
           "data": "2026-05-26",
@@ -59,7 +31,6 @@
       "partes": {
         "autor": "ALESSANDRA VIEIRA LEMOS",
         "reu": "HENRIQUE LUCAS ASSUNCAO DE AMORIM",
-        "advogado_autor": "",
         "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
       },
       "andamentos": [
@@ -89,12 +60,7 @@
       "comarca": "Manaus",
       "vara": "Des. Flávio Humberto Pascarelli Lopes",
       "classe": "",
-      "partes": {
-        "autor": "",
-        "reu": "",
-        "advogado_autor": "",
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"autor": "", "reu": "", "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [
         {
           "data": "2026-05-31",
@@ -103,7 +69,19 @@
           "prazo_tipo": "Manifestação nos autos (CPC art. 218)",
           "prazo_status": "VENCIDO"
         }
-      ]
+      ],
+      "obs": "OUTRO: Quem são as partes e qual é o tipo de ação? — aguarda consulta DataJud local"
+    },
+    {
+      "numero": "0800556-72.2026.8.22.0000",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "Revisão Criminal",
+      "partes": {"reu": "JONAIR ALVES FERREIRA", "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "Memorial Defensivo T-003 — refutar parecer MPRO"
     },
     {
       "numero": "7077392-31.2025.8.22.0001",
@@ -112,12 +90,9 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+      "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
     {
       "numero": "7032995-81.2025.8.22.0001",
@@ -126,12 +101,9 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+      "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
     {
       "numero": "7005268-47.2025.8.22.0002",
@@ -140,12 +112,9 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+      "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
     {
       "numero": "7021493-48.2025.8.22.0001",
@@ -154,12 +123,10 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+      "obs": "OUTRO: Nome de quem? — aguarda esclarecimento",
+      "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
     {
       "numero": "7007424-74.2026.8.22.0001",
@@ -168,28 +135,10 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+      "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
-    {
-      "numero": "0010577-05.2020.8.22.0501",
-      "status": "ARQUIVADO",
-      "arquivado_em": "2026-06-28",
-      "tribunal": "TJRO",
-      "comarca": "Porto Velho",
-      "vara": "",
-      "classe": "",
-      "partes": {
-        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
-      },
-      "andamentos": [],
-      "origem_mabios": "rascunho MABIOS_ACTION:ARQUIVAR — 2026-06-28"
-    }
-    ,
     {
       "numero": "0000558-26.2018.8.22.0010",
       "status": "CONFERIDO",
@@ -197,7 +146,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
@@ -209,10 +157,20 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "0010577-05.2020.8.22.0501",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
     },
     {
       "numero": "7032508-87.2020.8.22.0001",
@@ -221,7 +179,17 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7032651-76.2020.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -233,7 +201,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -245,7 +212,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -257,7 +223,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -269,7 +234,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -281,7 +245,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -293,7 +256,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -305,7 +267,6 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
@@ -317,10 +278,316 @@
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "",
-      "classe": "",
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7005032-40.2021.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0610215-87.2023.8.04.4400",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJAM",
+      "comarca": "Manaus",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7006444-35.2023.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0806296-79.2024.8.22.0000",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "1003135-06.2013.8.22.0601",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7014226-25.2025.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0800863-70.2019.8.22.0000",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "1001614-22.2010.8.22.0604",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7010989-32.2015.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "1005827-12.2012.8.22.0601",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "9001156-09.2009.8.22.0601",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7026624-43.2021.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "1000611-66.2009.8.22.0604",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0004497-22.2011.8.22.0701",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7002063-62.2015.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "7002410-25.2021.8.22.0021",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Buritis",
+      "vara": "Vara Criminal",
+      "classe": "Ação Penal",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0601654-29.2024.8.04.5600",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TJAM",
+      "comarca": "",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:BAIXA_PRIORIDADE — 2026-06-28"
+    },
+    {
+      "numero": "7007961-70.2026.8.22.0001",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:BAIXA_PRIORIDADE — 2026-06-28"
+    },
+    {
+      "numero": "7007762-48.2026.8.22.0001",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:BAIXA_PRIORIDADE — 2026-06-28"
+    },
+    {
+      "numero": "5017826-72.2026.8.08.0024",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TRF1",
+      "comarca": "",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:BAIXA_PRIORIDADE — 2026-06-28"
+    },
+    {
+      "numero": "7002018-97.2025.8.22.0004",
+      "status": "BAIXA_PRIORIDADE",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:BAIXA_PRIORIDADE — 2026-06-28"
+    },
+    {
+      "numero": "0001882-63.2014.8.22.0019",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Que processo é esse vamos analisar quem são as partes e o que que tá rolando — aguarda DataJud"
+    },
+    {
+      "numero": "0611311-40.2023.8.04.4400",
+      "status": "ATIVO",
+      "tribunal": "TJAM",
+      "comarca": "Manaus",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Alexandre precisa assinar da cidade dele — pesquisar pasta e criar minuta"
+    },
+    {
+      "numero": "7023346-63.2023.8.22.0001",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Quem são as partes nesse processo? — aguarda DataJud"
+    },
+    {
+      "numero": "7065682-19.2022.8.22.0001",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Andamento congelado — precisa pesquisar"
+    },
+    {
+      "numero": "4000311-20.2022.8.22.0015",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Quem são as partes? — aguarda DataJud"
+    },
+    {
+      "numero": "4000536-43.2022.8.22.0014",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Quem são as partes e qual é o tipo de ação? — aguarda DataJud"
+    },
+    {
+      "numero": "7025458-68.2024.8.22.0001",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Que tipo de ação é essa? — aguarda DataJud"
+    },
+    {
+      "numero": "7059550-38.2025.8.22.0001",
+      "status": "ATIVO",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "OUTRO: Que tipo de ação é essa? — aguarda DataJud"
     }
   ]
 }
