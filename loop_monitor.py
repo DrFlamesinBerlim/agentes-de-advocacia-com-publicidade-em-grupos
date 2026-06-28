@@ -184,8 +184,8 @@ def executar_tags_xml() -> None:
 
 # ─── Tarefas periódicas ───────────────────────────────────────────────────────
 
-last_mabios = 0.0
-last_full   = 0.0
+last_mabios    = 0.0
+last_full      = 0.0
 
 
 def checar_mabios() -> None:
@@ -210,6 +210,20 @@ def checar_mabios() -> None:
         log_out(f"[EMAILS:INBOX]\n{out2[:800]}")
 
         last_mabios = agora
+
+
+def checar_whatsapp() -> None:
+    """Processa exports .txt do WhatsApp depositados em documentos/whatsapp/inbox/."""
+    inbox = BASE / "documentos" / "whatsapp" / "inbox"
+    if not inbox.exists() or not any(inbox.glob("*.txt")):
+        return
+    log.info("=== WhatsApp inbox — arquivos detectados ===")
+    code, out = run(
+        [sys.executable, str(AGENTE_DIR / "modulo_whatsapp_monitor.py")],
+        timeout=60,
+    )
+    log.info("whatsapp monitor: %s", out[:300] or "ok")
+    log_out(f"[WHATSAPP:INBOX]\n{out[:600]}")
 
 
 def checar_pipeline_completo() -> None:
@@ -251,13 +265,16 @@ def main() -> None:
                 log.info("claude_output.txt mudou — processando tags XML")
                 executar_tags_xml()
 
-            # 3. Processar rascunhos MABIOS periodicamente
+            # 3. Verificar exports WhatsApp pendentes
+            checar_whatsapp()
+
+            # 4. Processar rascunhos MABIOS periodicamente
             checar_mabios()
 
-            # 4. Pipeline completo periodicamente
+            # 5. Pipeline completo periodicamente
             checar_pipeline_completo()
 
-            # 5. Push do log para o GitHub
+            # 6. Push do log para o GitHub
             git_push()
 
         except KeyboardInterrupt:

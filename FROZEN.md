@@ -1,6 +1,6 @@
 # FROZEN — Módulos Estáveis | De Brito Advocacia MABIOS V3
 
-> Última revisão: 28/06/2026 — 18 módulos congelados  
+> Última revisão: 28/06/2026 — 20 módulos congelados  
 > Critério: testado + aprovado + não requer mudança imediata
 
 ---
@@ -19,7 +19,8 @@
 | `.claude/commands/partes.md` | v2.0 | 28/06/2026 | Skill /partes — 8 fontes: Gmail+DataJud+Escavador+Drive+JusBrasil |
 | `agente_andamentos/modulo_relatorios.py` | v1.0 | 28/06/2026 | Relatórios elásticos — filtros validados |
 | `agente_andamentos/sync_github.py` | v1.0 | 28/06/2026 | Sync GitHub — REPO_DIR=BASE confirmado |
-| `loop_monitor.py` | v1.0 | 28/06/2026 | Daemon principal — ciclos 30s/15min/120min |
+| `loop_monitor.py` | v1.1 | 28/06/2026 | Daemon principal — ciclos 30s/15min/120min + checar_whatsapp |
+| `agente_andamentos/modulo_whatsapp_monitor.py` | v1.0 | 28/06/2026 | Monitor inbox WhatsApp — parse + prova processual automático |
 | `.claude/commands/powershell.md` | v1.0 | 28/06/2026 | Skill comandos PowerShell |
 | `.claude/commands/mabios.md` | v1.0 | 28/06/2026 | Skill ações MABIOS |
 | `.claude/commands/relatorio.md` | v1.0 | 28/06/2026 | Skill relatório elástico |
