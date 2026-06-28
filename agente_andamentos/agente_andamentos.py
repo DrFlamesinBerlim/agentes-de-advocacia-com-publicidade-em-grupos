@@ -69,6 +69,13 @@ def cmd_urgentes():
     _urgentes()
 
 
+def cmd_relatorio(args_extras: list = None):
+    """Relatório elástico. Repassa argumentos para modulo_relatorios."""
+    import subprocess
+    script = Path(__file__).parent / "modulo_relatorios.py"
+    subprocess.run([sys.executable, str(script)] + (args_extras or []))
+
+
 def cmd_status():
     """Resumo geral: processos, prazos, tarefas."""
     print(f"\n{'='*55}")
@@ -140,6 +147,7 @@ COMANDOS = {
     "mabios":    cmd_mabios,
     "tarefas":   cmd_tarefas,
     "urgentes":  cmd_urgentes,
+    "relatorio": cmd_relatorio,
     "status":    cmd_status,
     "tudo":      cmd_tudo,
 }
@@ -150,4 +158,7 @@ if __name__ == "__main__":
         print(f"Comando inválido: '{cmd}'")
         print(f"Use: {' | '.join(COMANDOS.keys())}")
         sys.exit(1)
-    COMANDOS[cmd]()
+    if cmd == "relatorio":
+        cmd_relatorio(sys.argv[2:])
+    else:
+        COMANDOS[cmd]()
