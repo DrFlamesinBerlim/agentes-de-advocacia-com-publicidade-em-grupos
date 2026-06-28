@@ -46,16 +46,27 @@ def get_service():
 
 
 def criar_evento(service, prazo: dict, processo: dict) -> str:
-    numero = processo.get("numero", "")
-    partes = processo.get("partes", {})
-    titulo = f"⚖️ PRAZO — {numero} | {partes.get('autor','')} x {partes.get('reu','')}"
+    # processo pode vir como dict aninhado (DataJud) ou vazio (email)
+    if isinstance(processo, dict) and "numero" in processo:
+        numero  = processo.get("numero", prazo.get("numero", ""))
+        partes  = processo.get("partes", {})
+        tribunal = processo.get("tribunal", "")
+    else:
+        numero  = prazo.get("numero", "")
+        partes  = {}
+        tribunal = prazo.get("tribunal", "")
+
+    autor = partes.get("autor", "")
+    reu   = partes.get("reu", "")
+    partes_str = f"{autor} × {reu}" if (autor or reu) else numero
+
+    titulo = f"⚖️ PRAZO — {numero} | {partes_str}"
     descricao = (
         f"Processo: {numero}\n"
-        f"Tribunal: {processo.get('tribunal','')}\n"
-        f"Movimento: {prazo.get('tipo_movimento','')}\n"
-        f"Data movimento: {prazo.get('data_movimento','')}\n"
+        f"Tribunal: {tribunal}\n"
+        f"Movimento: {prazo.get('tipo', prazo.get('tipo_movimento', prazo.get('movimento', '')))}\n"
         f"Vencimento: {prazo.get('vencimento','')}\n"
-        f"Status: {prazo.get('status','')}"
+        f"Origem: {prazo.get('origem','DataJud')}"
     )
     evento = {
         "summary": titulo,

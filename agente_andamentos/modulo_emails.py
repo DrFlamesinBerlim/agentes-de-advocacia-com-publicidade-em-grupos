@@ -76,16 +76,24 @@ FILTROS_JURIDICOS = {
     "remetentes": [
         "noreply@pje",
         "pje@tjro",
+        "pjepush@tjro",
         "dje@tjro",
         "tjro.jus.br",
         "tjam.jus.br",
         "stj.jus.br",
+        "stf.jus.br",
         "cnj.jus.br",
+        "trf1.jus.br",
+        "trf2.jus.br",
+        "trf3.jus.br",
+        "trf4.jus.br",
+        "jfro.jus.br",
+        "projudi",
         "datajud",
-        "noreply@projudi",
         "intimacao",
         "notificacao",
         "2turmarecursal@tjro",
+        "naoresponda.pje",
     ],
     "assuntos": [
         "intimação", "intimacao", "citação", "citacao",
@@ -299,15 +307,15 @@ def _registrar_andamento(email_info: dict) -> int:
     processos = dados.get("processos", [])
     idx = {p["numero"]: p for p in processos}
 
-    assunto    = email_info.get("assunto", "")
-    remetente  = email_info.get("remetente", "")
-    data_email = email_info.get("data", "")[:10]  # YYYY-MM-DD se possível
-    # normaliza data para ISO
+    assunto   = email_info.get("assunto", "")
+    remetente = email_info.get("remetente", "")
+    # normaliza data para ISO — aceita RFC2822 e ISO 8601
     try:
         from email.utils import parsedate_to_datetime
         data_iso = parsedate_to_datetime(email_info.get("data", "")).date().isoformat()
     except Exception:
-        data_iso = date.today().isoformat()
+        raw = email_info.get("data", "")
+        data_iso = raw[:10] if len(raw) >= 10 and raw[4] == "-" else date.today().isoformat()
 
     novos_prazos = []
     atualizados  = 0
@@ -441,8 +449,9 @@ def verificar_gmail_inbox() -> list[dict]:
 
     label_id = _gmail_label_id(service, LABEL_JURIDICO)
 
-    # Busca e-mails não lidos dos últimos 30 dias que NÃO tenham o label processado
-    query = f"in:inbox is:unread newer_than:30d -label:{LABEL_JURIDICO}"
+    # Busca emails dos últimos 60 dias que NÃO tenham o label processado
+    # Sem is:unread — emails lidos mas não processados também devem ser capturados
+    query = f"in:inbox newer_than:60d -label:{LABEL_JURIDICO}"
     resp = service.users().messages().list(userId="me", q=query, maxResults=50).execute()
     msgs = resp.get("messages", [])
 

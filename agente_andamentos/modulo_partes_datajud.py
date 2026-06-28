@@ -19,14 +19,10 @@ DATAJUD_KEY = "ApiKey cDZHYzlZa0JadVREZDJCendFbXNwWnA6MusICgs4R14wMWI1ZUp1ZmQ5dj
 DATAJUD_URL = "https://api-publica.datajud.cnj.jus.br/api_publica_{tribunal}/_search"
 
 TRIBUNAL_MAP = {
-    "TJRO": "tjro",
-    "TJAM": "tjam",
-    "TJMT": "tjmt",
-    "TJPA": "tjpa",
-    "STJ":  "stj",
-    "STF":  "stf",
-    "TRF1": "trf1",
-    "TRF3": "trf3",
+    "TJRO": "tjro", "TJAM": "tjam", "TJMT": "tjmt",
+    "TJPA": "tjpa", "STJ":  "stj",  "STF":  "stf",
+    "TRF1": "trf1", "TRF2": "trf2", "TRF3": "trf3",
+    "TRF4": "trf4", "TRF5": "trf5", "TRF6": "trf6",
 }
 
 logging.basicConfig(
@@ -95,7 +91,7 @@ def enriquecer_processos() -> None:
     atualizados = 0
     for proc in dados.get("processos", []):
         # Não consulta processos encerrados
-        if proc.get("status") in ("ARQUIVADO", "CONFERIDO"):
+        if proc.get("status") in ("ARQUIVADO", "CONFERIDO", "BAIXA_PRIORIDADE"):
             continue
         partes_atuais = proc.get("partes_datajud", [])
         # Só consulta se ainda não tiver partes preenchidas

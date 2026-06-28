@@ -28,8 +28,9 @@ DATAJUD_URL = "https://api-publica.datajud.cnj.jus.br/api_publica_{tribunal}/_se
 
 TRIBUNAL_MAP = {
     "TJRO": "tjro", "TJAM": "tjam", "TJMT": "tjmt",
-    "TJPA": "tjpa", "STJ": "stj",  "STF": "stf",
-    "TRF1": "trf1", "TRF3": "trf3",
+    "TJPA": "tjpa", "STJ":  "stj",  "STF":  "stf",
+    "TRF1": "trf1", "TRF2": "trf2", "TRF3": "trf3",
+    "TRF4": "trf4", "TRF5": "trf5", "TRF6": "trf6",
 }
 
 logging.basicConfig(
@@ -80,19 +81,20 @@ def processar() -> None:
     total = len(dados.get("processos", []))
     atualizados = 0
     novos_prazos = []
-    novas_movimentacoes = 0
+    total_movimentacoes = 0
 
     for proc in dados["processos"]:
         # Não consulta DataJud para processos encerrados
-        if proc.get("status") in ("ARQUIVADO", "CONFERIDO"):
+        if proc.get("status") in ("ARQUIVADO", "CONFERIDO", "BAIXA_PRIORIDADE"):
             continue
 
         numero   = proc["numero"]
         tribunal = proc.get("tribunal", "")
         andamentos_anteriores = {a["data"] for a in proc.get("andamentos", [])}
+        novas_movimentacoes = 0
 
         movimentos = buscar_andamentos(numero, tribunal)
-        for mov in movimentos[:3]:  # últimos 3
+        for mov in movimentos[:5]:  # últimos 5
             data_str  = mov.get("dataHora", "")[:10]
             descricao = mov.get("nome", mov.get("movimento", {}).get("nome", ""))
 
@@ -102,7 +104,7 @@ def processar() -> None:
                     "data": data_str,
                     "movimento": descricao,
                 })
-                proc["andamentos"] = proc["andamentos"][:3]  # mantém só últimos 3
+                proc["andamentos"] = proc["andamentos"][:5]  # mantém últimos 5
 
                 # Calcula prazo se movimento conhecido
                 try:
@@ -117,6 +119,7 @@ def processar() -> None:
                     log.warning("Sem prazo para %s: %s", numero, e)
 
         atualizados += 1
+        total_movimentacoes += novas_movimentacoes
         log.info("Processado: %s (%d movimentos novos)", numero, novas_movimentacoes)
 
     dados["atualizado_em"] = datetime.now(timezone.utc).isoformat()
@@ -142,7 +145,7 @@ def processar() -> None:
         f"\n---\nTimestamp: {datetime.now(timezone.utc).isoformat()}\n"
         f"Origem: Antigravity_Local\nOperação: atualizar_processos.py\n---\n"
         f"Processos atualizados: {atualizados}/{total}\n"
-        f"Novas movimentações: {novas_movimentacoes}\n"
+        f"Novas movimentações: {total_movimentacoes}\n"
         f"Novos prazos calculados: {len(novos_prazos)}\n"
         f"[ATUALIZAR:DONE]\n"
     )
