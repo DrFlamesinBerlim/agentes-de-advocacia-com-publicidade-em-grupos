@@ -29,10 +29,12 @@ from datetime import datetime, date, timezone, timedelta
 from email.header import decode_header
 
 BASE = Path(r"C:/Users/advog/Meu Drive/X")
-EMAILS_JSON   = BASE / "documentos" / "emails_juridicos.json"
-TAREFAS_JSON  = BASE / "documentos" / "tarefas.json"
-TOKEN_PATH    = BASE / "config" / "token.json"
-CREDS_PATH    = BASE / "config" / "credentials.json"
+EMAILS_JSON    = BASE / "documentos" / "emails_juridicos.json"
+TAREFAS_JSON   = BASE / "documentos" / "tarefas.json"
+PROCESSOS_JSON = BASE / "documentos" / "processos.json"
+PRAZOS_JSON    = BASE / "documentos" / "prazos_pendentes.json"
+TOKEN_PATH     = BASE / "config" / "token.json"
+CREDS_PATH     = BASE / "config" / "credentials.json"
 
 GMAIL_SCOPES = [
     "https://www.googleapis.com/auth/gmail.modify",
@@ -183,14 +185,19 @@ def verificar_imap(conta_key: str, senha: str) -> list[dict]:
                 corpo = msg.get_payload(decode=True).decode("utf-8", errors="replace")
 
             meta = extrair_metadados(assunto, corpo[:2000])
-            emails_juridicos.append({
+            entry = {
                 "conta": conta["email"],
                 "assunto": assunto,
                 "remetente": remetente,
                 "data": data_email,
                 "corpo_resumo": corpo[:500],
                 **meta,
-            })
+            }
+            emails_juridicos.append(entry)
+
+            if meta["numeros_processo"]:
+                _registrar_andamento(entry)
+                _criar_tarefa_de_email(entry)
 
         mail.logout()
     except Exception as e:
@@ -274,6 +281,110 @@ def _gmail_body(service, msg_id: str) -> str:
         return ""
 
     return extrair(payload)[:2000]
+
+
+def _registrar_andamento(email_info: dict) -> int:
+    """Registra andamento em processos.json e prazo em prazos_pendentes.json.
+
+    Retorna o número de processos atualizados.
+    """
+    numeros = email_info.get("numeros_processo", [])
+    if not numeros:
+        return 0
+
+    if not PROCESSOS_JSON.exists():
+        return 0
+
+    dados = json.loads(PROCESSOS_JSON.read_text(encoding="utf-8"))
+    processos = dados.get("processos", [])
+    idx = {p["numero"]: p for p in processos}
+
+    assunto    = email_info.get("assunto", "")
+    remetente  = email_info.get("remetente", "")
+    data_email = email_info.get("data", "")[:10]  # YYYY-MM-DD se possível
+    # normaliza data para ISO
+    try:
+        from email.utils import parsedate_to_datetime
+        data_iso = parsedate_to_datetime(email_info.get("data", "")).date().isoformat()
+    except Exception:
+        data_iso = date.today().isoformat()
+
+    novos_prazos = []
+    atualizados  = 0
+
+    for numero in numeros:
+        proc = idx.get(numero)
+        if proc is None:
+            # cria entrada mínima para o processo desconhecido
+            proc = {
+                "numero": numero,
+                "status": "ATIVO",
+                "tribunal": "",
+                "comarca": "",
+                "vara": "",
+                "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+                "andamentos": [],
+            }
+            processos.append(proc)
+            idx[numero] = proc
+
+        # Evita duplicata de andamento (mesma data + mesmo trecho de movimento)
+        andamentos_existentes = {
+            (a.get("data", ""), a.get("movimento", "")[:40])
+            for a in proc.get("andamentos", [])
+        }
+        chave = (data_iso, assunto[:40])
+        if chave in andamentos_existentes:
+            continue
+
+        # Calcula prazo
+        prazo_info = {}
+        try:
+            from modulo_prazos import calcular_prazo
+            prazo_info = calcular_prazo(date.fromisoformat(data_iso), assunto)
+        except Exception:
+            pass
+
+        andamento = {
+            "data": data_iso,
+            "movimento": assunto[:120],
+            "origem": f"email:{remetente[:60]}",
+        }
+        if prazo_info.get("vencimento"):
+            andamento["prazo_calculado"] = prazo_info["vencimento"]
+            andamento["prazo_tipo"]      = prazo_info.get("tipo", "")
+            andamento["prazo_status"]    = prazo_info.get("status", "PENDENTE")
+            novos_prazos.append({
+                "numero":     numero,
+                "vencimento": prazo_info["vencimento"],
+                "tipo":       prazo_info.get("tipo", ""),
+                "movimento":  assunto[:80],
+                "origem":     "email",
+            })
+
+        proc.setdefault("andamentos", []).insert(0, andamento)
+        proc["andamentos"] = proc["andamentos"][:5]  # mantém últimos 5
+        atualizados += 1
+
+    if atualizados:
+        dados["processos"] = processos
+        dados["atualizado_em"] = datetime.now(timezone.utc).isoformat()
+        PROCESSOS_JSON.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if novos_prazos:
+        prazos_existentes = []
+        if PRAZOS_JSON.exists():
+            prazos_existentes = json.loads(PRAZOS_JSON.read_text(encoding="utf-8")).get("prazos", [])
+        numeros_existentes = {(p["numero"], p["vencimento"]) for p in prazos_existentes}
+        novos = [p for p in novos_prazos if (p["numero"], p["vencimento"]) not in numeros_existentes]
+        if novos:
+            prazos_existentes.extend(novos)
+            PRAZOS_JSON.write_text(
+                json.dumps({"prazos": prazos_existentes}, ensure_ascii=False, indent=2),
+                encoding="utf-8"
+            )
+
+    return atualizados
 
 
 def _criar_tarefa_de_email(email_info: dict) -> None:
@@ -363,8 +474,9 @@ def verificar_gmail_inbox() -> list[dict]:
         }
         emails_juridicos.append(entry)
 
-        # Tenta criar tarefa automaticamente
+        # Registra andamento em processos.json + prazo em prazos_pendentes.json
         if meta["numeros_processo"]:
+            _registrar_andamento(entry)
             _criar_tarefa_de_email(entry)
 
         # Marca com label para não reprocessar
@@ -417,6 +529,24 @@ def cmd_gmail():
         print("Nenhum e-mail jurídico novo na caixa de entrada.")
 
 
+def cmd_andamentos():
+    """Varre Gmail inbox, registra andamentos em processos.json e prazos."""
+    print("\n=== ANDAMENTOS VIA EMAIL ===")
+    emails = verificar_gmail_inbox()
+    if not emails:
+        print("Nenhum e-mail jurídico novo.")
+        return
+    total_proc = sum(len(e.get("numeros_processo", [])) for e in emails)
+    print(f"\n✅ {len(emails)} e-mail(s) processado(s) → {total_proc} andamento(s) registrado(s)")
+    for e in emails:
+        if e.get("numeros_processo"):
+            print(f"  → {e['assunto'][:60]}")
+            for n in e["numeros_processo"]:
+                print(f"     Processo: {n}")
+            if e.get("prazos_dias_uteis"):
+                print(f"     Prazo: {e['prazos_dias_uteis']} dias úteis")
+
+
 def cmd_exportar():
     """Exporta e-mails já salvos e sugere tarefas."""
     if not EMAILS_JSON.exists():
@@ -434,14 +564,15 @@ def cmd_exportar():
 
 
 COMANDOS = {
-    "verificar": cmd_verificar,
-    "gmail":     cmd_gmail,
-    "exportar":  cmd_exportar,
+    "verificar":   cmd_verificar,
+    "gmail":       cmd_gmail,
+    "andamentos":  cmd_andamentos,
+    "exportar":    cmd_exportar,
 }
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "verificar"
     if cmd not in COMANDOS:
-        print(f"Uso: {sys.argv[0]} verificar | gmail | exportar")
+        print(f"Uso: {sys.argv[0]} verificar | gmail | andamentos | exportar")
         sys.exit(1)
     COMANDOS[cmd]()
