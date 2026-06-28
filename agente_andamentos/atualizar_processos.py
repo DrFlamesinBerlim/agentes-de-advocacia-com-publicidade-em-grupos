@@ -27,8 +27,15 @@ DATAJUD_KEY = "ApiKey cDZHYzlZa0JadVREZDJCendFbXNwWnA6MusICgs4R14wMWI1ZUp1ZmQ5dj
 DATAJUD_URL = "https://api-publica.datajud.cnj.jus.br/api_publica_{tribunal}/_search"
 
 TRIBUNAL_MAP = {
-    "TJRO": "tjro", "TJAM": "tjam", "TJMT": "tjmt",
-    "TJPA": "tjpa", "STJ":  "stj",  "STF":  "stf",
+    # Tribunais de Justiça estaduais
+    "TJRO": "tjro", "TJAM": "tjam", "TJMT": "tjmt", "TJPA": "tjpa",
+    "TJMS": "tjms", "TJSC": "tjsc", "TJPR": "tjpr", "TJAC": "tjac",
+    "TJAP": "tjap", "TJMA": "tjma", "TJTO": "tjto", "TJRR": "tjrr",
+    "TJPI": "tjpi", "TJBA": "tjba", "TJGO": "tjgo", "TJMG": "tjmg",
+    "TJSP": "tjsp", "TJRJ": "tjrj", "TJRS": "tjrs", "TJES": "tjes",
+    # Superiores
+    "STJ": "stj", "STF": "stf",
+    # TRFs
     "TRF1": "trf1", "TRF2": "trf2", "TRF3": "trf3",
     "TRF4": "trf4", "TRF5": "trf5", "TRF6": "trf6",
 }

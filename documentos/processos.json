@@ -624,6 +624,27 @@
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "obs": "OUTRO: Que tipo de ação é essa? — aguarda DataJud"
+    },
+    {
+      "numero": "0609455-41.2023.8.04.4400",
+      "status": "ATIVO",
+      "tribunal": "TJAM",
+      "comarca": "Manaus",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "obs": "MABIOS_ACTION:PRAZO — prazo cumprido aguarda confirmação; transferência para assinar liberdade — aguarda DataJud"
+    },
+    {
+      "numero": "7005583-20.2021.8.22.0001",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-27",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
+      "andamentos": [],
+      "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-27"
     }
   ]
 }

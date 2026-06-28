@@ -74,28 +74,55 @@ CONTAS = {
 # Remetentes e assuntos que indicam movimentação jurídica
 FILTROS_JURIDICOS = {
     "remetentes": [
-        "noreply@pje",
-        "pje@tjro",
-        "pjepush@tjro",
-        "dje@tjro",
-        "tjro.jus.br",
-        "tjam.jus.br",
-        "stj.jus.br",
-        "stf.jus.br",
-        "cnj.jus.br",
-        "trf1.jus.br",
+        # ── PJe genérico ─────────────────────────────────────────────────────
+        "noreply@pje", "pje@tjro", "pjepush@tjro", "dje@tjro",
+        "naoresponda.pje", "pjepush",
+        # ── TJRO ─────────────────────────────────────────────────────────────
+        "tjro.jus.br", "2turmarecursal@tjro",
+        # ── TJAM / Projudi AM / ESAJ AM ───────────────────────────────────────
+        "tjam.jus.br", "projudi.tjam", "esaj.tjam", "projudi.am",
+        "noreply@projudi", "notificacao@projudi",
+        # ── TJMT ─────────────────────────────────────────────────────────────
+        "tjmt.jus.br",
+        # ── TJPA ─────────────────────────────────────────────────────────────
+        "tjpa.jus.br",
+        # ── TJMS ─────────────────────────────────────────────────────────────
+        "tjms.jus.br",
+        # ── TJSC ─────────────────────────────────────────────────────────────
+        "tjsc.jus.br",
+        # ── TJPR ─────────────────────────────────────────────────────────────
+        "tjpr.jus.br",
+        # ── TJAC / TJAP / TJMA / TJTO (Amazônia legal e vizinhos) ────────────
+        "tjac.jus.br", "tjap.jus.br", "tjma.jus.br", "tjto.jus.br",
+        # ── STJ / STF / CNJ ──────────────────────────────────────────────────
+        "stj.jus.br", "stf.jus.br", "cnj.jus.br",
+        # ── TRF-1 (RO, AM, AC, AP, MA, MT, PA, TO, BA, GO, MG, PI, RR) ──────
+        "trf1.jus.br", "jfro.jus.br", "jfam.jus.br", "jfac.jus.br",
+        "jfap.jus.br", "jfma.jus.br", "jfmt.jus.br", "jfpa.jus.br",
+        "naoresponda.pje.push74@trf1",
+        # ── TRF-2 (RJ, ES) ───────────────────────────────────────────────────
         "trf2.jus.br",
-        "trf3.jus.br",
+        # ── TRF-3 (SP, MS) ───────────────────────────────────────────────────
+        "trf3.jus.br", "jfsp.jus.br", "jfms.jus.br",
+        # ── TRF-4 (RS, SC, PR) ───────────────────────────────────────────────
         "trf4.jus.br",
-        "jfro.jus.br",
-        "projudi",
-        "datajud",
-        "intimacao",
-        "notificacao",
-        "2turmarecursal@tjro",
-        "naoresponda.pje",
+        # ── TRF-5 e TRF-6 ────────────────────────────────────────────────────
+        "trf5.jus.br", "trf6.jus.br",
+        # ── Processos administrativos — INSS / SEI ────────────────────────────
+        "inss.gov.br", "sei.ro.gov.br", "sei.am.gov.br",
+        "noreply@sei", "notificacao@sei", "noreply.inss",
+        # ── Polícia Federal ───────────────────────────────────────────────────
+        "pf.gov.br", "dpf.gov.br",
+        # ── MPF / MPRO / MP estaduais ─────────────────────────────────────────
+        "mpf.mp.br", "mpro.mp.br", "mpam.mp.br",
+        "noreply@mpf", "intimacao@mpf",
+        # ── Defensoria — DPU / DPEAM / DPERO ────────────────────────────────
+        "dpu.def.br", "dpeam.am.def.br", "dpero.ro.def.br",
+        # ── Genéricos ─────────────────────────────────────────────────────────
+        "projudi", "datajud", "intimacao", "notificacao",
     ],
     "assuntos": [
+        # ── Atos processuais ─────────────────────────────────────────────────
         "intimação", "intimacao", "citação", "citacao",
         "prazo", "diário", "dje", "pje", "pauta",
         "julgamento", "sentença", "sentenca", "decisão", "decisao",
@@ -103,7 +130,52 @@ FILTROS_JURIDICOS = {
         "mandado", "cumprimento", "execução", "execucao",
         "audiência", "audiencia", "sessão", "sessao",
         "publicação", "publicacao", "disponibilização",
+        # ── Atos administrativos / federais ──────────────────────────────────
+        "sei", "ofício", "oficio", "notificação", "notificacao",
+        "despacho administrativo", "processo administrativo",
+        "benefício", "beneficio", "previdenciário", "previdenciario",
+        "habeas corpus", "mandado de segurança", "mandado de seguranca",
+        "revisão criminal", "revisao criminal",
+        "alvará", "alvara", "precatório", "precatorio",
+        # ── Sistemas específicos ──────────────────────────────────────────────
+        "projudi", "push", "movimentação processual", "movimentacao processual",
     ],
+}
+
+# Mapa de domínios de e-mail → sigla do tribunal (para auto-detectar tribunal)
+DOMINIO_TRIBUNAL_MAP = {
+    "tjro.jus.br":   "TJRO",
+    "tjam.jus.br":   "TJAM",
+    "tjmt.jus.br":   "TJMT",
+    "tjpa.jus.br":   "TJPA",
+    "tjms.jus.br":   "TJMS",
+    "tjsc.jus.br":   "TJSC",
+    "tjpr.jus.br":   "TJPR",
+    "tjac.jus.br":   "TJAC",
+    "tjap.jus.br":   "TJAP",
+    "tjma.jus.br":   "TJMA",
+    "tjto.jus.br":   "TJTO",
+    "stj.jus.br":    "STJ",
+    "stf.jus.br":    "STF",
+    "trf1.jus.br":   "TRF1",
+    "jfro.jus.br":   "TRF1",
+    "jfam.jus.br":   "TRF1",
+    "trf2.jus.br":   "TRF2",
+    "trf3.jus.br":   "TRF3",
+    "jfsp.jus.br":   "TRF3",
+    "jfms.jus.br":   "TRF3",
+    "trf4.jus.br":   "TRF4",
+    "trf5.jus.br":   "TRF5",
+    "trf6.jus.br":   "TRF6",
+    "inss.gov.br":   "INSS",
+    "pf.gov.br":     "PF",
+    "dpf.gov.br":    "PF",
+    "mpf.mp.br":     "MPF",
+    "mpro.mp.br":    "MPRO",
+    "mpam.mp.br":    "MPAM",
+    "dpu.def.br":    "DPU",
+    "dpeam.am.def.br": "DPEAM",
+    "dpero.ro.def.br": "DPERO",
 }
 
 # Padrões regex para extrair dados de e-mails
