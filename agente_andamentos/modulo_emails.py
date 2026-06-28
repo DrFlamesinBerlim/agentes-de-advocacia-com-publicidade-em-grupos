@@ -5,15 +5,16 @@ De Brito Advocacia | OAB/RO 2952
 CANAIS MONITORADOS:
   1. advogadobrito@hotmail.com    → principal escritório (DJE, PJe, intimações)
   2. jeffersondebrito@hotmail.com → pessoal Dr. Jefferson
-  3. tribuna.livre.ro@gmail.com   → institucional
-  4. flamesinberlim@gmail.com     → pessoal/backup
+  3. tribuna.livre.ro@gmail.com   → Gmail OAuth (caixa de entrada jurídica)
+  4. flamesinberlim@gmail.com     → Gmail OAuth (backup)
 
 ARQUITETURA:
   - Hotmail (1 e 2): Antigravity acessa via IMAP local (python-imaplib)
-  - Gmail (3 e 4):   Claude acessa via Gmail MCP na nuvem
+  - Gmail (3 e 4):   Antigravity acessa via OAuth (token.json) — autônomo
 
 Como usar (Antigravity):
-  python modulo_emails.py verificar   → varre todos os 4 e-mails
+  python modulo_emails.py verificar   → varre todos os 4 e-mails + Gmail inbox
+  python modulo_emails.py gmail       → só Gmail (caixa de entrada via OAuth)
   python modulo_emails.py hotmail     → só contas hotmail (IMAP local)
   python modulo_emails.py exportar    → salva e-mails jurídicos em JSON
 """
@@ -30,6 +31,14 @@ from email.header import decode_header
 BASE = Path(r"C:/Users/advog/Meu Drive/X")
 EMAILS_JSON   = BASE / "documentos" / "emails_juridicos.json"
 TAREFAS_JSON  = BASE / "documentos" / "tarefas.json"
+TOKEN_PATH    = BASE / "config" / "token.json"
+CREDS_PATH    = BASE / "config" / "credentials.json"
+
+GMAIL_SCOPES = [
+    "https://www.googleapis.com/auth/gmail.modify",
+    "https://www.googleapis.com/auth/calendar",
+]
+LABEL_JURIDICO = "JURIDICO_PROCESSADO"
 
 # ─── Configuração das contas ────────────────────────────────────────────────
 
@@ -219,15 +228,162 @@ def _senha_do_env(key: str) -> str:
     return os.environ.get(var_map.get(key, ""), "")
 
 
+def _gmail_service():
+    """Retorna serviço Gmail autenticado via token.json existente."""
+    from google.oauth2.credentials import Credentials
+    from google.auth.transport.requests import Request
+    from googleapiclient.discovery import build
+
+    creds = None
+    if TOKEN_PATH.exists():
+        creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), GMAIL_SCOPES)
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+            TOKEN_PATH.write_text(creds.to_json(), encoding="utf-8")
+        else:
+            raise RuntimeError("token.json inválido ou ausente — execute OAuth uma vez manualmente")
+    return build("gmail", "v1", credentials=creds)
+
+
+def _gmail_label_id(service, nome: str) -> str:
+    """Retorna ID do label criando-o se necessário."""
+    labels = service.users().labels().list(userId="me").execute().get("labels", [])
+    for lb in labels:
+        if lb["name"] == nome:
+            return lb["id"]
+    novo = service.users().labels().create(userId="me", body={"name": nome}).execute()
+    return novo["id"]
+
+
+def _gmail_body(service, msg_id: str) -> str:
+    """Extrai texto plano da mensagem Gmail (máx 2000 chars)."""
+    import base64
+    msg = service.users().messages().get(userId="me", id=msg_id, format="full").execute()
+    payload = msg.get("payload", {})
+
+    def extrair(p):
+        if p.get("mimeType") == "text/plain":
+            data = p.get("body", {}).get("data", "")
+            if data:
+                return base64.urlsafe_b64decode(data).decode("utf-8", errors="replace")
+        for part in p.get("parts", []):
+            r = extrair(part)
+            if r:
+                return r
+        return ""
+
+    return extrair(payload)[:2000]
+
+
+def _criar_tarefa_de_email(email_info: dict) -> None:
+    """Cria tarefa em tarefas.json se encontrou número de processo e prazo."""
+    numeros = email_info.get("numeros_processo", [])
+    prazos  = email_info.get("prazos_dias_uteis", [])
+    if not numeros or not prazos:
+        return
+
+    dados = {"tarefas": []}
+    if TAREFAS_JSON.exists():
+        dados = json.loads(TAREFAS_JSON.read_text(encoding="utf-8"))
+
+    tarefas = dados.get("tarefas", [])
+    ids_existentes = {t.get("id") for t in tarefas}
+
+    for numero in numeros:
+        # ID baseado em assunto truncado + número — evita duplicatas
+        tid = f"E-{numero[-7:]}-{date.today().isoformat()}"
+        if tid in ids_existentes:
+            continue
+
+        vencimento = ""
+        if prazos:
+            from modulo_prazos import calcular_prazo
+            try:
+                res = calcular_prazo(date.today(), email_info.get("assunto", ""))
+                vencimento = res.get("vencimento", "")
+            except Exception:
+                pass
+
+        tarefas.append({
+            "id": tid,
+            "titulo": email_info.get("assunto", "")[:80],
+            "processo": numero,
+            "status": "PENDENTE",
+            "prioridade": "NORMAL",
+            "vencimento": vencimento,
+            "origem": "email",
+            "conta": email_info.get("conta", ""),
+        })
+
+    dados["tarefas"] = tarefas
+    TAREFAS_JSON.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def verificar_gmail_inbox() -> list[dict]:
+    """Varre caixa de entrada do Gmail por e-mails jurídicos não processados."""
+    try:
+        service = _gmail_service()
+    except Exception as e:
+        print(f"[GMAIL INBOX] OAuth indisponível: {e}")
+        return []
+
+    label_id = _gmail_label_id(service, LABEL_JURIDICO)
+
+    # Busca e-mails não lidos dos últimos 30 dias que NÃO tenham o label processado
+    query = f"in:inbox is:unread newer_than:30d -label:{LABEL_JURIDICO}"
+    resp = service.users().messages().list(userId="me", q=query, maxResults=50).execute()
+    msgs = resp.get("messages", [])
+
+    emails_juridicos = []
+    for m in msgs:
+        msg = service.users().messages().get(
+            userId="me", id=m["id"], format="metadata",
+            metadataHeaders=["Subject", "From", "Date"]
+        ).execute()
+
+        headers = {h["name"]: h["value"] for h in msg.get("payload", {}).get("headers", [])}
+        assunto   = headers.get("Subject", "")
+        remetente = headers.get("From", "")
+        data_str  = headers.get("Date", "")
+
+        if not eh_juridico(assunto, remetente):
+            continue
+
+        corpo = _gmail_body(service, m["id"])
+        meta  = extrair_metadados(assunto, corpo)
+
+        entry = {
+            "conta": "gmail/flamesinberlim",
+            "assunto": assunto,
+            "remetente": remetente,
+            "data": data_str,
+            "corpo_resumo": corpo[:500],
+            **meta,
+        }
+        emails_juridicos.append(entry)
+
+        # Tenta criar tarefa automaticamente
+        if meta["numeros_processo"]:
+            _criar_tarefa_de_email(entry)
+
+        # Marca com label para não reprocessar
+        service.users().messages().modify(
+            userId="me", id=m["id"],
+            body={"addLabelIds": [label_id]}
+        ).execute()
+
+    print(f"[Gmail Inbox] {len(emails_juridicos)} e-mail(s) jurídico(s) encontrado(s)")
+    return emails_juridicos
+
+
 def cmd_verificar():
-    """Varre as contas hotmail via IMAP. Gmail via Claude MCP (nuvem)."""
+    """Varre Hotmail via IMAP e Gmail inbox via OAuth."""
     print("\n=== VARREDURA E-MAILS JURÍDICOS ===")
-    print("Hotmail 1: advogadobrito@hotmail.com")
-    print("Hotmail 2: jeffersondebrito@hotmail.com")
-    print("Gmail: verificação feita pelo Claude na nuvem via MCP")
-    print()
 
     todos = []
+
+    # Hotmail IMAP
     for key in ["advogadobrito", "jeffersondebrito"]:
         senha = _senha_do_env(key)
         if not senha:
@@ -235,6 +391,10 @@ def cmd_verificar():
             continue
         emails = verificar_imap(key, senha)
         todos.extend(emails)
+
+    # Gmail OAuth (inbox)
+    gmail_emails = verificar_gmail_inbox()
+    todos.extend(gmail_emails)
 
     if todos:
         salvar_emails(todos)
@@ -245,6 +405,16 @@ def cmd_verificar():
                 print(f"    Processos: {', '.join(e['numeros_processo'])}")
     else:
         print("Nenhum e-mail jurídico encontrado nos últimos 30 dias.")
+
+
+def cmd_gmail():
+    """Só Gmail inbox via OAuth (sem IMAP)."""
+    print("\n=== GMAIL INBOX — E-MAILS JURÍDICOS ===")
+    emails = verificar_gmail_inbox()
+    if emails:
+        salvar_emails(emails)
+    else:
+        print("Nenhum e-mail jurídico novo na caixa de entrada.")
 
 
 def cmd_exportar():
@@ -265,12 +435,13 @@ def cmd_exportar():
 
 COMANDOS = {
     "verificar": cmd_verificar,
+    "gmail":     cmd_gmail,
     "exportar":  cmd_exportar,
 }
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "verificar"
     if cmd not in COMANDOS:
-        print(f"Uso: {sys.argv[0]} verificar | exportar")
+        print(f"Uso: {sys.argv[0]} verificar | gmail | exportar")
         sys.exit(1)
     COMANDOS[cmd]()
