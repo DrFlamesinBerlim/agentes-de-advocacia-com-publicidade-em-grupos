@@ -110,10 +110,23 @@
       "status": "CONFERIDO",
       "conferido_em": "2026-06-28",
       "tribunal": "TJRO",
-      "comarca": "Porto Velho",
-      "vara": "",
-      "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
-      "andamentos": [],
+      "comarca": "Ariquemes",
+      "vara": "3ª Vara Criminal",
+      "classe": "Ação Penal — Procedimento Ordinário",
+      "partes": {
+        "autor": "MPRO — Ministério Público do Estado de Rondônia",
+        "reu": "ALINE ESTEFANNI BOLLIS RODRIGUES E OUTROS",
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [
+        {
+          "data": "2026-06-28",
+          "movimento": "Juntada de Petição",
+          "origem": "email:pjepush@tjro.jus.br",
+          "prazo_status": "NOVO — verificar reativação"
+        }
+      ],
+      "obs": "Nova movimentação após CONFERIDO — verificar se reativa",
       "origem_mabios": "MABIOS_ACTION:CONFERIDO — 2026-06-28"
     },
     {
@@ -458,6 +471,29 @@
       "partes": {"advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"},
       "andamentos": [],
       "origem_mabios": "MABIOS_ACTION:ARQUIVAR — 2026-06-28"
+    },
+    {
+      "numero": "0001462-36.2006.4.01.4100",
+      "status": "ATIVO",
+      "tribunal": "TRF1",
+      "comarca": "Porto Velho",
+      "vara": "1ª Vara Federal Cível da SJRO",
+      "classe": "Execução Fiscal",
+      "partes": {
+        "autor": "CONSELHO REGIONAL DOS REPRES COMERC DO ESTADO RONDONIA",
+        "reu": "ELETROVOLT TRANSFORMADORES LTDA",
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [
+        {
+          "data": "2026-06-27",
+          "movimento": "Decorrido prazo em 26/06/2026 23:59",
+          "origem": "email:naoresponda.pje.push74@trf1.jus.br",
+          "prazo_calculado": "2026-06-26",
+          "prazo_status": "VENCIDO"
+        }
+      ],
+      "obs": "Prazo decorrido em 26/06 — verificar providências"
     },
     {
       "numero": "0601654-29.2024.8.04.5600",
