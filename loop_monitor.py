@@ -192,10 +192,14 @@ def checar_mabios() -> None:
     global last_mabios
     agora = time.time()
     if agora - last_mabios >= MABIOS_INTERVAL * 60:
-        log.info("=== Rodada MABIOS (rascunhos Gmail) ===")
-        code, out = agente("mabios")
-        log.info("mabios: %s", out[:300] or "sem ações")
-        log_out(f"[MABIOS:PERIODICO]\n{out[:800]}")
+        log.info("=== Rodada MABIOS — lendo Gmail diretamente ===")
+        # Chama modulo_mabios_email.py gmail diretamente (sem passar pelo orquestrador)
+        code, out = run(
+            [sys.executable, str(AGENTE_DIR / "modulo_mabios_email.py"), "gmail"],
+            timeout=120,
+        )
+        log.info("mabios gmail: %s", out[:300] or "sem ações")
+        log_out(f"[MABIOS:GMAIL]\n{out[:800]}")
         last_mabios = agora
 
 
