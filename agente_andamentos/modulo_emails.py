@@ -201,6 +201,24 @@ def salvar_emails(emails: list[dict]) -> None:
     print(f"[SALVO] {EMAILS_JSON} — {len(emails)} e-mail(s)")
 
 
+def _senha_do_env(key: str) -> str:
+    """Lê senha do .env. Fallback: variável de ambiente do sistema."""
+    import os
+    env_file = BASE / ".env"
+    if env_file.exists():
+        for linha in env_file.read_text(encoding="utf-8").splitlines():
+            linha = linha.strip()
+            if linha.startswith("#") or "=" not in linha:
+                continue
+            nome, _, valor = linha.partition("=")
+            os.environ.setdefault(nome.strip(), valor.strip())
+    var_map = {
+        "advogadobrito":   "HOTMAIL_ADVO_SENHA",
+        "jeffersondebrito": "HOTMAIL_JEFF_SENHA",
+    }
+    return os.environ.get(var_map.get(key, ""), "")
+
+
 def cmd_verificar():
     """Varre as contas hotmail via IMAP. Gmail via Claude MCP (nuvem)."""
     print("\n=== VARREDURA E-MAILS JURÍDICOS ===")
@@ -211,7 +229,10 @@ def cmd_verificar():
 
     todos = []
     for key in ["advogadobrito", "jeffersondebrito"]:
-        senha = input(f"Senha {CONTAS[key]['email']}: ")
+        senha = _senha_do_env(key)
+        if not senha:
+            print(f"[AVISO] Senha não encontrada no .env para {key} — pulando")
+            continue
         emails = verificar_imap(key, senha)
         todos.extend(emails)
 

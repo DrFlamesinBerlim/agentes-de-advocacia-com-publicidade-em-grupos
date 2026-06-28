@@ -94,6 +94,9 @@ def enriquecer_processos() -> None:
 
     atualizados = 0
     for proc in dados.get("processos", []):
+        # Não consulta processos encerrados
+        if proc.get("status") in ("ARQUIVADO", "CONFERIDO"):
+            continue
         partes_atuais = proc.get("partes_datajud", [])
         # Só consulta se ainda não tiver partes preenchidas
         if partes_atuais:

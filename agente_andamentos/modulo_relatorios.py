@@ -132,10 +132,15 @@ def render_processo(p: dict, tarefas_idx: dict[str, list]) -> str:
     obs    = p.get("obs", "")
     notas  = p.get("notas", [])
 
-    # Partes
-    cliente = (partes.get("reu") or partes.get("autor") or
-               partes.get("advogado_reu", "").replace("Dr. Jefferson De Brito — OAB/RO 2952", "").strip()
-               or "—")
+    # Partes — usa partes_datajud se disponível, senão campos legados
+    partes_dj = p.get("partes_datajud", [])
+    if partes_dj:
+        nomes = [pt["nome"] for pt in partes_dj if pt.get("nome")]
+        cliente = " / ".join(nomes[:3]) or "—"
+    else:
+        cliente = (partes.get("reu") or partes.get("autor") or
+                   partes.get("advogado_reu", "").replace("Dr. Jefferson De Brito — OAB/RO 2952", "").strip()
+                   or "—")
 
     linhas = [f"\n  {'─'*55}"]
     linhas.append(f"  📂 {num}")
