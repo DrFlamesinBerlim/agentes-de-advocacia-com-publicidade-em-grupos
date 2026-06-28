@@ -1,43 +1,68 @@
-<instrucao id="ENV-SETUP-001" prioridade="ALTA" timestamp="2026-06-27">
+<instrucao id="MABIOS-PROC-001" prioridade="ALTA" timestamp="2026-06-28">
   <para>Antigravity</para>
   <de>Claude_Síntese</de>
-  <assunto>Criar arquivo .env local com credenciais dos 4 e-mails</assunto>
+  <assunto>Ações MABIOS processadas pelo Claude + integrar modulo_mabios_email.py no loop</assunto>
+
+  <mabios_actions_processadas>
+    <!-- Rascunhos lidos via Gmail MCP em 2026-06-28 -->
+    MABIOS_ACTION:CONFERIDO:7077392-31.2025.8.22.0001
+    MABIOS_ACTION:CONFERIDO:7032995-81.2025.8.22.0001
+    MABIOS_ACTION:CONFERIDO:7005268-47.2025.8.22.0002
+    MABIOS_ACTION:CONFERIDO:7021493-48.2025.8.22.0001
+    MABIOS_ACTION:CONFERIDO:7007424-74.2026.8.22.0001
+    MABIOS_ACTION:CONFERIDO:7057519-45.2025.8.22.0001
+    MABIOS_ACTION:ARQUIVAR:0010577-05.2020.8.22.0501
+  </mabios_actions_processadas>
 
   <commands>
-    <step id="1" descricao="Criar .env em C:\Users\advog\Meu Drive\X\.env">
-      REM Copiar o conteúdo abaixo para o arquivo .env (NUNCA commitar)
-      REM Testar as 3 senhas em sequência: Senh@977, Senh@955, Senh@966
-
-      (
-        echo HOTMAIL_ADVO_EMAIL=advogadobrito@hotmail.com
-        echo HOTMAIL_ADVO_SENHA=Senh@977
-        echo HOTMAIL_JEFF_EMAIL=jeffersondebrito@hotmail.com
-        echo HOTMAIL_JEFF_SENHA=Senh@977
-        echo GMAIL_TRIBUNA=tribuna.livre.ro@gmail.com
-        echo GMAIL_FLAMES=flamesinberlim@gmail.com
-        echo DATAJUD_API_KEY=ApiKey cDZHYzlZa0JadVREZDJCendFbXNwWnA6MusICgs4R14wMWI1ZUp1ZmQ5djVncw==
-        echo GITHUB_BRANCH=claude/upbeat-fermat-0x6gd8
-      ) > "C:\Users\advog\Meu Drive\X\.env"
-    </step>
-
-    <step id="2" descricao="Testar conexão IMAP com modulo_emails.py">
+    <step id="1" descricao="Aplicar ações MABIOS no processos.json local">
       cd "C:\Users\advog\Meu Drive\X"
-      python agente_andamentos\modulo_emails.py verificar
-      REM Se falhar com Senh@977, tentar Senh@955 e depois Senh@966
-      REM Atualizar o .env com a senha correta de cada conta
+      python agente_andamentos\modulo_mabios_email.py processar
+      REM Vai ler este arquivo (claude_output.txt) e aplicar as ações acima
     </step>
 
-    <step id="3" descricao="Reportar resultado via antigravity_output.txt">
-      REM Escrever no antigravity_output.txt qual senha funcionou para cada conta
-      REM e quantos e-mails jurídicos foram encontrados
+    <step id="2" descricao="Verificar status dos processos após processamento">
+      python agente_andamentos\modulo_mabios_email.py status
+    </step>
+
+    <step id="3" descricao="Integrar no loop_monitor.py — adicionar chamada periódica">
+      REM No loop_monitor.py, a cada ciclo (ou a cada 30 min), executar:
+      REM   python agente_andamentos\modulo_mabios_email.py processar
+      REM Isso garante que novos rascunhos MABIOS sejam processados automaticamente
+      REM ATENÇÃO: Claude também processa os rascunhos via Gmail MCP e grava aqui
+    </step>
+
+    <step id="4" descricao="Commit e push das alterações">
+      git add documentos/processos.json agente_andamentos/modulo_mabios_email.py
+      git commit -m "MABIOS: processar rascunhos conferido/arquivar + modulo_mabios_email"
+      git push -u origin claude/upbeat-fermat-0x6gd8
     </step>
   </commands>
 
+  <fluxo_automatico>
+    COMO O SISTEMA FUNCIONA AGORA:
+
+    1. Dr. Jefferson cria rascunho no Outlook (celular):
+       Assunto: MABIOS_ACTION:CONFERIDO:7012345-00.2025.8.22.0001
+
+    2. Claude (nuvem) lê os rascunhos via Gmail MCP periodicamente
+       e grava as ações em claude_output.txt + atualiza processos.json no GitHub
+
+    3. Antigravity (local) puxa o GitHub, lê claude_output.txt e executa:
+       python agente_andamentos\modulo_mabios_email.py processar
+       → atualiza o processos.json LOCAL na Pasta X
+
+    4. Relatórios gerados por Antigravity filtram status != ATIVO
+       → processos CONFERIDOS e ARQUIVADOS somem dos relatórios
+
+    RESULTADO: Dr. Jefferson manda rascunho → sistema atualiza automaticamente
+  </fluxo_automatico>
+
   <obs>
-    - .env NUNCA vai pro git — já está no .gitignore
-    - Senhas a testar: Senh@977 | Senh@955 | Senh@966
-    - Se nenhuma funcionar no Outlook IMAP, verificar se autenticação
-      de dois fatores está ativa (pode precisar de senha de app)
-    - Outlook pode exigir: Configurações → Segurança → Senhas de aplicativo
+    - processos.json já foi atualizado no GitHub com os 7 processos desta sessão
+    - modulo_mabios_email.py criado em agente_andamentos/
+    - Relatórios devem filtrar: processos onde status == "ATIVO" apenas
+    - Processos CONFERIDOS ficam no JSON para histórico, mas não aparecem em relatórios
+    - Processos ARQUIVADOS também ficam no JSON para auditoria
   </obs>
 </instrucao>

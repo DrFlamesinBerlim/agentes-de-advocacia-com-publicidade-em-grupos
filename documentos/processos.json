@@ -1,8 +1,9 @@
 {
-  "atualizado_em": "2026-06-23T00:00:00+00:00",
+  "atualizado_em": "2026-06-28T17:00:00+00:00",
   "processos": [
     {
       "numero": "7002410-25.2021.8.22.0021",
+      "status": "ATIVO",
       "tribunal": "TJRO",
       "comarca": "Buritis",
       "vara": "Vara Criminal",
@@ -25,6 +26,7 @@
     },
     {
       "numero": "7054209-31.2025.8.22.0001",
+      "status": "ATIVO",
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "10ª Vara Cível",
@@ -43,10 +45,13 @@
           "prazo_tipo": "Manifestação nos autos (CPC art. 218)",
           "prazo_status": "VENCIDO"
         }
-      ]
+      ],
+      "notas": "Intimação pessoal — risco abandono de causa — cliente possivelmente foragido"
     },
     {
       "numero": "7057519-45.2025.8.22.0001",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
       "tribunal": "TJRO",
       "comarca": "Porto Velho",
       "vara": "2ª Turma Recursal",
@@ -79,6 +84,7 @@
     },
     {
       "numero": "0021230-05.2025.8.04.9001",
+      "status": "ATIVO",
       "tribunal": "TJAM",
       "comarca": "Manaus",
       "vara": "Des. Flávio Humberto Pascarelli Lopes",
@@ -95,9 +101,93 @@
           "movimento": "Disponibilização no Diário da Justiça Eletrônico",
           "prazo_calculado": "2026-06-23",
           "prazo_tipo": "Manifestação nos autos (CPC art. 218)",
-          "prazo_status": "VENCE_HOJE"
+          "prazo_status": "VENCIDO"
         }
       ]
+    },
+    {
+      "numero": "7077392-31.2025.8.22.0001",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "7032995-81.2025.8.22.0001",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "7005268-47.2025.8.22.0002",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "7021493-48.2025.8.22.0001",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "7007424-74.2026.8.22.0001",
+      "status": "CONFERIDO",
+      "conferido_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:CONFERIDO — 2026-06-28"
+    },
+    {
+      "numero": "0010577-05.2020.8.22.0501",
+      "status": "ARQUIVADO",
+      "arquivado_em": "2026-06-28",
+      "tribunal": "TJRO",
+      "comarca": "Porto Velho",
+      "vara": "",
+      "classe": "",
+      "partes": {
+        "advogado_reu": "Dr. Jefferson De Brito — OAB/RO 2952"
+      },
+      "andamentos": [],
+      "origem_mabios": "rascunho MABIOS_ACTION:ARQUIVAR — 2026-06-28"
     }
   ]
 }
