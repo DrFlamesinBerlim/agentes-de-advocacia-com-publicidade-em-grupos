@@ -1,0 +1,19 @@
+{
+  "api_base": "http://localhost:8000",
+  "endpoints": {
+    "state": "/cc001/state",
+    "output": "/cc001/output",
+    "ingest": "/cc001/artefatos/ingest"
+  },
+  "cron_job_id": "7dbf000f",
+  "cron_schedule": "7 * * * *",
+  "cron_descricao": "Ciclo horário CC-001 — monitoramento e relatório de prazos",
+  "timezone": "America/Porto_Velho",
+  "modo_padrao": "LLM+H",
+  "nos_rede": {
+    "JB-000": "Dr. Jefferson Silva de Brito (Operador Humano)",
+    "CC-001": "Claude Cowork (Redação + Análise)",
+    "GA-002": "Gemini Antigravity (Automação local)",
+    "WA-003": "WhatsApp Coordinator (Evolution API)"
+  }
+}
