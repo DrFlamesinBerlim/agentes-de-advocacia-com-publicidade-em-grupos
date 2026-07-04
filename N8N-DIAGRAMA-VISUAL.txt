@@ -1,0 +1,532 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                  N8N: DIAGRAMA VISUAL SIMPLIFICADO                             ║
+║                                                                                ║
+║   Como N8N funciona com blocos conectados (sem código)                        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+
+VISÃO GERAL: COMO N8N CONECTA SERVIÇOS
+
+█ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █
+
+SEM N8N (Você escreve Python):
+┌──────────────┐
+│ Python Code  │────────────────────────────────────────┐
+│ 60+ linhas   │                                        │
+└──────────────┘                                        │
+       │                                                 │
+       └────→ ❌ Complexo, bugs fáceis, difícil editar   │
+
+
+COM N8N (Você clica):
+┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐
+│Block │      │Block │      │Block │      │Block │
+│  1   │─────→│  2   │─────→│  3   │─────→│  4   │
+└──────┘      └──────┘      └──────┘      └──────┘
+   ✅                                          ✅
+Visual,                                    Resultado
+fácil de                                   automático
+entender
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+ARQUITETURA DE UM WORKFLOW N8N
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                        ┌──────────────────────────────┐
+                        │     WORKFLOW N8N             │
+                        │ dra-julia-agente-ia-advocacia│
+                        └──────────────────────────────┘
+                                    │
+                                    │
+          ┌─────────────────────────┼─────────────────────────┐
+          │                         │                         │
+          ▼                         ▼                         ▼
+    ┌──────────────┐           ┌──────────────┐         ┌──────────────┐
+    │   TRIGGER    │           │     CORE     │         │INTEGRAÇÕES  │
+    │   NODES      │           │     NODES    │         │    NODES    │
+    └──────────────┘           └──────────────┘         └──────────────┘
+          │                         │                         │
+    ├─Webhook                  ├─Function             ├─OpenAI (GPT-4o)
+    ├─Scheduler                ├─IF/ELSE              ├─Google Sheets
+    ├─Polling                  ├─Set Variable         ├─Google Calendar
+    ├─Email Trigger            ├─Merge Data           ├─Google Drive
+    └─DB Trigger               ├─Split Loop           ├─WhatsApp
+                               ├─Code (JS/Python)     ├─Email
+                               └─Switch               ├─Slack
+                                                      └─HTTP Request
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+EXEMPLO 1: FLUXO SIMPLES (3 NÓS)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+┌─────────────────────┐
+│ NÓ 1: WEBHOOK       │ ← Cliente envia mensagem WhatsApp
+│                     │
+│ Input do WhatsApp:  │
+│ {                   │
+│   "from": "556499..." │
+│   "text": "Tive..."  │
+│ }                   │
+└─────────────────────┘
+           │
+           │ Dados fluem para próximo nó
+           ▼
+┌─────────────────────────────────────────┐
+│ NÓ 2: FUNCTION (Processar)             │ ← Lógica JavaScript simples
+│                                         │
+│ JavaScript Code:                        │
+│ return {                                │
+│   "phone": msg.from,                   │
+│   "message": msg.text,                 │
+│   "timestamp": new Date()              │
+│ }                                       │
+│                                         │
+│ Output:                                 │
+│ {                                       │
+│   "phone": "5564992217123",           │
+│   "message": "Tive acidente...",       │
+│   "timestamp": "2026-07-04T14:46:00Z"  │
+│ }                                       │
+└─────────────────────────────────────────┘
+           │
+           │ JSON com dados processados
+           ▼
+┌─────────────────────────────────────┐
+│ NÓ 3: GOOGLE SHEETS                 │ ← Salvar em planilha
+│                                     │
+│ Configuração:                       │
+│ ├─ Spreadsheet ID: 1nXxxx...       │
+│ ├─ Sheet: "Clientes_Dra_Julia"   │
+│ ├─ Action: "Append Row"            │
+│ └─ Columns: phone, message, time   │
+│                                     │
+│ Resultado:                          │
+│ ✅ Nova linha adicionada            │
+│    5564992217123 | Tive acidente... │ 2026-07-04...
+│                                     │
+└─────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+EXEMPLO 2: FLUXO COM DECISÃO (IF/ELSE)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    ┌──────────────────────────┐
+                    │ NÓ 1: WEBHOOK            │
+                    │ (Receber mensagem)       │
+                    └──────────────────────────┘
+                               │
+                               ▼
+                    ┌──────────────────────────┐
+                    │ NÓ 2: OPENAI (GPT-4o)   │
+                    │ (Analisar categoria)    │
+                    │                          │
+                    │ Output:                  │
+                    │ {                        │
+                    │ "categoria": "trabalhista"
+                    │ "urgencia": "alta"       │
+                    │ }                        │
+                    └──────────────────────────┘
+                               │
+                               ▼
+                    ┌──────────────────────────┐
+                    │ NÓ 3: IF STATEMENT      │
+                    │                          │
+                    │ if urgencia == "alta"   │
+                    │    THEN → Branch 1      │
+                    │    ELSE → Branch 2      │
+                    └──────────────────────────┘
+                         │              │
+             ┌───────────┘              └───────────┐
+             │ (THEN: Urgente)         (ELSE: Normal)│
+             ▼                                       ▼
+  ┌──────────────────────┐      ┌──────────────────────┐
+  │ NÓ 4a: SEND EMAIL    │      │ NÓ 4b: SEND EMAIL   │
+  │ To: dra@julia.com    │      │ To: queue@julia.com │
+  │ Subject: URGENTE!    │      │ Subject: Novo caso  │
+  │ Prioridade: Alta     │      │ Prioridade: Normal  │
+  └──────────────────────┘      └──────────────────────┘
+             │                           │
+             └───────────┬───────────────┘
+                         │
+                         ▼
+                ┌──────────────────┐
+                │ NÓ 5: END        │
+                │ (Fim do workflow)│
+                └──────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+EXEMPLO 3: FLUXO DRA JULIA SIMPLIFICADO (8 NÓS)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+
+[NÓ 1]  ┌──────────────────┐
+        │ WEBHOOK          │ ← WhatsApp envia mensagem
+        └────────┬─────────┘
+                 │
+[NÓ 2]           │         ┌──────────────────┐
+                 └────────→│ IF: TOKEN OK?    │ ← Validação de segurança
+                           └────────┬─────────┘
+[NÓ 3]                              │
+                      ┌─────────────┘
+                      │
+        ┌─────────────▼──────────────┐
+        │ FUNCTION: Extract Data     │ ← Separar phone, texto
+        └────────┬──────────────────┘
+[NÓ 4]          │
+                │
+    ┌───────────▼──────────────┐
+    │ OPENAI: GPT-4o           │ ← Triagem jurídica
+    │ (modelo gpt-4o)          │
+    │ (sistema prompt)          │
+    │ (mensagem do cliente)     │
+    └────────┬─────────────────┘
+[NÓ 5]       │
+             │
+  ┌──────────▼──────────┐
+  │ GOOGLE SHEETS       │ ← Registrar cliente
+  │ (Append row)        │
+  └────────┬────────────┘
+[NÓ 6]     │
+           │
+  ┌────────▼──────────────┐
+  │ GOOGLE CALENDAR       │ ← Agendar consulta
+  │ (Create event)        │
+  └────────┬───────────────┘
+[NÓ 7]     │
+           │
+  ┌────────▼──────────────┐
+  │ WHATSAPP             │ ← Enviar resposta com botões
+  │ (Interactive message) │
+  │ - Agendar Consulta   │
+  │ - Mais Informações   │
+  │ - Falar Atendente    │
+  └────────┬──────────────┘
+[NÓ 8]     │
+           │
+  ┌────────▼──────────────┐
+  │ END / RESPONSE       │ ← Fim do workflow
+  │ ✅ Sucesso           │
+  └──────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+FLUXO DE DADOS: COMO INFORMAÇÕES SE MOVEM
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Webhook recebe:
+{
+  "from": "5564992217123",
+  "text": "Tive um acidente de carro"
+}
+      │
+      ▼ (transformado por FUNCTION)
+{
+  "phone": "5564992217123",
+  "message": "Tive um acidente de carro",
+  "timestamp": "2026-07-04T14:46:00Z"
+}
+      │
+      ▼ (passado para OpenAI)
+OpenAI recebe:
+{
+  "phone": "5564992217123",
+  "message": "Tive um acidente de carro"
+}
+
+OpenAI retorna:
+{
+  "categoria": "responsabilidade_civil",
+  "urgencia": "média",
+  "resposta": "Olá! Identifiquei sua situação como..."
+}
+      │
+      ▼ (MERGE: combina com dados anteriores)
+{
+  "phone": "5564992217123",
+  "message": "Tive um acidente de carro",
+  "categoria": "responsabilidade_civil",
+  "urgencia": "média",
+  "resposta": "Olá!..."
+}
+      │
+      ├─→ GOOGLE SHEETS (salva tudo)
+      ├─→ GOOGLE CALENDAR (cria evento)
+      └─→ WHATSAPP (envia resposta)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+INTERFACE N8N NA PRÁTICA
+
+═══════════════════════════════════════════════════════════════════════════════
+
+    ┌──────────────────────────────────────────────────────────────┐
+    │ N8N Editor - dra-julia-agente-ia-advocacia                   │
+    ├──────────────────────────────────────────────────────────────┤
+    │                                                              │
+    │  [← Workflows] [Executions] [Help]                          │
+    │                                                              │
+    │  CANVAS (Área de Desenho):                                  │
+    │  ┌────────────────────────────────────────────────────────┐│
+    │  │                                                        ││
+    │  │     ┌────────────┐         ┌────────────┐            ││
+    │  │     │  WEBHOOK   │         │  OPENAI    │            ││
+    │  │     │            │────────→│            │            ││
+    │  │     └────────────┘         └────────────┘            ││
+    │  │                                    │                  ││
+    │  │          ┌──────────────┐          │                 ││
+    │  │          │  IF: TOKEN?  │←─────────┘                 ││
+    │  │          └──────────────┘                            ││
+    │  │                    │                                  ││
+    │  │     ┌──────────────▼──────────────┐                  ││
+    │  │     │  GOOGLE SHEETS              │                  ││
+    │  │     │  (Append)                   │                  ││
+    │  │     └──────────────┬──────────────┘                  ││
+    │  │                    │                                  ││
+    │  │     ┌──────────────▼──────────────┐                  ││
+    │  │     │  WHATSAPP                   │                  ││
+    │  │     │  (Send Interactive)         │                  ││
+    │  │     └──────────────────────────────┘                  ││
+    │  │                                                        ││
+    │  └────────────────────────────────────────────────────────┘│
+    │                                                              │
+    │  RIGHT PANEL: Configuration                                │
+    │  ┌──────────────────────────────────────────────────────┐ │
+    │  │ OPENAI Node                                          │ │
+    │  │                                                      │ │
+    │  │ Enabled: [✓]                                        │ │
+    │  │ Credential: [OpenAI API ▼]                         │ │
+    │  │ Model: [gpt-4o ▼]                                  │ │
+    │  │                                                      │ │
+    │  │ System Prompt:                                      │ │
+    │  │ [Você é assistente jurídica...]                    │ │
+    │  │                                                      │ │
+    │  │ [+ Add Input] [Test] [Execute]                     │ │
+    │  └──────────────────────────────────────────────────────┘ │
+    │                                                              │
+    │  [Save] [Activate] [Test Workflow]                         │
+    │                                                              │
+    └──────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+CICLO DE VIDA: WEBHOOK DISPARADO → EXECUÇÃO COMPLETA
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Tempo Real:
+
+14:46:23.000 ┌─ Cliente envia: "Tive acidente..."
+             │  Webhook recebido por N8N
+             │
+
+14:46:23.100 ├─ NÓ 1 (Webhook): ✅ Processado (100ms)
+             │  Dados extraídos
+             │
+
+14:46:24.200 ├─ NÓ 2 (OpenAI): ✅ Processado (1100ms)
+             │  GPT-4o analisou, retornou categoria
+             │
+
+14:46:24.350 ├─ NÓ 3 (IF): ✅ Processado (150ms)
+             │  Validação OK, continuar
+             │
+
+14:46:24.750 ├─ NÓ 4 (Sheets): ✅ Processado (400ms)
+             │  Nova linha adicionada
+             │
+
+14:46:25.350 ├─ NÓ 5 (Calendar): ✅ Processado (600ms)
+             │  Evento criado
+             │
+
+14:46:26.000 ├─ NÓ 6 (WhatsApp): ✅ Processado (650ms)
+             │  Mensagem enviada com botões
+             │
+
+14:46:26.100 └─ ✅ WORKFLOW COMPLETO (3.1 segundos)
+                 Execution ID: exec_xyz123
+                 Status: SUCCESS
+
+Log de Execução:
+┌────────────────────────────────────────────────┐
+│ Execution Logs                                  │
+├────────────────────────────────────────────────┤
+│ ✅ 14:46:23.100 Webhook: Input received        │
+│ ✅ 14:46:23.200 Webhook: Parsed JSON          │
+│ ✅ 14:46:24.200 OpenAI: API call successful   │
+│ ✅ 14:46:24.201 OpenAI: Response received     │
+│ ✅ 14:46:24.350 IF: Condition evaluated      │
+│ ✅ 14:46:24.351 IF: Branch TRUE selected     │
+│ ✅ 14:46:24.750 Sheets: Row appended         │
+│ ✅ 14:46:25.350 Calendar: Event created      │
+│ ✅ 14:46:26.000 WhatsApp: Message sent       │
+│ ✅ 14:46:26.100 Workflow: Completed         │
+│                                                │
+│ Total Time: 3.1 seconds                        │
+│ Nodes Executed: 6/6                           │
+│ Status: ✅ SUCCESS                            │
+└────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+O QUE ACONTECE SE UM NÓ FALHAR?
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Cenário: OpenAI não responde (API down)
+
+14:46:24.200 ┌─ NÓ 2 (OpenAI): ❌ FAILED
+             │  Erro: "429 Too Many Requests"
+             │
+             │  N8N Tenta Retry (automático):
+             │  ├─ Tentativa 1: 14:46:30 ❌ (falhou)
+             │  ├─ Tentativa 2: 14:46:36 ❌ (falhou)
+             │  └─ Tentativa 3: 14:46:42 ✅ SUCESSO
+             │
+14:46:42.000 └─ Continua de onde parou
+             │  NÓ 3, 4, 5, 6 executados normalmente
+             │
+14:46:45.100 └─ ✅ WORKFLOW COMPLETO (com retry)
+
+Log:
+┌────────────────────────────────────────┐
+│ ❌ OpenAI failed at 14:46:24 (429)    │
+│ ⏱️  Retry 1/3 at 14:46:30...           │
+│ ❌ OpenAI failed at 14:46:30 (429)    │
+│ ⏱️  Retry 2/3 at 14:46:36...           │
+│ ✅ OpenAI succeeded at 14:46:42!       │
+│ ✅ Workflow continued normally         │
+└────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+COMPARAÇÃO: N8N vs. CÓDIGO TRADICIONAL
+
+═══════════════════════════════════════════════════════════════════════════════
+
+TAREFA: "Receba WhatsApp, chame GPT-4o, salve em Sheets, envie resposta"
+
+════════════════════════════════════════════════════════════════════════════════
+
+COM CÓDIGO PYTHON (você escreve):
+
+@app.post("/webhook/whatsapp")
+def handle_whatsapp(request):
+    # Validação
+    if not verify_token(request):
+        return error()
+
+    # Extrair dados
+    phone = request.json['from']
+    message = request.json['text']
+
+    # Chamar OpenAI
+    response = openai.ChatCompletion.create(
+        model="gpt-4o",
+        system="Você é assistente jurídica",
+        messages=[{"role": "user", "content": message}]
+    )
+
+    # Salvar em Sheets
+    sheets.append_row([phone, message, response['content']])
+
+    # Enviar WhatsApp
+    whatsapp.send_message(phone, response['content'])
+
+    return success()
+
+Linhas de Código: 30+
+Tempo para implementar: 2-3 horas
+Testes necessários: Integração, API, edge cases
+Maintenance: Você é responsável
+
+════════════════════════════════════════════════════════════════════════════════
+
+COM N8N (você clica):
+
+[WEBHOOK] → [OpenAI] → [Sheets] → [WhatsApp] → [END]
+
+Linhas de Código: 0
+Tempo para implementar: 10 minutos
+Testes necessários: Testar visualmente
+Maintenance: N8N é responsável
+
+════════════════════════════════════════════════════════════════════════════════
+
+VENCEDOR: N8N (10x mais rápido, mais fácil, menos bugs)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+ONDE N8N RODA?
+
+═══════════════════════════════════════════════════════════════════════════════
+
+OPÇÃO 1: Cloud N8N
+┌─────────────────────────────┐
+│ N8N Cloud (app.n8n.cloud)   │
+│                             │
+│ ✅ Sem configuração         │
+│ ✅ Automático backup        │
+│ ✅ Escala automática        │
+│ ❌ Mais caro ($25+/mês)    │
+│ ❌ Dados fora do seu controle│
+└─────────────────────────────┘
+
+
+OPÇÃO 2: Docker (Seu servidor)
+┌─────────────────────────────┐
+│ Docker Container            │
+│ (Seu servidor, sua rede)    │
+│                             │
+│ ✅ Controle total           │
+│ ✅ Mais barato              │
+│ ✅ Dados na sua rede        │
+│ ❌ Você gerencia infra      │
+│ ❌ Você cuida de uptime     │
+└─────────────────────────────┘
+
+Para Dra Julia: Docker (controle + dados seguros)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+RESUMO: N8N EM 10 PONTOS
+
+═══════════════════════════════════════════════════════════════════════════════
+
+1️⃣  N8N = Automação visual (0 código)
+2️⃣  Nós = Blocos que fazem coisas
+3️⃣  Workflow = Sequência de nós
+4️⃣  Trigger = O que dispara (webhook, horário, etc)
+5️⃣  Conector = Integração com serviço (OpenAI, Sheets, etc)
+6️⃣  Dados fluem entre nós em JSON
+7️⃣  Execução automática quando trigger acontece
+8️⃣  Retry automático em caso de falha
+9️⃣  Logs completos de tudo que acontece
+🔟 Ideal para automação: rápido, fácil, sem código
+
+Para Dra Julia: 35 nós conectados = sistema completo de triagem + agendamento
+
+
+═══════════════════════════════════════════════════════════════════════════════
