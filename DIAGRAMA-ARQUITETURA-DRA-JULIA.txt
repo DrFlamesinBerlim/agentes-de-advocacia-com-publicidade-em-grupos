@@ -1,0 +1,303 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║           DRA. JULIA: FLUXO COMPLETO DE UMA CONSULTA WhatsApp                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 1️⃣  CLIENTE ENVIA MENSAGEM VIA WHATSAPP                                    │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   Cliente: "Tive um acidente de carro..."                                 │
+│   ├─ Telefone: 5564992217123                                              │
+│   ├─ Hora: 14:46 UTC                                                      │
+│   └─ Plataforma: WhatsApp Business API                                    │
+│                                                                            │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ WhatsApp Business API (Evolution/Baileys)       │                    │
+│   │ Recebe webhook → Payload JSON                   │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 2️⃣  N8N WEBHOOK GUARDRAILS (NÓS 1-2)                                      │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ NÓ 1: Validar Challenge Webhook                │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ if hub.verify_token == "secret_token_n8n":     │                    │
+│   │    return "Challenge válido" ✅                 │                    │
+│   │ else:                                            │                    │
+│   │    return error("Webhook inválido") ❌           │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ NÓ 2: Rate Limiting & Anti-Spam                │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ redis[cliente_phone] = mensagens_ultimo_minuto  │                    │
+│   │ if count > 5:                                    │                    │
+│   │    return error("Muitas mensagens") ❌          │                    │
+│   │ else:                                            │                    │
+│   │    continue ✅                                   │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 3️⃣  ENVIAR PARA GPT-4o PARA TRIAGEM JURÍDICA (NÓS 3-4)                   │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ PROMPT CUSTOMIZADO (Sistema)                    │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ Você é assistente jurídica de Dra. Julia       │                    │
+│   │ Analise esta mensagem e retorne JSON:          │                    │
+│   │ {                                                │                    │
+│   │   "categoria": "...",                           │                    │
+│   │   "urgencia": "...",                            │                    │
+│   │   "palavras_chave": [...],                      │                    │
+│   │   "recomendacao": "..."                         │                    │
+│   │ }                                                │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ OpenAI API (GPT-4o) - ~2 segundos               │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ Input: "Tive um acidente de carro..."           │                    │
+│   │ Output: {                                        │                    │
+│   │   "categoria": "responsabilidade_civil",        │                    │
+│   │   "urgencia": "média",                          │                    │
+│   │   "confidence": 0.95,                           │                    │
+│   │   "palavras_chave": ["acidente", "culpa", ...] │                    │
+│   │ }                                                │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 4️⃣  GERAR RESPOSTA PERSONALIZADA (NÓ 5)                                    │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ TEMPLATE + CONTEÚDO DINÂMICO                    │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ Template:                                        │                    │
+│   │   "Identifiquei como: {categoria}"              │                    │
+│   │   "Próximos passos: {recomendacoes}"            │                    │
+│   │                                                  │                    │
+│   │ Substituições:                                   │                    │
+│   │   categoria = "Responsabilidade Civil"          │                    │
+│   │   recomendacoes = ["Fotos", "BO", "Doc", ...]  │                    │
+│   │                                                  │                    │
+│   │ Resultado Final:                                │                    │
+│   │   "Olá! 👋                                      │                    │
+│   │    Identifiquei como Responsabilidade Civil... │                    │
+│   │    1️⃣ Você pode estar protegido...            │                    │
+│   │    2️⃣ Não aceite culpa facilmente...          │                    │
+│   │    3️⃣ Próximos passos recomendados..."        │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 5️⃣  REGISTRAR NO GOOGLE SHEETS (NÓ 6)                                      │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌────────────────────────────────────────────────────────┐              │
+│   │ Google Sheets: "Clientes_Dra_Julia"                    │              │
+│   ├────────────────────────────────────────────────────────┤              │
+│   │ ID        │ Telefone      │ Categoria     │ Urgencia  │              │
+│   ├───────────┼───────────────┼───────────────┼───────────┤              │
+│   │ CLI_7123  │ 5564992217123 │ Resp. Civil   │ Média     │              │
+│   │ CLI_7124  │ 5564999998899 │ Trabalhista   │ Alta      │              │
+│   │ CLI_7125  │ 5564991234567 │ Consumerista  │ Baixa     │              │
+│   └────────────────────────────────────────────────────────┘              │
+│                          │                                                │
+│                          ▼                                                │
+│   Google Sheets API escreve nova linha                                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 6️⃣  AGENDAR NO GOOGLE CALENDAR (NÓ 7)                                      │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌─────────────────────────────────────────────────┐                    │
+│   │ Google Calendar API                             │                    │
+│   ├─────────────────────────────────────────────────┤                    │
+│   │ Criar evento automático:                        │                    │
+│   │   Data: 2026-07-07 14:00                        │                    │
+│   │   Duração: 30 min                               │                    │
+│   │   Descrição: "Consulta - CLI_7123"             │                    │
+│   │   Link Meet: https://meet.google.com/abc...    │                    │
+│   │                                                  │                    │
+│   │ ┌──────────────────┐                           │                    │
+│   │ │ 07 Jul 2026      │                           │                    │
+│   │ │ ┌──────────────┐ │                           │                    │
+│   │ │ │ 14:00-14:30  │ │                           │                    │
+│   │ │ │ Consulta CLI │ │ ← Dra Julia vê isso       │                    │
+│   │ │ │ (Google Meet)│ │                           │                    │
+│   │ │ └──────────────┘ │                           │                    │
+│   │ └──────────────────┘                           │                    │
+│   └─────────────────────────────────────────────────┘                    │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 7️⃣  ENVIAR VIA WHATSAPP COM BOTÕES INTERATIVOS (NÓ 8)                    │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│   ┌──────────────────────────────────────────────────────┐                │
+│   │ Mensagem com Botões (Interactive Message)            │                │
+│   ├──────────────────────────────────────────────────────┤                │
+│   │                                                       │                │
+│   │  [Resposta educacional completa...]                 │                │
+│   │                                                       │                │
+│   │  ┌──────────────────────────┐                       │                │
+│   │  │ Agendar Consulta        │ ← Clica → Calendly   │                │
+│   │  ├──────────────────────────┤                       │                │
+│   │  │ Mais Informações        │ ← Clica → PDFs      │                │
+│   │  ├──────────────────────────┤                       │                │
+│   │  │ Falar com Atendente     │ ← Clica → Humano    │                │
+│   │  └──────────────────────────┘                       │                │
+│   │                                                       │                │
+│   │  Tempo total: 3-5 segundos ⏱️                       │                │
+│   └──────────────────────────────────────────────────────┘                │
+│                          │                                                │
+│                          ▼                                                │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────────────────────────────────┐
+│ 8️⃣  MONITORAR CLIQUE DO CLIENTE (NÓS 9+)                                  │
+├────────────────────────────────────────────────────────────────────────────┤
+│                                                                            │
+│                       Três cenários possíveis:                             │
+│                                                                            │
+│  CENÁRIO A: Clica "Agendar Consulta"                                      │
+│  ─────────────────────────────────────                                    │
+│     Webhook recebe resposta                                               │
+│          ↓                                                                │
+│     Envia link: calendly.com/dra-julia/consulta-remota                   │
+│          ↓                                                                │
+│     Cliente seleciona horário                                             │
+│          ↓                                                                │
+│     Google Calendar confirma automaticamente                              │
+│          ↓                                                                │
+│     Reminder: 1 hora antes                                                │
+│          ↓                                                                │
+│     Google Meet link ativado                                              │
+│                                                                            │
+│                                                                            │
+│  CENÁRIO B: Clica "Mais Informações"                                      │
+│  ─────────────────────────────────────                                    │
+│     Webhook recebe resposta                                               │
+│          ↓                                                                │
+│     Busca em Google Drive:                                                │
+│        • responsabilidade_civil_acidente.pdf                              │
+│        • boletim_ocorrencia_guia.pdf                                      │
+│          ↓                                                                │
+│     Envia PDFs via WhatsApp                                               │
+│          ↓                                                                │
+│     Cliente pode ler offline                                              │
+│          ↓                                                                │
+│     Pode responder depois com dúvidas                                     │
+│                                                                            │
+│                                                                            │
+│  CENÁRIO C: Clica "Falar com Atendente"                                   │
+│  ───────────────────────────────────────                                  │
+│     Webhook recebe resposta                                               │
+│          ↓                                                                │
+│     Escala para humano: maria.silva@dra-julia.com.br                      │
+│          ↓                                                                │
+│     Email + notificação WhatsApp para Dra Julia                           │
+│          ↓                                                                │
+│     Dra Julia responde pessoalmente ou delega atendente                   │
+│          ↓                                                                │
+│     Cliente tem suporte humano                                            │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          RESUMO DE INTEGRATIONS                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  📱 WhatsApp Business API (Evolution/Baileys)                               ║
+║     └─ Webhook entrada + envio de mensagens                                ║
+║                                                                              ║
+║  🤖 OpenAI GPT-4o                                                           ║
+║     └─ Triagem, análise, geração de texto                                  ║
+║                                                                              ║
+║  📊 Google Sheets                                                           ║
+║     └─ CRM: tabela Clientes_Dra_Julia                                      ║
+║                                                                              ║
+║  📅 Google Calendar                                                         ║
+║     └─ Agendamento automático de slots                                     ║
+║                                                                              ║
+║  📥 Google Drive                                                            ║
+║     └─ PDFs educativos (documentação templates)                            ║
+║                                                                              ║
+║  🌐 Calendly                                                                ║
+║     └─ Interface de agendamento para cliente                               ║
+║                                                                              ║
+║  🔗 N8N (Workflow Orchestration)                                            ║
+║     └─ Conecta todos os serviços acima                                     ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                      FASE 2: "PUBLICIDADE EM GRUPOS"                        ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  Ao invés de RESPONDER 1 CLIENTE, POSTAR EM MÚLTIPLOS GRUPOS:              ║
+║                                                                              ║
+║  ┌────────────────────────────────────────────────────────┐                ║
+║  │ 09:00 → Grupo "Advogados Rondônia"                    │                ║
+║  │         ⚖️ JURISPRUDÊNCIA SEMANAL                      │                ║
+║  │         3 decisões STF sobre responsabilidade civil   │                ║
+║  └────────────────────────────────────────────────────────┘                ║
+║                          ↓                                                  ║
+║  ┌────────────────────────────────────────────────────────┐                ║
+║  │ 14:30 → Grupo "Coletivo Legal"                        │                ║
+║  │         💡 DICA LEGAL                                  │                ║
+║  │         Como documentar acidente de carro (6 passos)  │                ║
+║  └────────────────────────────────────────────────────────┘                ║
+║                          ↓                                                  ║
+║  ┌────────────────────────────────────────────────────────┐                ║
+║  │ 18:00 → Grupo "Rede de Apoio"                         │                ║
+║  │         📰 CASE DE SUCESSO (anônimo)                  │                ║
+║  │         Revertemos condenação injusta...              │                ║
+║  └────────────────────────────────────────────────────────┘                ║
+║                          ↓                                                  ║
+║  ┌────────────────────────────────────────────────────────┐                ║
+║  │ RASTREAR MÉTRICAS                                      │                ║
+║  │   ├─ Reações (👍❤️😂)                                  │                ║
+║  │   ├─ Shares                                            │                ║
+║  │   ├─ Links clicados                                    │                ║
+║  │   ├─ Grupos com melhor performance                     │                ║
+║  │   └─ Otimizar conteúdo futuro                         │                ║
+║  └────────────────────────────────────────────────────────┘                ║
+║                                                                              ║
+║  INTEGRAÇÕES ADICIONAIS:                                                    ║
+║  • Canva API → Gerar imagens automaticamente                               ║
+║  • monday.com → Gerenciar calendário de posts                              ║
+║  • Google Sheets → Rastrear analytics                                      ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
