@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "versao_template": "1.0",
+    "data_criacao_template": "2026-07-04",
+    "status": "CONGELADO — não alterar sem autorização explícita"
+  },
+  "exportacao": {
+    "origem": {
+      "tipo": "whatsapp_export",
+      "fonte": "{{ORIGEM_NOME}}",
+      "descricao": "{{DESCRICAO_BREVE}}"
+    },
+    "metadados": {
+      "data_exportacao": "{{DATA_EXPORTACAO_ISO}}",
+      "periodo_inicio": "{{DATA_INICIO_ISO}}",
+      "periodo_fim": "{{DATA_FIM_ISO}}",
+      "tipo_chat": "{{TIPO: individual|grupo|comunidade}}",
+      "nome_chat": "{{NOME_CHAT}}",
+      "total_mensagens": {{TOTAL_MENSAGENS}},
+      "total_participantes": {{TOTAL_PARTICIPANTES}},
+      "observacoes": "{{OBSERVACOES_OPCIONAIS}}"
+    }
+  },
+  "participantes": [
+    {
+      "id": "{{ID_UNICO}}",
+      "nome": "{{NOME_PARTICIPANTE}}",
+      "eh_cliente": {{true|false}},
+      "eh_adversario": {{true|false}},
+      "eh_terceiro": {{true|false}},
+      "contato_whatsapp": "{{TELEFONE_OPCIONAL}}",
+      "email": "{{EMAIL_OPCIONAL}}"
+    }
+  ],
+  "mensagens": {
+    "total": {{TOTAL}},
+    "periodo": {
+      "inicio": "{{DATA_PRIMEIRA}}",
+      "fim": "{{DATA_ULTIMA}}"
+    },
+    "dados": [
+      {
+        "id": "{{MSG_ID}}",
+        "timestamp": "{{TIMESTAMP_ISO}}",
+        "data_local": "{{DATA_BR}}",
+        "hora": "{{HORA}}",
+        "remetente": "{{NOME_REMETENTE}}",
+        "tipo_conteudo": "{{texto|audio|documento|imagem|video|ligacao|status}}",
+        "corpo_texto": "{{TEXTO_COMPLETO_OU_DESCRICAO}}",
+        "arquivo_original": "{{NOME_ARQUIVO_SE_EXISTE}}",
+        "tamanho_bytes": {{TAMANHO_OU_NULL}},
+        "duracao_audio_seg": {{DURACAO_OU_NULL}}
+      }
+    ]
+  },
+  "transcricoes_audio": {
+    "total": {{TOTAL}},
+    "metodo": "{{METODO_TRANSCRICAO: whisper|manual|outro}}",
+    "qualidade": "{{QUALIDADE: alta|media|baixa}}",
+    "idioma": "{{pt-BR|pt|es|en}}",
+    "dados": [
+      {
+        "msg_id": "{{REFERENCIA_MENSAGEM_AUDIO}}",
+        "audio_timestamp": "{{TIMESTAMP_AUDIO}}",
+        "duracao_segundos": {{DURACAO}},
+        "texto_transcrito": "{{TRANSCRICAO_TEXTO_COMPLETA}}",
+        "confianca": {{0.0_a_1.0_OU_NULL}},
+        "notas_transcricao": "{{NOTAS_OPCIONAIS}}"
+      }
+    ]
+  },
+  "documentos_anexos": {
+    "total": {{TOTAL}},
+    "dados": [
+      {
+        "id": "{{DOC_ID}}",
+        "msg_id": "{{REF_MENSAGEM}}",
+        "timestamp": "{{TIMESTAMP}}",
+        "nome_arquivo": "{{NOME_ORIGINAL}}",
+        "tipo": "{{TIPO: pdf|imagem|planilha|documento|outro}}",
+        "tamanho_kb": {{TAMANHO}},
+        "caminho_local": "{{CAMINHO_SE_DISPONIVEL}}"
+      }
+    ]
+  },
+  "prova_processual": {
+    "gerada": {{true|false}},
+    "data_geracao": "{{DATA_ISO_OU_NULL}}",
+    "formato": "{{Texto estruturado para judicial}}",
+    "conteudo": "{{PROVA_ESTRUTURADA_FORMATADA}}"
+  },
+  "indice_processual": {
+    "processos_mencionados": [
+      {
+        "numero": "{{NUMERO_PROCESSO}}",
+        "mencionado_por": "{{QUEM_MENCIONOU}}",
+        "datas_mencao": ["{{DATA1}}", "{{DATA2}}"],
+        "contexto": "{{BREVE_CONTEXTO}}"
+      }
+    ],
+    "partes_mencionadas": [
+      {
+        "nome": "{{NOME_PARTE}}",
+        "tipo": "{{autor|reu|terceiro}}",
+        "mencoes_total": {{TOTAL}},
+        "datas_mencao": ["{{DATA1}}", "{{DATA2}}"]
+      }
+    ],
+    "documentos_mencionados": [
+      {
+        "documento": "{{DESCRICAO}}",
+        "tipo": "{{contrato|petição|sentença|outro}}",
+        "datas_mencao": ["{{DATA1}}"]
+      }
+    ]
+  },
+  "processamento_sistema": {
+    "status_processamento": "{{pendente|processando|concluido|erro}}",
+    "data_processamento": "{{DATA_ISO_OU_NULL}}",
+    "versao_processador": "{{VERSAO_MODULO}}",
+    "erros_identificados": [
+      "{{ERRO_1}}", "{{ERRO_2}}"
+    ],
+    "avisos": [
+      "{{AVISO_1}}"
+    ],
+    "hash_arquivo_original": "{{SHA256_OU_NULL}}"
+  },
+  "localizacao_arquivo": {
+    "caminho_original": "{{CAMINHO_COMPLETO_ORIGINAL}}",
+    "caminho_processado": "{{CAMINHO_JSON_PROCESSADO}}",
+    "pasta_evidencias": "{{PASTA_PROVA_JUDICIAL}}"
+  }
+}
