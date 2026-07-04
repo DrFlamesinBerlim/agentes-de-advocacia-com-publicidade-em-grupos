@@ -34,6 +34,28 @@ Instalados mas não habilitados neste chat / status desconhecido:
 - Local Falcon
 - Zapier
 
+## Plugins habilitados na conta
+
+- legal
+- cowork-plugin-management
+- zapier
+- sanity-plugin
+- brightdata-plugin
+- wix
+- valtown
+- datarobot-agent-skills
+
+Não tenho acesso ao conteúdo/configuração interna de cada plugin (o que exatamente o "legal" ou o "cowork-plugin-management" fazem por trás) — só sei que estão habilitados na conta.
+
+## Limitações deste levantamento
+
+Este inventário reflete apenas o que é visível a partir desta sessão de chat, via as ferramentas de conta (rotinas agendadas e conectores). Ele **não** cobre:
+- Outras sessões ativas do Claude Code (CLI/app), incluindo subagentes rodando em outros projetos ou repositórios.
+- Agentes ou automações configuradas dentro do Cowork além dos plugins listados acima.
+- O comportamento interno de cada plugin/conector.
+
+Para um retrato completo, é preciso checar diretamente as telas de configuração do Code e do Cowork.
+
 ## Repositório
 
 `agentes-de-advocacia-com-publicidade-em-grupos` está vazio (apenas um README em branco) — ainda não há código ou automação própria do projeto implementada aqui.
