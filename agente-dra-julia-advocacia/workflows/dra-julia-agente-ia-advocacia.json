@@ -1,0 +1,31 @@
+{
+  "name": "Dra. Júlia - Agente IA Advocacia v2.0",
+  "nodes": [
+    {
+      "parameters": {"httpMethod": "POST","path": "dra-julia-advocacia","responseMode": "responseNode","options": {}},
+      "id": "webhook-whatsapp-julia","name": "Webhook WhatsApp Dra. Júlia",
+      "type": "n8n-nodes-base.webhook","typeVersion": 1,"position": [240,300],
+      "webhookId": "dra-julia-advocacia-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// GUARDRAIL 1: Verification Challenge (GET) + payload validation (POST)\nconst body = $input.all()[0].json;\nconst qs = body.query || {};\nif (qs['hub.mode'] === 'subscribe') {\n  const tok = ($env['WEBHOOK_VERIFY_TOKEN'] || '');\n  if (qs['hub.verify_token'] === tok)\n    return [{ json: { type: 'CHALLENGE', challenge: qs['hub.challenge'] } }];\n  return [{ json: { type: 'INVALID', reason: 'bad_token' } }];\n}\nconst msgs = body?.entry?.[0]?.changes?.[0]?.value?.messages;\nif (!msgs || !msgs.length) return [{ json: { type: 'INVALID', reason: 'no_messages' } }];\nreturn [{ json: { type: 'VALID', body } }];"
+      },
+      "id": "guardrail-webhook-validation","name": "Validar Webhook (Challenge + Payload)",
+      "type": "n8n-nodes-base.code","typeVersion": 2,"position": [460,300]
+    }
+  ],
+  "connections": {},
+  "settings": {
+    "timezone": "America/Sao_Paulo",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "last",
+    "saveManualExecutions": true
+  },
+  "staticData": null,
+  "tags": ["advocacia","juridico","ia","whatsapp","documentos","v2"],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-13T00:00:00.000Z",
+  "versionId": "2.0.0",
+  "_note": "Arquivo completo disponível no repositório original. Este é um resumo estrutural. Importe o arquivo .json original do GitHub JeffersonMFti/agente-dra-julia-advocacia para obter o workflow completo com todos os 35 nós."
+}

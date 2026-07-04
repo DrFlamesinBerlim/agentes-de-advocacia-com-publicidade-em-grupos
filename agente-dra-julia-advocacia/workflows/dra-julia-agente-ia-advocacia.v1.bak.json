@@ -1,0 +1,17 @@
+{
+  "name": "Dra. Júlia - Agente IA Advocacia",
+  "nodes": [],
+  "connections": {},
+  "settings": {
+    "timezone": "America/Sao_Paulo",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "last",
+    "saveManualExecutions": true
+  },
+  "staticData": null,
+  "tags": ["advocacia","juridico","ia","whatsapp"],
+  "triggerCount": 0,
+  "updatedAt": "2024-10-04T00:00:00.000Z",
+  "versionId": "1.0.0",
+  "_note": "Backup v1.0 do workflow. Arquivo completo disponível no repositório JeffersonMFti/agente-dra-julia-advocacia em workflows/dra-julia-agente-ia-advocacia.v1.bak.json"
+}
