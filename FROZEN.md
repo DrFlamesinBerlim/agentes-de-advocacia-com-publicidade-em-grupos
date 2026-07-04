@@ -1,6 +1,6 @@
 # FROZEN — Módulos Estáveis | De Brito Advocacia MABIOS V3
 
-> Última revisão: 28/06/2026 — 20 módulos congelados  
+> Última revisão: 28/06/2026 — 21 módulos congelados  
 > Critério: testado + aprovado + não requer mudança imediata
 
 ---
@@ -19,7 +19,7 @@
 | `.claude/commands/partes.md` | v2.0 | 28/06/2026 | Skill /partes — 8 fontes: Gmail+DataJud+Escavador+Drive+JusBrasil |
 | `agente_andamentos/modulo_relatorios.py` | v1.0 | 28/06/2026 | Relatórios elásticos — filtros validados |
 | `agente_andamentos/sync_github.py` | v1.0 | 28/06/2026 | Sync GitHub — REPO_DIR=BASE confirmado |
-| `loop_monitor.py` | v1.1 | 28/06/2026 | Daemon principal — ciclos 30s/15min/120min + checar_whatsapp |
+| `loop_monitor.py` | v1.2 | 28/06/2026 | Daemon principal — ciclos 30s/15min/120min + tarefas + whatsapp |
 | `agente_andamentos/modulo_whatsapp_monitor.py` | v1.0 | 28/06/2026 | Monitor inbox WhatsApp — parse + prova processual automático |
 | `.claude/commands/powershell.md` | v1.0 | 28/06/2026 | Skill comandos PowerShell |
 | `.claude/commands/mabios.md` | v1.0 | 28/06/2026 | Skill ações MABIOS |
@@ -27,6 +27,7 @@
 | `.claude/commands/status.md` | v1.0 | 28/06/2026 | Skill painel status |
 | `.claude/commands/sync.md` | v1.0 | 28/06/2026 | Skill sync GitHub |
 | `.claude/commands/andamentos.md` | v1.0 | 28/06/2026 | Skill andamentos via email |
+| `.claude/commands/tarefas.md` | v1.0 | 28/06/2026 | Skill tarefas — gestão automática com ciclo de vida |
 
 ---
 

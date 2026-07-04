@@ -212,6 +212,20 @@ def checar_mabios() -> None:
         last_mabios = agora
 
 
+def checar_tarefas_urgentes() -> None:
+    """Verifica tarefas urgentes/vencidas periodicamente."""
+    inbox = BASE / "documentos" / "tarefas.json"
+    if not inbox.exists():
+        return
+    log.info("=== Tarefas — verificando urgentes ===")
+    code, out = run(
+        [sys.executable, str(AGENTE_DIR / "modulo_tarefas.py"), "urgentes"],
+        timeout=30,
+    )
+    if code == 0 and ("URGENTE" in out or "VENCIDO" in out):
+        log_out(f"[TAREFAS:URGENTES]\n{out[:600]}")
+
+
 def checar_whatsapp() -> None:
     """Processa exports .txt do WhatsApp depositados em documentos/whatsapp/inbox/."""
     inbox = BASE / "documentos" / "whatsapp" / "inbox"
@@ -265,16 +279,19 @@ def main() -> None:
                 log.info("claude_output.txt mudou — processando tags XML")
                 executar_tags_xml()
 
-            # 3. Verificar exports WhatsApp pendentes
+            # 3. Verificar tarefas urgentes
+            checar_tarefas_urgentes()
+
+            # 4. Verificar exports WhatsApp pendentes
             checar_whatsapp()
 
-            # 4. Processar rascunhos MABIOS periodicamente
+            # 5. Processar rascunhos MABIOS periodicamente
             checar_mabios()
 
-            # 5. Pipeline completo periodicamente
+            # 6. Pipeline completo periodicamente
             checar_pipeline_completo()
 
-            # 6. Push do log para o GitHub
+            # 7. Push do log para o GitHub
             git_push()
 
         except KeyboardInterrupt:
