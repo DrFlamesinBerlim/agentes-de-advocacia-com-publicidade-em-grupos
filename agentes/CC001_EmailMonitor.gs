@@ -224,10 +224,22 @@ function enviarRelatorioDiario() {
   const hoje = new Date();
   const dataStr = Utilities.formatDate(hoje, 'America/Porto_Velho', 'dd/MM/yyyy');
   const html = gerarRelatorioHTML(processos, hoje);
+  const assunto = `[CC-001] Relatório Diário — De Brito Advocacia | ${dataStr}`;
+
+  // Deletar relatório anterior (mesmo assunto)
+  const threads = GmailApp.search('from:noreply@google.com subject:"[CC-001] Relatório Diário"');
+  threads.slice(0, 5).forEach(t => {
+    const msgs = t.getMessages();
+    msgs.forEach(m => {
+      if (m.getSubject().includes('Relatório Diário')) {
+        m.moveToTrash();
+      }
+    });
+  });
 
   GmailApp.sendEmail(
     CONFIG.EMAIL_DESTINO,
-    `[CC-001] Relatório Diário — De Brito Advocacia | ${dataStr}`,
+    assunto,
     'Visualize em cliente de email com suporte a HTML.',
     { htmlBody: html }
   );
@@ -238,7 +250,7 @@ function enviarRelatorioDiario() {
   props.setProperty(CONFIG.HASH_PROP_KEY, calcularHash(conteudo));
   props.setProperty(CONFIG.SNAPSHOT_PROP_KEY, conteudo);
 
-  Logger.log(`[CC-001] Relatório diário enviado — ${processos.length} processos — ${dataStr}`);
+  Logger.log(`[CC-001] Relatório diário enviado (anterior deletado) — ${processos.length} processos — ${dataStr}`);
 }
 
 // ─────────────────────────────────────────────

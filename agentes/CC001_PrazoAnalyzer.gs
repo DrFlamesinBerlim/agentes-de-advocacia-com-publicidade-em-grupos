@@ -146,13 +146,28 @@ function enviarAlertaPrazos(prazos, dataStr) {
 
   html += '</div>';
 
+  // Deletar alerta anterior
+  try {
+    const threads = GmailApp.search('subject:"ALERTA DE PRAZOS"');
+    threads.slice(0, 3).forEach(t => {
+      const msgs = t.getMessages();
+      msgs.forEach(m => {
+        if (m.getSubject().includes('ALERTA DE PRAZOS')) {
+          m.moveToTrash();
+        }
+      });
+    });
+  } catch (e) {
+    Logger.log('Erro ao deletar alerta anterior: ' + e);
+  }
+
   GmailApp.sendEmail(CONFIG_PRAZO.EMAIL_DESTINO,
     `🚨 ALERTA DE PRAZOS — CC-001 | ${prazos.criticos.length} crítico(s) | ${Utilities.formatDate(new Date(), 'America/Porto_Velho', 'dd/MM/yyyy HH:mm')}`,
     'Visualize em cliente HTML.',
     { htmlBody: html }
   );
 
-  Logger.log('Email de alerta de prazos enviado.');
+  Logger.log('Email de alerta de prazos enviado (anterior deletado).');
 }
 
 function testarAnalisadorPrazos() {

@@ -167,6 +167,21 @@ function enviarSugestoesAgenda(sugestoes, dataStr) {
     </div>
     </div>`;
 
+  // Deletar sugestões de agenda anteriores
+  try {
+    const threads = GmailApp.search('subject:"AGENDA SUGERIDA"');
+    threads.slice(0, 3).forEach(t => {
+      const msgs = t.getMessages();
+      msgs.forEach(m => {
+        if (m.getSubject().includes('AGENDA SUGERIDA')) {
+          m.moveToTrash();
+        }
+      });
+    });
+  } catch (e) {
+    Logger.log('Erro ao deletar agenda anterior: ' + e);
+  }
+
   GmailApp.sendEmail(CONFIG_AGENDA.EMAIL_DESTINO,
     `📅 AGENDA SUGERIDA — CC-001 | ${sugestoes.length} petição(ões) | ${dataStr}`,
     'Visualize em cliente HTML.',
