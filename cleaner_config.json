@@ -1,0 +1,128 @@
+{
+  "version": "2.0",
+  "application": "System Cleaner Advanced",
+  "description": "Advanced Windows cleaning with restore points and dry-run support",
+  "auto_restore_point": true,
+  "dry_run_by_default": true,
+  "structured_logging": true,
+  "categories": {
+    "Temporary Files": {
+      "enabled": true,
+      "safe": true,
+      "description": "Remove temporary files and folders",
+      "locations": [
+        "%TEMP%",
+        "%TMP%",
+        "C:\\Windows\\Temp",
+        "%LOCALAPPDATA%\\Temp"
+      ],
+      "patterns": ["*.tmp", "*.log", "*.bak", "~*"],
+      "backup": true,
+      "secure_delete": false,
+      "priority": "HIGH"
+    },
+    "Browser Cache": {
+      "enabled": true,
+      "safe": true,
+      "description": "Clean browser cache and temporary data",
+      "locations": [
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Cache",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\Default\\Cache",
+        "%LOCALAPPDATA%\\Mozilla\\Firefox\\Profiles",
+        "%APPDATA%\\Microsoft\\Internet Explorer\\Cache"
+      ],
+      "patterns": [],
+      "backup": true,
+      "secure_delete": false,
+      "priority": "MEDIUM"
+    },
+    "Windows Update": {
+      "enabled": true,
+      "safe": true,
+      "description": "Clean Windows Update cache",
+      "locations": [
+        "C:\\Windows\\SoftwareDistribution\\Download",
+        "C:\\Windows\\Logs\\WindowsUpdate"
+      ],
+      "patterns": [],
+      "backup": false,
+      "secure_delete": false,
+      "priority": "MEDIUM"
+    },
+    "Duplicate Files": {
+      "enabled": true,
+      "safe": true,
+      "description": "Find and remove duplicate files",
+      "scan_locations": [
+        "%USERPROFILE%\\Downloads",
+        "%USERPROFILE%\\Documents",
+        "%USERPROFILE%\\Desktop"
+      ],
+      "patterns": ["*.*"],
+      "backup": true,
+      "secure_delete": false,
+      "priority": "LOW"
+    },
+    "System Restore Points": {
+      "enabled": true,
+      "safe": true,
+      "description": "Create system restore point before cleanup",
+      "auto_create": true,
+      "name_format": "PreCleanup-{timestamp}",
+      "backup": true,
+      "priority": "CRITICAL"
+    },
+    "Disk Analysis": {
+      "enabled": true,
+      "safe": true,
+      "description": "Analyze disk usage and generate report",
+      "scan_all_drives": true,
+      "include_system": true,
+      "priority": "HIGH"
+    },
+    "Recycle Bin": {
+      "enabled": true,
+      "safe": false,
+      "description": "Empty recycle bin",
+      "backup": false,
+      "secure_delete": false,
+      "priority": "LOW"
+    },
+    "Prefetch": {
+      "enabled": true,
+      "safe": true,
+      "description": "Clean prefetch files",
+      "locations": [
+        "C:\\Windows\\Prefetch"
+      ],
+      "patterns": ["*.pf"],
+      "backup": true,
+      "secure_delete": false,
+      "priority": "MEDIUM"
+    }
+  },
+  "operations": {
+    "backup_before_delete": true,
+    "create_restore_point": true,
+    "dry_run_enabled": true,
+    "log_all_actions": true,
+    "auto_restart_on_completion": false,
+    "restart_countdown_seconds": 30
+  },
+  "security": {
+    "enable_uac_check": true,
+    "validate_critical_folders": true,
+    "system_folders_protected": [
+      "C:\\Windows",
+      "C:\\Program Files",
+      "C:\\Program Files (x86)",
+      "C:\\ProgramData"
+    ],
+    "never_delete_patterns": [
+      "System32",
+      "SysWOW64",
+      "boot",
+      "bootmgr"
+    ]
+  }
+}
