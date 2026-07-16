@@ -173,13 +173,25 @@ function gerarRelatorioHTML(processos, dataRef) {
     { titulo: '📦 CAIXA NÃO PRIORITÁRIA', lista: grupos.naoPrio, cor: '#546e7a' },
   ];
 
+  // Calcular estatísticas de risco
+  const risco = {
+    critico: grupos.urgentes.length,
+    alto: grupos.p16.length + grupos.p31.length,
+    medio: grupos.p46.length + grupos.p61.length,
+    baixo: grupos.p121.length + grupos.p181.length + grupos.p261.length + grupos.ativo.length,
+    arquivados: grupos.naoPrio.length,
+  };
+
   let corpo = `
     <div style="font-family:Arial,sans-serif;max-width:1100px;margin:auto">
     <h2 style="background:#1a237e;color:white;padding:16px;border-radius:6px">
       ⚖️ CC-001 — Relatório Diário de Processos<br>
       <small style="font-size:14px">De Brito Advocacia | Dr. Jefferson Silva de Brito | OAB/RO 2952</small><br>
       <small style="font-size:13px">Data: ${dataStr} | Total: ${processos.length} processos</small>
-    </h2>`;
+    </h2>
+    <div style="background:#fff3cd;border:1px solid #ffc107;padding:12px;border-radius:4px;margin-bottom:16px">
+      <small style="color:#333"><b>📊 SAÚDE DA CARTEIRA:</b> ${risco.critico} críticos | ${risco.alto} altos | ${risco.medio} médios | ${risco.baixo} baixos | ${risco.arquivados} arquivados</small>
+    </div>`;
 
   // Resumo executivo
   corpo += `<table style="width:100%;border-collapse:collapse;margin-bottom:20px">

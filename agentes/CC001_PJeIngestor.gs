@@ -1,14 +1,16 @@
 /**
- * CC-001 — MABIOS v3 — Ingestor de Andamentos PJe
+ * CC-001 — MABIOS v3 — Ingestor de Andamentos PJe v2
  * Dr. Jefferson Silva de Brito | OAB/RO 2952
  *
- * Scraper automático de andamentos do PJe
- * Atualiza processos.json com últimas movimentações
+ * Scraper robusto de andamentos do PJe
+ * Multi-estratégia: scraping + API fallback + manual input
+ * Atualiza processos.json com análise de prazos críticos
  *
- * CONFIGURAÇÃO:
- * 1. Execute setupPJeIngestor() UMA VEZ para criar trigger
- * 2. Executa a cada 30 minutos automaticamente
- * 3. Consulta PJe, busca andamentos, atualiza Drive
+ * SETUP:
+ * 1. Execute setupPJeIngestor() UMA VEZ para criar triggers
+ * 2. Consulta PJe a cada 15 min
+ * 3. Análise de prazos a cada hora
+ * 4. Agendamento inteligente de petições
  */
 
 const CONFIG_INGESTOR = {
@@ -18,8 +20,10 @@ const CONFIG_INGESTOR = {
   NOME_COMPLETO: 'Jefferson Silva de Brito',
   CPF: '02881809928',
   PJE_URL: 'https://pje.tjro.jus.br',
-  PJE_LOGIN_URL: 'https://pje.tjro.jus.br/login.do',
+  LOG_SHEET_ID: null, // Opcional: apontar para Google Sheet de logs
   INGESTOR_HASH_KEY: 'pje_ingestor_ultima_consulta',
+  PRAZO_ALERTA_DIAS: 5, // Alertar X dias antes do prazo
+  MAX_RETRIES: 3,
 };
 
 // ─────────────────────────────────────────────
