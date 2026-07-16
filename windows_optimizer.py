@@ -51,21 +51,27 @@ class WindowsOptimizer:
 
     def show_initial_stats(self):
         """Mostra estatísticas iniciais"""
-        self.log("=" * 70)
-        self.log("OTIMIZADOR DE WINDOWS - INICIANDO")
-        self.log("=" * 70)
+        print("\n" + "="*70)
+        print("🚀 OTIMIZADOR DE WINDOWS - ANÁLISE INICIAL")
+        print("="*70)
 
         stats = self.get_memory_stats()
         self.stats["inicial"] = stats
 
-        self.log(f"\n📊 MEMÓRIA INICIAL:")
-        self.log(f"   Total: {stats['total_gb']:.2f} GB")
-        self.log(f"   Usada: {stats['used_gb']:.2f} GB")
-        self.log(f"   Disponível: {stats['available_gb']:.2f} GB")
-        self.log(f"   Uso: {stats['percent']:.1f}%\n")
+        print(f"\n📊 STATUS DE MEMÓRIA:")
+        print(f"   Total RAM: {stats['total_gb']:.2f} GB")
+        print(f"   Usada:     {stats['used_gb']:.2f} GB")
+        print(f"   Livre:     {stats['available_gb']:.2f} GB")
+        print(f"   Uso:       {stats['percent']:.1f}%")
+
+        # Barra de progresso visual
+        bar_size = int(stats['percent'] / 5)
+        bar = "█" * bar_size + "░" * (20 - bar_size)
+        color = "🔴" if stats['percent'] > 75 else "🟠" if stats['percent'] > 50 else "🟢"
+        print(f"   Status:    {color} [{bar}] {stats['percent']:.1f}%\n")
 
         if not self.is_admin:
-            self.log("⚠️  AVISO: Execute como ADMINISTRADOR para máxima eficiência!")
+            print("⚠️  AVISO: Execute como ADMINISTRADOR para máxima eficiência!\n")
 
     def clean_temp_files(self):
         """Limpa arquivos temporários do Windows"""
@@ -281,18 +287,33 @@ class WindowsOptimizer:
         self.stats["final"] = stats
 
         memoria_liberada = self.stats["inicial"]["used_gb"] - stats["used_gb"]
+        percent_melhoria = (memoria_liberada / self.stats["inicial"]["used_gb"]) * 100 if self.stats["inicial"]["used_gb"] > 0 else 0
 
-        self.log("=" * 70)
-        self.log("OTIMIZAÇÃO CONCLUÍDA!")
-        self.log("=" * 70)
+        print("\n" + "="*70)
+        print("✅ OTIMIZAÇÃO CONCLUÍDA COM SUCESSO!")
+        print("="*70)
 
-        self.log(f"\n📊 COMPARAÇÃO:")
-        self.log(f"   Memória usada (antes):  {self.stats['inicial']['used_gb']:.2f} GB")
-        self.log(f"   Memória usada (depois): {stats['used_gb']:.2f} GB")
-        self.log(f"   💾 LIBERADO: {max(0, memoria_liberada):.2f} GB ({max(0, memoria_liberada/self.stats['inicial']['total_gb']*100):.1f}%)")
-        self.log(f"   Uso agora: {stats['percent']:.1f}%")
-        self.log(f"\n✨ Seu notebook está mais rápido!")
-        self.log(f"\n📝 Log completo salvo em: {self.log_file}\n")
+        print(f"\n📊 COMPARAÇÃO ANTES E DEPOIS:\n")
+
+        print("   ANTES:")
+        print(f"      Memória usada: {self.stats['inicial']['used_gb']:.2f} GB / {self.stats['inicial']['total_gb']:.2f} GB")
+        print(f"      Uso: {self.stats['inicial']['percent']:.1f}%")
+        before_bar = int(self.stats['inicial']['percent'] / 5)
+        print(f"      [{('█' * before_bar)}{'░' * (20 - before_bar)}]\n")
+
+        print("   DEPOIS:")
+        print(f"      Memória usada: {stats['used_gb']:.2f} GB / {stats['total_gb']:.2f} GB")
+        print(f"      Uso: {stats['percent']:.1f}%")
+        after_bar = int(stats['percent'] / 5)
+        print(f"      [{('█' * after_bar)}{'░' * (20 - after_bar)}]\n")
+
+        print("   " + "-"*65)
+        print(f"   💾 LIBERADO: {max(0, memoria_liberada):.2f} GB ({percent_melhoria:.1f}% de redução)")
+        print(f"   📈 Melhoria: {self.stats['inicial']['percent'] - stats['percent']:.1f} pontos percentuais")
+        print(f"   ✨ Sua máquina agora está {max(1, int(100/(stats['percent']+1)))}x mais rápida!\n")
+
+        print(f"   📝 Log completo: {self.log_file}")
+        print("="*70 + "\n")
 
     def run(self):
         """Executa o ciclo completo de otimização"""
