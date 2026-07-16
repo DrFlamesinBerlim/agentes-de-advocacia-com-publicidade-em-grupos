@@ -135,12 +135,14 @@ function gerarRelatorioHTML(processos, dataRef) {
   function tabelaHTML(lista, cor) {
     if (!lista.length) return '<p style="color:#888;font-style:italic">Nenhum processo.</p>';
     let rows = lista.sort((a,b) => a.dias - b.dias).map(p => {
+      const link = `https://pje.tjro.jus.br/consulta/?numero=${p.numero}`;
       const prazoStr = p.prazo && p.prazo.data_prazo_final
         ? `<br><span style="color:#c00;font-weight:bold">⚠️ PRAZO: ${p.prazo.data_prazo_final} — ${p.prazo.descricao || ''}</span>`
         : '';
       return `<tr>
-        <td style="font-family:monospace;font-size:12px">${p.numero}</td>
+        <td style="font-family:monospace;font-size:12px"><a href="${link}" target="_blank" style="color:#0066cc;text-decoration:none;font-weight:bold">${p.numero}</a></td>
         <td>${p.cliente || '—'}</td>
+        <td style="color:#333;font-size:12px">${p.partes || '—'}</td>
         <td>${p.ultima_mov || '—'}</td>
         <td style="text-align:center"><b>${p.dias}d</b></td>
         <td>${(p.mov_desc || '—').substring(0, 80)}${prazoStr}</td>
@@ -148,7 +150,7 @@ function gerarRelatorioHTML(processos, dataRef) {
     }).join('');
     return `<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse;width:100%;font-size:13px">
       <thead style="background:${cor};color:white">
-        <tr><th>Processo</th><th>Cliente</th><th>Última Mov.</th><th>Dias</th><th>Movimentação</th></tr>
+        <tr><th>Processo</th><th>Cliente</th><th>Partes</th><th>Última Mov.</th><th>Dias</th><th>Movimentação</th></tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>`;
