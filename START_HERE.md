@@ -4,6 +4,31 @@ Bem-vindo! Este é seu ponto de entrada. Escolha seu objetivo abaixo.
 
 ---
 
+## 0️⃣ PASSO ZERO (fazer uma única vez)
+
+Antes de tudo, baixe esta pasta inteira para o seu notebook Windows (não adianta rodar nada por aqui — isso aqui é só o repositório de origem).
+
+Depois, na pasta baixada:
+
+```
+1. Clique com o botão DIREITO em: INSTALAR_ATALHOS.bat
+2. Escolha: "Executar como administrador"
+3. Confirme e aguarde
+```
+
+Isso cria **4 ícones na sua Área de Trabalho**, prontos para clique duplo:
+
+| Ícone | O que faz |
+|---|---|
+| 🔧 **Reparar Touchpad** | Repara o mousepad, pede admin sozinho |
+| 🧹 **Limpar Sistema - Prévia** | Mostra o que seria limpo, não deleta nada |
+| 🧹 **Limpar Sistema - Aplicar** | Limpa de verdade (cria restore point antes) |
+| 📊 **Dashboard Otimizador** | Abre o painel visual no navegador |
+
+Depois desse passo, **use sempre os ícones** — o resto deste guia é só referência para quando quiser entender o que cada um faz por baixo dos panos.
+
+---
+
 ## 🎯 QUAL É SEU OBJETIVO?
 
 ### 1️⃣ **Mousepad/Touchpad parou de funcionar**
