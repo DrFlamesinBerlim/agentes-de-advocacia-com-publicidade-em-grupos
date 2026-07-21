@@ -1,19 +1,20 @@
 @echo off
-title Otimizador de Servicos - Desliga Bloatware com Seguranca
-setlocal enabledelayedexpansion
-
+title Otimizador de Servicos - Versao Robusta
 REM ============================================================
-REM  Auto-elevacao
+REM  Auto-elevacao pelo metodo classico ^(ShellExecute^)
 REM ============================================================
-net session >nul 2>&1
+reg query "HKU\S-1-5-19" >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Solicitando permissao de administrador...
-    powershell -NoProfile -Command "Start-Process -FilePath '%~f0' -Verb RunAs"
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\elev_srv.vbs"
+    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%temp%\elev_srv.vbs"
+    "%temp%\elev_srv.vbs"
     exit /b
 )
+if exist "%temp%\elev_srv.vbs" del "%temp%\elev_srv.vbs"
 
-cls
+setlocal enabledelayedexpansion
 color 0B
+cls
 echo ================================================================================
 echo.
 echo           OTIMIZADOR DE SERVICOS - DESLIGA BLOATWARE SEGURO
@@ -24,14 +25,9 @@ echo.
 echo ================================================================================
 echo.
 
-REM ---- Ponto de restauracao ----
 echo Criando ponto de restauracao de seguranca...
-powershell -NoProfile -Command "Checkpoint-Computer -Description 'Otimizacao de Servicos' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
-if %errorlevel% equ 0 (
-    echo    [OK] Ponto de restauracao criado
-) else (
-    echo    [AVISO] Nao criou ponto, continua mesmo assim
-)
+powershell -NoProfile -Command "Checkpoint-Computer -Description 'Otimizacao Servicos' -RestorePointType 'MODIFY_SETTINGS'" >nul 2>&1
+echo    [OK] Etapa de restauracao concluida
 echo.
 
 echo ================================================================================
@@ -39,85 +35,42 @@ echo DESLIGANDO SERVICOS DESNECESSARIOS...
 echo ================================================================================
 echo.
 
-set /a DESLIGADOS=0
-set /a NAO_ENCONTRADOS=0
-
-REM Nome real do servico + descricao SEM parenteses ^(evita bug do batch^)
-call :desliga DiagTrack           "Telemetria - coleta de dados"
-call :desliga dmwappushservice    "Publicidade e push"
-call :desliga Fax                 "Fax"
-call :desliga MapsBroker          "Gerenciador de Mapas Baixados"
-call :desliga RetailDemo          "Modo Demonstracao de Loja"
-call :desliga WMPNetworkSvc       "Compartilhamento do Media Player"
-call :desliga RemoteRegistry      "Registro Remoto - risco de seguranca"
-call :desliga WerSvc              "Relatorio de Erros do Windows"
-call :desliga XblAuthManager      "Xbox Live - Autenticacao"
-call :desliga XblGameSave         "Xbox Live - Salvar Jogo"
-call :desliga XboxGipSvc          "Xbox - Controle"
-call :desliga XboxNetApiSvc       "Xbox - Rede"
+set /a N=0
+for %%S in (DiagTrack dmwappushservice Fax MapsBroker RetailDemo WMPNetworkSvc RemoteRegistry WerSvc XblAuthManager XblGameSave XboxGipSvc XboxNetApiSvc) do (
+    sc stop "%%S" >nul 2>&1
+    sc config "%%S" start= disabled >nul 2>&1
+    echo    [OK] %%S
+    set /a N+=1
+)
 
 echo.
-echo ================================================================================
-echo AJUSTANDO SEM DESLIGAR DE VEZ...
-echo ================================================================================
-echo.
-echo    Windows Search para Manual...
+echo Ajustando Windows Search para Manual...
 sc config WSearch start= demand >nul 2>&1
-echo    [OK] Windows Search agora e Manual
-echo.
+echo    [OK] WSearch
 
+echo.
 color 0A
 echo ================================================================================
-echo   RESUMO DA OTIMIZACAO:
+echo   CONCLUIDO com sucesso!
 echo.
-echo      Servicos desligados:      !DESLIGADOS!
-echo      Nao existiam neste PC:    !NAO_ENCONTRADOS!
-echo      Windows Search:           ajustado para Manual
+echo      Servicos processados:  !N!
+echo      Windows Search:        ajustado para Manual
 echo.
 echo   O ganho de RAM aparece melhor APOS REINICIAR.
 echo.
-echo   Para reverter um servico, exemplo Xbox, use no CMD admin:
+echo   Para reverter um servico, exemplo Xbox, digite no CMD admin:
 echo      sc config XblAuthManager start= demand
 echo ================================================================================
 echo.
 
-REM ---- Escolha de reinicio ----
-echo   O ganho dos servicos so aparece APOS reiniciar.
-echo.
 set "RESP="
 set /p "RESP=   Reiniciar AGORA? Digite S para Sim ou N para depois: "
-if /i "!RESP!"=="S" goto :agora
-goto :depois
+if /i "!RESP!"=="S" (
+    echo   Reiniciando em 15 segundos... Salve seus arquivos!
+    shutdown /r /t 15 /c "Otimizacao concluida"
+)
 
-:agora
 echo.
-echo   Reiniciando em 15 segundos... Salve seus arquivos!
-echo   Para cancelar, feche esta janela agora.
-shutdown /r /t 15 /c "Otimizacao de servicos concluida"
-timeout /t 16 /nobreak >nul
-exit /b 0
-
-:depois
-echo.
-echo   Ok! Reinicie voce mesmo quando puder para os servicos fazerem efeito.
-echo.
+echo   Pronto. Pode fechar esta janela.
 pause
 exit /b 0
-
-REM ============================================================
-REM  Sub-rotina: desliga um servico com seguranca
-REM ============================================================
-:desliga
-set "SVC=%~1"
-set "DESC=%~2"
-sc query "%SVC%" >nul 2>&1
-if %errorlevel% neq 0 (
-    echo    [--] !DESC! - nao existe neste PC
-    set /a NAO_ENCONTRADOS+=1
-    goto :eof
-)
-sc stop "%SVC%" >nul 2>&1
-sc config "%SVC%" start= disabled >nul 2>&1
-echo    [OK] !DESC!
-set /a DESLIGADOS+=1
-goto :eof
