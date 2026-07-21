@@ -27,7 +27,9 @@ echo.
 REM ---- Estado ANTES ----
 echo [MEDINDO ESTADO INICIAL]
 for /f %%A in ('powershell -NoProfile -Command "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024)"') do set RAM_ANTES=%%A
-echo    RAM livre antes: aproximadamente !RAM_ANTES! MB
+for /f %%D in ('powershell -NoProfile -Command "[math]::Round((Get-PSDrive C).Free/1MB)"') do set DISCO_ANTES=%%D
+echo    RAM livre no inicio:   aproximadamente !RAM_ANTES! MB
+echo    Disco C: livre agora:  aproximadamente !DISCO_ANTES! MB
 echo.
 
 REM ============================================================
@@ -111,6 +113,11 @@ echo ===========================================================================
 echo                            RESULTADO
 echo ================================================================================
 for /f %%A in ('powershell -NoProfile -Command "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1024)"') do set RAM_DEPOIS=%%A
+for /f %%D in ('powershell -NoProfile -Command "[math]::Round((Get-PSDrive C).Free/1MB)"') do set DISCO_DEPOIS=%%D
+set /a DISCO_LIBERADO=DISCO_DEPOIS-DISCO_ANTES
+echo    ---------------------------------------------------------
+echo    DISCO C: liberado:  aproximadamente !DISCO_LIBERADO! MB
+echo    ---------------------------------------------------------
 echo    RAM livre antes:  aproximadamente !RAM_ANTES! MB
 echo    RAM livre depois: aproximadamente !RAM_DEPOIS! MB
 echo.
