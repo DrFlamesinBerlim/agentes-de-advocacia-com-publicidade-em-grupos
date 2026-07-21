@@ -127,8 +127,27 @@ echo.
 echo   DICA: para ganhar ainda mais velocidade, aperte
 echo   Ctrl+Shift+Esc, va na aba INICIALIZAR e desabilite
 echo   os programas que voce nao usa ^(Spotify, Discord, etc^).
-echo.
-echo   Reinicie o notebook quando puder para completar.
 echo ================================================================================
 echo.
+
+REM ---- Escolha de reinicio ----
+echo   Para completar a otimizacao, o Windows precisa reiniciar.
+echo.
+choice /C SN /N /M "   Reiniciar AGORA? Aperte  S = Sim  ou  N = Depois: "
+if errorlevel 2 goto :depois
+if errorlevel 1 goto :agora
+
+:agora
+echo.
+echo   Reiniciando em 15 segundos... Salve seus arquivos!
+echo   ^(Para cancelar: feche esta janela^)
+shutdown /r /t 15 /c "Otimizacao concluida - reiniciando"
+timeout /t 16 /nobreak >nul
+exit /b 0
+
+:depois
+echo.
+echo   Ok! Reinicie voce mesmo quando puder para completar.
+echo.
 pause
+exit /b 0

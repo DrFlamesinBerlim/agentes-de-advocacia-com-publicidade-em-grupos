@@ -82,6 +82,26 @@ echo   Ctrl+Shift+Esc  -^>  aba INICIALIZAR  -^>  desabilite
 echo   os programas que voce nao usa ^(Spotify, Discord, updaters^).
 echo ================================================================================
 echo.
+
+REM ---- Escolha de reinicio ----
+echo   O ganho dos servicos so aparece APOS reiniciar.
+echo.
+choice /C SN /N /M "   Reiniciar AGORA? Aperte  S = Sim  ou  N = Depois: "
+if errorlevel 2 goto :depois
+if errorlevel 1 goto :agora
+
+:agora
+echo.
+echo   Reiniciando em 15 segundos... Salve seus arquivos!
+echo   ^(Para cancelar: feche esta janela^)
+shutdown /r /t 15 /c "Otimizacao de servicos concluida - reiniciando"
+timeout /t 16 /nobreak >nul
+exit /b 0
+
+:depois
+echo.
+echo   Ok! Reinicie voce mesmo quando puder para os servicos fazerem efeito.
+echo.
 pause
 exit /b 0
 
