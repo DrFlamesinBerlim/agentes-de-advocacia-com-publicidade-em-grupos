@@ -1,0 +1,65 @@
+{
+  "T001": {
+    "title": "🚨 VIAGEM HUMAITÁ — URGENTE",
+    "description": "Processo: 0609455-41.2023.8.04.4400 (Alexandre Marques de Campos)\nComarca: Humaitá/AM\nAção: Criar tarefa urgente viajar para Humaitá\nDatas: Quinta / Sexta / Monday (Sexta mais provável)",
+    "deadline": "31/07/2026",
+    "priority": "CRÍTICO",
+    "client": "Alexandre Marques de Campos",
+    "process": "0609455-41.2023.8.04.4400",
+    "comarca": "Humaitá/AM"
+  },
+  "T002": {
+    "title": "🚨 PROTOCOLAR PETIÇÃO RESCISÓRIA",
+    "description": "Processo: 0611311-40.2023.8.04.4400 (Alexandre Marques de Campos)\nClasse: Inquérito Policial\nAção: Protocolar petição (já pronta)\nDetalhes: Cobrar diligência do novo juiz / Envio imediato em conclusão",
+    "deadline": "25/07/2026",
+    "priority": "CRÍTICO",
+    "client": "Alexandre Marques de Campos",
+    "process": "0611311-40.2023.8.04.4400",
+    "comarca": "TJAM"
+  },
+  "T003": {
+    "title": "🚨 REUNIÃO COM CLIENTE BERNADETE",
+    "description": "Processo: 7012658-71.2025.8.22.0001 (Bernadete da Silva Goveia)\nComarca: Porto Velho\nAção: Transformar em tarefa + agendar reunião\nObjetivo: Decidir próximos passos do caso",
+    "deadline": "26/07/2026",
+    "priority": "CRÍTICO",
+    "client": "Bernadete da Silva Goveia",
+    "process": "7012658-71.2025.8.22.0001",
+    "comarca": "Porto Velho"
+  },
+  "T004": {
+    "title": "⏰ JUNTAR CUSTAS — LILIAN",
+    "description": "Processo: 7053758-06.2025.8.22.0001 (Lilian de Jesus Borges)\nAção: Juntar custas do processo",
+    "deadline": "29/07/2026",
+    "priority": "ALTO",
+    "client": "Lilian de Jesus Borges",
+    "process": "7053758-06.2025.8.22.0001",
+    "comarca": "Porto Velho"
+  },
+  "T005": {
+    "title": "⏰ JUNTAR TERMO DE REVOGAÇÃO",
+    "description": "Processo: 7077392-31.2025.8.22.0001 (Jefferson Sinfronio de Oliveira)\nAção: Criar tarefa para juntar termo de revogação",
+    "deadline": "29/07/2026",
+    "priority": "ALTO",
+    "client": "Jefferson Sinfronio de Oliveira",
+    "process": "7077392-31.2025.8.22.0001",
+    "comarca": "Porto Velho"
+  },
+  "T006": {
+    "title": "⏰ VERIFICAR NOTAS FISCAIS — ALDEMIR",
+    "description": "Processo: 7032995-81.2025.8.22.0001 (Aldemir Ribeiro da Silva)\nAção: Levantar notas fiscais (informações já coletadas)",
+    "deadline": "31/07/2026",
+    "priority": "MÉDIO",
+    "client": "Aldemir Ribeiro da Silva",
+    "process": "7032995-81.2025.8.22.0001",
+    "comarca": "Porto Velho"
+  },
+  "T007": {
+    "title": "⏰ CHECAR ACOMPANHAMENTO MANDADO PRISÃO",
+    "description": "Processo: 7026053-67.2024.8.22.0001 (Leandro Pereira Cardoso)\nÚltima Mov: 23/05/2024 - Definitivo (DESATUALIZADO)\nAção: Obter Outlook para Android + acompanhar caso",
+    "deadline": "25/07/2026",
+    "priority": "CRÍTICO",
+    "client": "Leandro Pereira Cardoso",
+    "process": "7026053-67.2024.8.22.0001",
+    "comarca": "Porto Velho"
+  }
+}
