@@ -1,0 +1,56 @@
+{
+  "monitor": {
+    "enabled": true,
+    "interval_hours": 18,
+    "next_run": "2026-07-05T10:00:00Z",
+    "mcp_servers": [
+      {
+        "name": "github",
+        "description": "GitHub integration",
+        "critical": true,
+        "last_check": "2026-07-24T04:33:51.756Z",
+        "status": "healthy"
+      },
+      {
+        "name": "gmail",
+        "description": "Gmail integration",
+        "critical": false,
+        "last_check": "2026-07-24T04:33:52.513Z",
+        "status": "healthy"
+      },
+      {
+        "name": "google-drive",
+        "description": "Google Drive integration",
+        "critical": false,
+        "last_check": "2026-07-24T04:33:53.644Z",
+        "status": "healthy"
+      },
+      {
+        "name": "slack",
+        "description": "Slack integration",
+        "critical": false,
+        "last_check": "2026-07-24T04:33:54.022Z",
+        "status": "healthy"
+      },
+      {
+        "name": "notion",
+        "description": "Notion integration",
+        "critical": false,
+        "last_check": "2026-07-24T04:33:55.709Z",
+        "status": "healthy"
+      },
+      {
+        "name": "google-calendar",
+        "description": "Google Calendar integration",
+        "critical": false,
+        "last_check": "2026-07-24T04:33:56.520Z",
+        "status": "healthy"
+      }
+    ]
+  },
+  "alerting": {
+    "failure_threshold": 2,
+    "notify_user_on_critical_failure": true,
+    "log_directory": ".claude/mcp-monitor/logs"
+  }
+}

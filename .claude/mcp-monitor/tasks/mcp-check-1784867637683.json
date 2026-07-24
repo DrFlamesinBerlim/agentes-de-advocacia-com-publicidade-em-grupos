@@ -1,0 +1,56 @@
+{
+  "id": "mcp-check-1784867637683",
+  "type": "mcp-health-check",
+  "title": "MCP Health Check Report",
+  "status": "completed",
+  "timestamp": "2026-07-24T04:33:57.683Z",
+  "results": {
+    "healthy_mcps": 6,
+    "failed_mcps": 0,
+    "total_mcps": 6
+  },
+  "details": [
+    {
+      "name": "github",
+      "timestamp": "2026-07-24T04:33:51.756Z",
+      "status": "healthy",
+      "response_time": 756,
+      "error": null
+    },
+    {
+      "name": "gmail",
+      "timestamp": "2026-07-24T04:33:52.513Z",
+      "status": "healthy",
+      "response_time": 1130,
+      "error": null
+    },
+    {
+      "name": "google-drive",
+      "timestamp": "2026-07-24T04:33:53.644Z",
+      "status": "healthy",
+      "response_time": 377,
+      "error": null
+    },
+    {
+      "name": "slack",
+      "timestamp": "2026-07-24T04:33:54.022Z",
+      "status": "healthy",
+      "response_time": 1687,
+      "error": null
+    },
+    {
+      "name": "notion",
+      "timestamp": "2026-07-24T04:33:55.709Z",
+      "status": "healthy",
+      "response_time": 810,
+      "error": null
+    },
+    {
+      "name": "google-calendar",
+      "timestamp": "2026-07-24T04:33:56.520Z",
+      "status": "healthy",
+      "response_time": 1161,
+      "error": null
+    }
+  ]
+}
