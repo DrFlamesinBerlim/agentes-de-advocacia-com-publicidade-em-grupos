@@ -8,42 +8,42 @@
         "name": "github",
         "description": "GitHub integration",
         "critical": true,
-        "last_check": "2026-07-24T04:33:51.756Z",
+        "last_check": "2026-07-24T17:54:33.466Z",
         "status": "healthy"
       },
       {
         "name": "gmail",
         "description": "Gmail integration",
         "critical": false,
-        "last_check": "2026-07-24T04:33:52.513Z",
+        "last_check": "2026-07-24T17:54:34.563Z",
         "status": "healthy"
       },
       {
         "name": "google-drive",
         "description": "Google Drive integration",
         "critical": false,
-        "last_check": "2026-07-24T04:33:53.644Z",
+        "last_check": "2026-07-24T17:54:36.102Z",
         "status": "healthy"
       },
       {
         "name": "slack",
         "description": "Slack integration",
         "critical": false,
-        "last_check": "2026-07-24T04:33:54.022Z",
+        "last_check": "2026-07-24T17:54:36.223Z",
         "status": "healthy"
       },
       {
         "name": "notion",
         "description": "Notion integration",
         "critical": false,
-        "last_check": "2026-07-24T04:33:55.709Z",
+        "last_check": "2026-07-24T17:54:37.292Z",
         "status": "healthy"
       },
       {
         "name": "google-calendar",
         "description": "Google Calendar integration",
         "critical": false,
-        "last_check": "2026-07-24T04:33:56.520Z",
+        "last_check": "2026-07-24T17:54:38.317Z",
         "status": "healthy"
       }
     ]
