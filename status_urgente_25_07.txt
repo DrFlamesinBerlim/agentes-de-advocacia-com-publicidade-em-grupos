@@ -1,0 +1,52 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                     STATUS CRÍTICO FINAL                      ║
+║                    25/07/2026 — DIA DO DEADLINE               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+HORÁRIO ATUAL: Madrugada/Manhã de 25/07/2026
+DEADLINE: 25/07/2026 23:59 (hoje à noite)
+
+════════════════════════════════════════════════════════════════
+
+🚨 TAREFAS CRÍTICAS — VENCIMENTO HOJE
+
+T002 — PROTOCOLAR PETIÇÃO RESCISÓRIA
+├─ Cliente: Alexandre Marques de Campos
+├─ Processo: 0611311-40.2023.8.04.4400 (TJAM)
+├─ Status: NÃO PROTOCOLARIZADA
+├─ Ação: Protocolar HOJE antes de 23:59
+└─ Risco: Perda de prazo se não fizer
+
+T007 — VERIFICAR MANDADO PRISÃO
+├─ Cliente: Leandro Pereira Cardoso
+├─ Processo: 7026053-67.2024.8.22.0001 (TJRO)
+├─ Status: Desatualizado (última info: 23/05/2024)
+├─ Ação: Verificar status + atualizar cliente
+└─ Risco: Cliente sem informação há 2 meses
+
+════════════════════════════════════════════════════════════════
+
+⏱️ TEMPO RESTANTE: ~23 HORAS ATÉ MEIA-NOITE
+
+AÇÕES IMEDIATAS:
+1. Acessar https://pje.tjam.jus.br → Protocolar T002
+2. Acessar https://pje.tjro.jus.br → Verificar T007
+3. Notificar clientes após execução
+
+════════════════════════════════════════════════════════════════
+
+WATCHDOG STATUS: 🟡 OFFLINE (reinicialização)
+MCP ENVIRONMENT: ⏳ Instável mas parcialmente recuperado
+INFRAESTRUTURA: ✅ 100% PRONTA
+
+ENTREGÁVEIS COMPLETADOS:
+✅ Relatório PDF (541.5 KB)
+✅ Plano de ação detalhado
+✅ Documentação completa
+✅ Scripts e automação
+✅ Notion database (7 tarefas)
+✅ Repositório Git
+
+O QUE FALTA: AÇÃO DO DR. JEFFERSON — AGORA
+
+════════════════════════════════════════════════════════════════
