@@ -1,0 +1,79 @@
+ORQUESTRADOR MABIOS — instalação passo a passo (Windows)
+==========================================================
+
+Esta pasta tem tudo que precisa. Siga na ordem.
+
+PASSO 1 — Instalar (uma vez)
+-----------------------------
+Dê duplo-clique em: instalar_windows.bat
+Ele cria o ambiente e instala as dependências sozinho.
+Se der erro "Python não encontrado", instale em python.org/downloads
+(marcando "Add Python to PATH") e rode instalar_windows.bat de novo.
+
+PASSO 2 — Instalar o gcloud CLI (uma vez, se ainda não tiver)
+------------------------------------------------------------------
+Baixe e instale em: https://cloud.google.com/sdk/docs/install
+(instalador do Windows, "Next" em tudo). Ele já pede pra você logar —
+entre com flamesinberlim@gmail.com quando pedir.
+
+Se já usa o Cloud Shell (console.cloud.google.com), o gcloud já está
+pronto por lá, mas o orquestrador roda no SEU PC, então precisa do gcloud
+instalado localmente também.
+
+PASSO 3 — Autorizar (uma vez)
+--------------------------------
+Abra o PowerShell nesta pasta (Shift + botão direito → "Abrir janela do
+PowerShell aqui") e rode este comando (é um só, mesmo que quebre linha):
+
+    gcloud auth application-default login --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.modify,openid,https://www.googleapis.com/auth/userinfo.email"
+
+Vai abrir o navegador pedindo para você entrar com flamesinberlim@gmail.com
+e clicar em Permitir. Não precisa criar nada no Cloud Console — usa o
+app já verificado do próprio Google Cloud SDK. Só acontece essa vez —
+gera um arquivo que renova sozinho depois
+(%APPDATA%\gcloud\application_default_credentials.json).
+
+Depois, confirme que funcionou:
+
+    .\venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
+
+PASSO 4 — Colocar para rodar sempre, na inicialização
+--------------------------------------------------------
+1. Pressione Win + R, digite: shell:startup   e aperte Enter
+   (abre a pasta de Inicialização do Windows)
+2. Volte nesta pasta do orquestrador, clique com o botão direito em
+   iniciar_com_reinicio.bat → "Criar atalho"
+3. Arraste esse atalho para dentro da pasta de Inicialização que abriu
+   no passo 1.
+
+Pronto. Da próxima vez que a máquina ligar, o orquestrador MABIOS liga
+sozinho — e se cair por qualquer motivo, o próprio .bat reinicia ele em
+10 segundos, então nunca fica desligado.
+
+TESTAR AGORA (sem esperar reiniciar o PC)
+--------------------------------------------
+Dê duplo-clique em iniciar_com_reinicio.bat diretamente. Ele já começa
+a rodar a matriz (relatório a cada hora, índice a cada 30min, propostas
+1x por dia). Deixe essa janela aberta (ou minimizada) para testar.
+
+COMANDOS ÚTEIS (rodar no Prompt de Comando desta pasta)
+-----------------------------------------------------------
+venv\Scripts\python.exe orquestrador_mabios.py --buscar "railson"
+venv\Scripts\python.exe orquestrador_mabios.py --so-relatorio
+venv\Scripts\python.exe orquestrador_mabios.py --so-indexar
+venv\Scripts\python.exe orquestrador_mabios.py --so-propor
+
+ONDE VER O QUE ESTÁ ACONTECENDO
+------------------------------------
+- orquestrador.log         → log detalhado de cada ciclo
+- orquestrador_startup.log → log de quando ligou/reiniciou
+- propostas_reorganizacao.md → sugestões de organização (revise antes
+  de mexer em qualquer arquivo — o script nunca move nada sozinho)
+- indice_pasta_x.json      → índice pesquisável da Pasta X
+
+IMPORTANTE
+------------
+Depois de confirmar que o relatório unificado está chegando certo em
+flamesinberlim@gmail.com, desligue os gatilhos do CC-001 (Apps Script,
+menu Acionadores) e pare o loop_monitor.py do GA-002, para não ficar
+nada duplicado mandando email por fora da matriz.

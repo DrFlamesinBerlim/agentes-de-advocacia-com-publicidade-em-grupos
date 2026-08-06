@@ -1,0 +1,16 @@
+[
+  {
+    "numero": "XXXX-XX.XXXX.X.XX.XXXX",
+    "cliente": "Nome do Cliente",
+    "tipo_acao": "ex: Ação de Indenização por Danos Morais",
+    "vara": "ex: 1ª Vara Cível de Porto Velho/RO",
+    "fase": "ex: Conhecimento / Recursal / Execução",
+    "ultima_mov": "YYYY-MM-DD",
+    "descricao_ultima_mov": "Descrição do último andamento",
+    "prazo_fatal": null,
+    "prioritario": true,
+    "suspenso": false,
+    "instancia_superior": false,
+    "observacoes": ""
+  }
+]
