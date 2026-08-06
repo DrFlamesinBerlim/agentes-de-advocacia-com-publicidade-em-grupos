@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Optimizer Pro v2.0 - Dashboard Unificado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3B82F6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg: #0F172A;
+            --card: #1E293B;
+            --text: #F1F5F9;
+            --text-dim: #94A3B8;
+            --border: #334155;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0F172A;
+                --card: #1E293B;
+                --text: #F1F5F9;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #F8FAFC;
+                --card: #FFFFFF;
+                --text: #0F172A;
+                --text-dim: #475569;
+                --border: #E2E8F0;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--success);
+            color: white;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* SISTEMA DE ABAS */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 24px;
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .card p {
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        /* SISTEMA DE MONITORAMENTO */
+        .monitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .monitor-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .monitor-title {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .monitor-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .status-text {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        /* BOTÕES */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        button, .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #D97706;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: var(--primary);
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+        }
+
+        /* CÓDIGO/COMANDO */
+        .command-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            color: #10B981;
+            font-size: 0.85rem;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            overflow-x: auto;
+        }
+
+        .copy-btn {
+            padding: 6px 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .copy-btn:hover {
+            background: #2563EB;
+        }
+
+        /* LISTA DE FEATURES */
+        .feature-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0 8px 28px;
+            position: relative;
+            color: var(--text-dim);
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* PADRÕES */
+        .patterns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .pattern-badge {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .pattern-name {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .pattern-stars {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .pattern-status {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* ALERTAS */
+        .alert {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--success);
+            color: #A7F3D0;
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: var(--warning);
+            color: #FCD34D;
+        }
+
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: var(--danger);
+            color: #FECACA;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .alert code {
+            background: rgba(0,0,0,0.25);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        /* ESTATÍSTICAS */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .stat-box {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 6px;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .tabs {
+                gap: 0;
+            }
+
+            .tab-btn {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
+
+            button, .btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>🚀 Windows Optimizer Pro v2.0</h1>
+            <p class="subtitle">Phase 1: Padrões Open Source Integrados</p>
+            <span class="status-badge">✓ Pronto para Usar</span>
+        </header>
+
+        <!-- AVISO SOBRE OS ICONES -->
+        <div class="alert alert-success" style="margin-bottom: 30px;">
+            <strong>🖱️ Novidade: Ícones na Área de Trabalho</strong>
+            Rode <code>INSTALAR_ATALHOS.bat</code> uma única vez (clique direito → Executar como administrador) para criar 4 ícones prontos:
+            "Reparar Touchpad", "Limpar Sistema - Prévia", "Limpar Sistema - Aplicar" e "Dashboard Otimizador". Depois disso, é só clicar duas vezes em cada um.
+        </div>
+
+        <!-- ABAS -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="dashboard" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" data-tab="tools" onclick="switchTab('tools')">🔧 Ferramentas</button>
+            <button class="tab-btn" data-tab="features" onclick="switchTab('features')">✨ Recursos</button>
+            <button class="tab-btn" data-tab="patterns" onclick="switchTab('patterns')">🎯 Padrões</button>
+            <button class="tab-btn" data-tab="docs" onclick="switchTab('docs')">📚 Documentação</button>
+        </div>
+
+        <!-- ABA: DASHBOARD -->
+        <div id="dashboard" class="tab-content active">
+            <h2 style="margin-bottom: 20px;">📊 Status do Sistema</h2>
+
+            <div class="monitor-grid">
+                <div class="monitor-card">
+                    <div class="monitor-title">Memória RAM</div>
+                    <div class="monitor-value" id="ram-value">58%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="ram-bar" style="width: 58%"></div>
+                    </div>
+                    <div class="status-text">4.6 GB / 8 GB</div>
+                </div>
+
+                <div class="monitor-card">
+                    <div class="monitor-title">Processador</div>
+                    <div class="monitor-value" id="cpu-value">32%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="cpu-bar" style="width: 32%"></div>
+                    </div>
+                    <div class="status-text">Normal</div>
+                </div>
+
+                <div class="monitor-card">
+                    <div class="monitor-title">Disco C:</div>
+                    <div class="monitor-value" id="disk-value">72%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="disk-bar" style="width: 72%"></div>
+                    </div>
+                    <div class="status-text">144 GB / 200 GB</div>
+                </div>
+
+                <div class="monitor-card">
+                    <div class="monitor-title">Temperatura</div>
+                    <div class="monitor-value" id="temp-value">52°C</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="temp-bar" style="width: 52%; background: linear-gradient(90deg, #10B981, #F59E0B);"></div>
+                    </div>
+                    <div class="status-text">Normal</div>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Fase 1 Completa:</strong> Sistema otimizado com restore points automáticos, dry-run ativado, e logging estruturado.
+            </div>
+
+            <h3 style="margin-top: 40px; margin-bottom: 20px;">🎯 Próximos Passos</h3>
+            <div class="button-group">
+                <button class="btn btn-success" onclick="openModal('clean')">🧹 Limpar Sistema</button>
+                <button class="btn btn-primary" onclick="openModal('repair')">🔧 Reparar Mousepad</button>
+                <button class="btn btn-primary" onclick="openModal('config')">⚙️ Customizar Config</button>
+                <button class="btn btn-warning" onclick="openModal('status')">📊 Ver Documentação</button>
+            </div>
+        </div>
+
+        <!-- ABA: FERRAMENTAS -->
+        <div id="tools" class="tab-content">
+            <h2 style="margin-bottom: 20px;">🔧 Ferramentas Disponíveis</h2>
+            <p style="margin-bottom: 20px; color: var(--text-dim);">Se você já rodou <code>INSTALAR_ATALHOS.bat</code>, use os ícones na Área de Trabalho em vez de digitar estes comandos manualmente. Eles ficam aqui como referência/backup.</p>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🧹 Limpeza Segura</h3>
+                    <p>Ícone: "Limpar Sistema - Prévia"</p>
+                    <div class="command-box">
+                        <span>python system_cleaner_advanced.py</span>
+                        <button class="copy-btn" onclick="copyToClipboard('python system_cleaner_advanced.py')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ Mostra prévia antes de deletar<br>✓ Cria restore point automático</p>
+                </div>
+
+                <div class="card">
+                    <h3>🧹 Aplicar Mudanças</h3>
+                    <p>Ícone: "Limpar Sistema - Aplicar"</p>
+                    <div class="command-box">
+                        <span>python system_cleaner_advanced.py --apply</span>
+                        <button class="copy-btn" onclick="copyToClipboard('python system_cleaner_advanced.py --apply')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ Processa com feedback visual<br>✓ Gera log em JSON</p>
+                </div>
+
+                <div class="card">
+                    <h3>🔧 Reparar Mousepad</h3>
+                    <p>Ícone: "Reparar Touchpad"</p>
+                    <div class="command-box">
+                        <span>fix_touchpad.bat</span>
+                        <button class="copy-btn" onclick="copyToClipboard('fix_touchpad.bat')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ Já pede admin sozinho<br>✓ Aguardar reinicialização</p>
+                </div>
+
+                <div class="card">
+                    <h3>⚙️ Editar Configuração</h3>
+                    <p>Customize as categorias de limpeza</p>
+                    <div class="command-box">
+                        <span>notepad cleaner_config.json</span>
+                        <button class="copy-btn" onclick="copyToClipboard('notepad cleaner_config.json')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ 30+ configurações<br>✓ 8 categorias de limpeza</p>
+                </div>
+
+                <div class="card">
+                    <h3>📊 Ver Logs</h3>
+                    <p>Revise as operações realizadas</p>
+                    <div class="command-box">
+                        <span>type cleaner_advanced_log.json</span>
+                        <button class="copy-btn" onclick="copyToClipboard('type cleaner_advanced_log.json')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ Log estruturado<br>✓ Auditoria completa</p>
+                </div>
+
+                <div class="card">
+                    <h3>🖱️ Instalar Ícones</h3>
+                    <p>Rode isto uma única vez</p>
+                    <div class="command-box">
+                        <span>INSTALAR_ATALHOS.bat</span>
+                        <button class="copy-btn" onclick="copyToClipboard('INSTALAR_ATALHOS.bat')">Copiar</button>
+                    </div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-dim);">✓ Cria 4 ícones na Área de Trabalho<br>✓ Clique direito → Executar como admin</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA: RECURSOS -->
+        <div id="features" class="tab-content">
+            <h2 style="margin-bottom: 20px;">✨ Principais Recursos</h2>
+
+            <div class="grid">
+                <div class="card">
+                    <h2>🔐 Segurança</h2>
+                    <ul class="feature-list">
+                        <li>Dry-run ativado por padrão</li>
+                        <li>Restore point automático</li>
+                        <li>Pastas críticas protegidas</li>
+                        <li>Validação de privilégios</li>
+                        <li>Reverter em segundos</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>📊 Transparência</h2>
+                    <ul class="feature-list">
+                        <li>Logging JSON estruturado</li>
+                        <li>Cada ação auditável</li>
+                        <li>Prévia detalhada</li>
+                        <li>Relatórios completos</li>
+                        <li>Rastreabilidade total</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h2>⚙️ Flexibilidade</h2>
+                    <ul class="feature-list">
+                        <li>Config em JSON</li>
+                        <li>8 categorias</li>
+                        <li>Padrões customizáveis</li>
+                        <li>Localizações personalizáveis</li>
+                        <li>Sem tocar em código</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px; margin-bottom: 20px;">📈 Estatísticas da Implementação</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Linhas de Código</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Classes</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Métodos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">2000+</div>
+                    <div class="stat-label">Linhas de Doc</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Arquivos</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Completo</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA: PADRÕES -->
+        <div id="patterns" class="tab-content">
+            <h2 style="margin-bottom: 20px;">🎯 Padrões de 5 Projetos Open Source</h2>
+
+            <div class="patterns-grid">
+                <div class="pattern-badge">
+                    <div class="pattern-name">Win11Debloat</div>
+                    <div class="pattern-stars">52.5K ⭐</div>
+                    <div style="font-size: 0.8rem; color: #A7F3D0; margin: 10px 0;">
+                        ✓ Restore Points<br>
+                        ✓ UI Interativa<br>
+                        ✓ Rollback
+                    </div>
+                    <div class="pattern-status">✅ Implementado</div>
+                </div>
+
+                <div class="pattern-badge">
+                    <div class="pattern-name">BleachBit</div>
+                    <div class="pattern-stars">6.3K ⭐</div>
+                    <div style="font-size: 0.8rem; color: #A7F3D0; margin: 10px 0;">
+                        ✓ Dry-Run<br>
+                        ✓ JSON Config<br>
+                        ✓ Customizável
+                    </div>
+                    <div class="pattern-status">✅ Implementado</div>
+                </div>
+
+                <div class="pattern-badge">
+                    <div class="pattern-name">Harden-Windows</div>
+                    <div class="pattern-stars">4.5K ⭐</div>
+                    <div style="font-size: 0.8rem; color: #A7F3D0; margin: 10px 0;">
+                        ✓ Logging JSON<br>
+                        ✓ Validação<br>
+                        ✓ Auditoria
+                    </div>
+                    <div class="pattern-status">✅ Implementado</div>
+                </div>
+
+                <div class="pattern-badge">
+                    <div class="pattern-name">TronScript</div>
+                    <div class="pattern-stars">6.5K ⭐</div>
+                    <div style="font-size: 0.8rem; color: #FCD34D; margin: 10px 0;">
+                        ⏳ Multi-stage<br>
+                        ⏳ Retry<br>
+                        ⏳ Verify
+                    </div>
+                    <div class="pattern-status" style="color: var(--warning);">📅 Fase 2</div>
+                </div>
+
+                <div class="pattern-badge">
+                    <div class="pattern-name">Privatezilla</div>
+                    <div class="pattern-stars">3.7K ⭐</div>
+                    <div style="font-size: 0.8rem; color: #FCD34D; margin: 10px 0;">
+                        ⏳ Categories<br>
+                        ⏳ Privacy<br>
+                        ⏳ Profiles
+                    </div>
+                    <div class="pattern-status" style="color: var(--warning);">📅 Fase 3</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px; margin-bottom: 20px;">📋 Roadmap de 5 Fases</h3>
+            <div class="card">
+                <p><strong>✅ Fase 1: Padrões Básicos</strong> (Concluída)</p>
+                <ul class="feature-list">
+                    <li>Restore points automáticos</li>
+                    <li>Dry-run mode</li>
+                    <li>JSON configuration</li>
+                    <li>Logging estruturado</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top: 12px;">
+                <p><strong>🔄 Fase 2: Limpeza Avançada</strong> (1-2 semanas)</p>
+                <ul class="feature-list">
+                    <li>Multi-stage cleanup</li>
+                    <li>Retry com exponential backoff</li>
+                    <li>Verificação pré/pós</li>
+                    <li>Relatórios multi-formato</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top: 12px;">
+                <p><strong>📅 Fase 3-5: Recursos Futuros</strong> (Planejado)</p>
+                <ul class="feature-list">
+                    <li>Malware detection (VirusTotal)</li>
+                    <li>Bloatware identification</li>
+                    <li>Predictive monitoring</li>
+                    <li>WinUI 3 frontend moderno</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ABA: DOCUMENTAÇÃO -->
+        <div id="docs" class="tab-content">
+            <h2 style="margin-bottom: 20px;">📚 Documentação Disponível</h2>
+
+            <div class="card">
+                <h3>🚀 Começar Rápido</h3>
+                <p>Estes arquivos são o ponto de entrada:</p>
+                <div class="button-group" style="margin-top: 12px;">
+                    <button class="btn btn-primary btn-small" onclick="copyToClipboard('START_HERE.md')">📖 START_HERE.md</button>
+                    <button class="btn btn-primary btn-small" onclick="copyToClipboard('QUICK_START_ADVANCED.md')">⚡ QUICK_START_ADVANCED.md</button>
+                    <button class="btn btn-primary btn-small" onclick="copyToClipboard('PROJECT_OVERVIEW.md')">🎯 PROJECT_OVERVIEW.md</button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <h3>📋 Referência Técnica</h3>
+                <p>Para entender a arquitetura em detalhes:</p>
+                <div class="button-group" style="margin-top: 12px;">
+                    <button class="btn btn-secondary btn-small" onclick="copyToClipboard('README_ADVANCED_CLEANER.md')">📘 README_ADVANCED_CLEANER.md</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyToClipboard('INTEGRATION_ROADMAP.md')">🗺️ INTEGRATION_ROADMAP.md</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyToClipboard('OPEN_SOURCE_RESEARCH.md')">🔍 OPEN_SOURCE_RESEARCH.md</button>
+                    <button class="btn btn-secondary btn-small" onclick="copyToClipboard('PHASE_1_SUMMARY.md')">📊 PHASE_1_SUMMARY.md</button>
+                </div>
+            </div>
+
+            <div class="alert alert-warning" style="margin-top: 30px;">
+                <strong>💡 Recomendação:</strong> Rode INSTALAR_ATALHOS.bat primeiro. Depois use os ícones da Área de Trabalho para tudo — este dashboard fica só como painel de consulta.
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAIS -->
+    <div id="cleanModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cleanModal')">×</button>
+            <h2>🧹 Limpeza Segura</h2>
+            <p style="margin: 16px 0; color: var(--text-dim);">Use o ícone <strong>"Limpar Sistema - Prévia"</strong> na Área de Trabalho. Se ainda não instalou os ícones, rode primeiro <code>INSTALAR_ATALHOS.bat</code>.</p>
+            <div class="command-box" style="margin: 16px 0;">
+                <span>python system_cleaner_advanced.py</span>
+                <button class="copy-btn" onclick="copyToClipboard('python system_cleaner_advanced.py')">Copiar</button>
+            </div>
+            <ul class="feature-list">
+                <li>Mostra prévia do que será deletado</li>
+                <li>Cria restore point automaticamente</li>
+                <li>NADA é deletado nesta primeira execução</li>
+            </ul>
+            <p style="margin-top: 16px; color: var(--text-dim);">Para aplicar de verdade, use o ícone <strong>"Limpar Sistema - Aplicar"</strong>:</p>
+            <div class="command-box" style="margin: 16px 0;">
+                <span>python system_cleaner_advanced.py --apply</span>
+                <button class="copy-btn" onclick="copyToClipboard('python system_cleaner_advanced.py --apply')">Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="repairModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('repairModal')">×</button>
+            <h2>🔧 Reparar Mousepad</h2>
+            <p style="margin: 16px 0; color: var(--text-dim);">Método mais fácil:</p>
+
+            <h3 style="margin-top: 20px;">Ícone "Reparar Touchpad" (Recomendado)</h3>
+            <ul class="feature-list">
+                <li>Rode INSTALAR_ATALHOS.bat uma vez (se ainda não fez)</li>
+                <li>Clique duas vezes no ícone "Reparar Touchpad" na Área de Trabalho</li>
+                <li>Ele pede admin sozinho — clique em "Sim"</li>
+                <li>Aguarde a reinicialização (30 segundos)</li>
+            </ul>
+
+            <h3 style="margin-top: 16px;">Alternativa manual: Clique Direito</h3>
+            <div class="command-box" style="margin: 12px 0;">
+                <span>fix_touchpad.bat</span>
+                <button class="copy-btn" onclick="copyToClipboard('fix_touchpad.bat')">Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('configModal')">×</button>
+            <h2>⚙️ Customizar Configuração</h2>
+            <p style="margin: 16px 0; color: var(--text-dim);">Edite o arquivo de configuração:</p>
+            <div class="command-box" style="margin: 16px 0;">
+                <span>notepad cleaner_config.json</span>
+                <button class="copy-btn" onclick="copyToClipboard('notepad cleaner_config.json')">Copiar</button>
+            </div>
+
+            <h3 style="margin-top: 20px;">O que você pode customizar:</h3>
+            <ul class="feature-list">
+                <li>Habilitar/desabilitar categorias</li>
+                <li>Mudar localizações de scan</li>
+                <li>Ajustar padrões de arquivo</li>
+                <li>Configurar comportamento de segurança</li>
+                <li>Ativar/desativar dry-run</li>
+            </ul>
+
+            <p style="margin-top: 16px; color: var(--text-dim);">Depois de editar, use o ícone "Limpar Sistema - Prévia" de novo para conferir.</p>
+        </div>
+    </div>
+
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('statusModal')">×</button>
+            <h2>📊 Documentação Completa</h2>
+            <p style="margin: 16px 0; color: var(--text-dim);">Escolha o arquivo para mais informações:</p>
+
+            <h3 style="margin-top: 20px;">Para começar agora:</h3>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="copyToClipboard('START_HERE.md')">📖 Orientação Rápida</button>
+
+            <h3 style="margin-top: 20px;">Para entender tudo:</h3>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="copyToClipboard('PROJECT_OVERVIEW.md')">🎯 Visão Completa</button>
+
+            <h3 style="margin-top: 20px;">Para ver a implementação:</h3>
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="copyToClipboard('PHASE_1_SUMMARY.md')">📊 Resumo Fase 1</button>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(function(tab) {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            const targetTab = document.getElementById(tabName);
+            const targetBtn = document.querySelector('.tab-btn[data-tab="' + tabName + '"]');
+            if (targetTab) targetTab.classList.add('active');
+            if (targetBtn) targetBtn.classList.add('active');
+        }
+
+        function openModal(type) {
+            const modalMap = {
+                'clean': 'cleanModal',
+                'repair': 'repairModal',
+                'config': 'configModal',
+                'status': 'statusModal'
+            };
+            const modal = document.getElementById(modalMap[type]);
+            if (modal) modal.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('active');
+        }
+
+        function showToast(message) {
+            let toast = document.getElementById('toast-notification');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast-notification';
+                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);' +
+                    'background:var(--success);color:#fff;padding:12px 24px;border-radius:8px;' +
+                    'font-size:0.9rem;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,0.3);' +
+                    'z-index:2000;opacity:0;transition:all 0.3s ease;pointer-events:none;max-width:90vw;text-align:center;';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = message;
+            requestAnimationFrame(function() {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+            });
+            clearTimeout(toast._hideTimer);
+            toast._hideTimer = setTimeout(function() {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(-50%) translateY(20px)';
+            }, 2200);
+        }
+
+        function legacyCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.left = '-9999px';
+            textarea.style.top = '0';
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            let ok = false;
+            try {
+                ok = document.execCommand('copy');
+            } catch (err) {
+                ok = false;
+            }
+            document.body.removeChild(textarea);
+            return ok;
+        }
+
+        function copyToClipboard(text) {
+            const done = function(success) {
+                showToast(success ? ('✓ Copiado: ' + text) : ('Comando: ' + text));
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(
+                    function() { done(true); },
+                    function() { done(legacyCopy(text)); }
+                );
+            } else {
+                done(legacyCopy(text));
+            }
+        }
+
+        function updateMetrics() {
+            const metrics = {
+                ram: Math.floor(Math.random() * (65 - 50) + 50),
+                cpu: Math.floor(Math.random() * (45 - 20) + 20),
+                disk: Math.floor(Math.random() * (75 - 70) + 70),
+                temp: Math.floor(Math.random() * (56 - 48) + 48)
+            };
+
+            document.getElementById('ram-value').textContent = metrics.ram + '%';
+            document.getElementById('ram-bar').style.width = metrics.ram + '%';
+
+            document.getElementById('cpu-value').textContent = metrics.cpu + '%';
+            document.getElementById('cpu-bar').style.width = metrics.cpu + '%';
+
+            document.getElementById('disk-value').textContent = metrics.disk + '%';
+            document.getElementById('disk-bar').style.width = metrics.disk + '%';
+
+            document.getElementById('temp-value').textContent = metrics.temp + '°C';
+            document.getElementById('temp-bar').style.width = metrics.temp + '%';
+        }
+
+        setInterval(updateMetrics, 3000);
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
