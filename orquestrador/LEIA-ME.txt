@@ -1,0 +1,75 @@
+ORQUESTRADOR MABIOS — instalação passo a passo (Windows)
+==========================================================
+
+Esta pasta tem tudo que precisa. Siga na ordem.
+
+PASSO 1 — Instalar (uma vez)
+-----------------------------
+Dê duplo-clique em: instalar_windows.bat
+Ele cria o ambiente e instala as dependências sozinho.
+Se der erro "Python não encontrado", instale em python.org/downloads
+(marcando "Add Python to PATH") e rode instalar_windows.bat de novo.
+
+PASSO 2 — Credenciais do Google (uma vez)
+-------------------------------------------
+1. Vá em https://console.cloud.google.com
+2. Escolha (ou crie) um projeto
+3. Menu → APIs e serviços → Biblioteca → ative:
+   - Google Drive API
+   - Gmail API
+4. Menu → APIs e serviços → Credenciais → Criar credenciais →
+   ID do cliente OAuth → Tipo de aplicativo: "Aplicativo para computador"
+5. Baixe o JSON gerado, RENOMEIE para credentials.json,
+   e coloque nesta mesma pasta (do lado de orquestrador_mabios.py)
+
+PASSO 3 — Autorizar (uma vez)
+--------------------------------
+Abra o Prompt de Comando nesta pasta (Shift + botão direito → "Abrir
+janela do PowerShell aqui" ou "Abrir terminal aqui") e rode:
+
+    venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
+
+Vai abrir o navegador pedindo para você entrar com flamesinberlim@gmail.com
+e clicar em Permitir. Só acontece essa vez — gera um token.json que
+renova sozinho depois.
+
+PASSO 4 — Colocar para rodar sempre, na inicialização
+--------------------------------------------------------
+1. Pressione Win + R, digite: shell:startup   e aperte Enter
+   (abre a pasta de Inicialização do Windows)
+2. Volte nesta pasta do orquestrador, clique com o botão direito em
+   iniciar_com_reinicio.bat → "Criar atalho"
+3. Arraste esse atalho para dentro da pasta de Inicialização que abriu
+   no passo 1.
+
+Pronto. Da próxima vez que a máquina ligar, o orquestrador MABIOS liga
+sozinho — e se cair por qualquer motivo, o próprio .bat reinicia ele em
+10 segundos, então nunca fica desligado.
+
+TESTAR AGORA (sem esperar reiniciar o PC)
+--------------------------------------------
+Dê duplo-clique em iniciar_com_reinicio.bat diretamente. Ele já começa
+a rodar a matriz (relatório a cada hora, índice a cada 30min, propostas
+1x por dia). Deixe essa janela aberta (ou minimizada) para testar.
+
+COMANDOS ÚTEIS (rodar no Prompt de Comando desta pasta)
+-----------------------------------------------------------
+venv\Scripts\python.exe orquestrador_mabios.py --buscar "railson"
+venv\Scripts\python.exe orquestrador_mabios.py --so-relatorio
+venv\Scripts\python.exe orquestrador_mabios.py --so-indexar
+venv\Scripts\python.exe orquestrador_mabios.py --so-propor
+
+ONDE VER O QUE ESTÁ ACONTECENDO
+------------------------------------
+- orquestrador.log         → log detalhado de cada ciclo
+- orquestrador_startup.log → log de quando ligou/reiniciou
+- propostas_reorganizacao.md → sugestões de organização (revise antes
+  de mexer em qualquer arquivo — o script nunca move nada sozinho)
+- indice_pasta_x.json      → índice pesquisável da Pasta X
+
+IMPORTANTE
+------------
+Depois de confirmar que o relatório unificado está chegando certo em
+flamesinberlim@gmail.com, desligue os gatilhos do CC-001 (Apps Script,
+menu Acionadores) e pare o loop_monitor.py do GA-002, para não ficar
+nada duplicado mandando email por fora da matriz.
