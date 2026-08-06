@@ -57,7 +57,7 @@ setupPlanificadorAgenda()  // Executar uma única vez
 
 ---
 
-### 4️⃣ **CC001_PJeIngestor.gs** — Atualização de Andamentos
+### 4️⃣ **CC001_PJeIngestor.gs** — Atualização de Andamentos (scraping, fallback)
 - 🔄 Consulta PJe a cada 30 minutos
 - Busca últimos andamentos de cada processo
 - Atualiza processos.json no Google Drive
@@ -69,9 +69,36 @@ setupPJeIngestor()  // Executar uma única vez
 ```
 
 **Limitações:** 
-- PJe tem proteção contra scraping
-- Pode exigir ajustes conforme tribunal
-- Alternativa: atualizar manualmente via formulário Google
+- PJe é uma SPA (React/Angular) — scraping por regex em HTML estático não captura a maioria dos processos
+- Login com certificado digital + 2FA (app) não pode ser automatizado — é proposital, protege o sistema
+- Recomendado usar **CC001_DataJudIntegration.gs** abaixo como fonte principal
+
+---
+
+### 5️⃣ **CC001_DataJudIntegration.gs** — Consulta Oficial CNJ (recomendado) ⭐
+- 🏛️ Usa a **API pública DataJud do CNJ** — dados oficiais, sem login, sem certificado, sem 2FA
+- Cobre processos **não sigilosos** do TJRO (e outros tribunais, trocando o alias)
+- Atualiza `ultima_mov` e `mov_desc` automaticamente a cada 30 minutos
+- Processos em segredo de justiça continuam exigindo consulta manual (esperado — é a lei)
+
+**Obter API Key (gratuita, 2 minutos):**
+1. Acesse https://datajud-wiki.cnj.jus.br/api-publica/acesso
+2. Copie a APIKey pública divulgada pelo CNJ
+3. No Apps Script, rode uma vez:
+```javascript
+setDataJudApiKey('SUA_CHAVE_AQUI')
+```
+
+**Setup:**
+```javascript
+setupDataJudIngestor()   // Executar uma única vez
+```
+
+**Teste:**
+```javascript
+testarDataJudIngestor()                          // Roda ingestão completa
+testarConsultaUnicaDataJud('7070726-82.2023.8.22.0001')  // Testa 1 processo
+```
 
 ---
 
