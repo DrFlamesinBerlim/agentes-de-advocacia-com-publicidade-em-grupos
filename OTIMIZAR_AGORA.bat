@@ -130,24 +130,17 @@ echo   os programas que voce nao usa ^(Spotify, Discord, etc^).
 echo ================================================================================
 echo.
 
-REM ---- Escolha de reinicio ----
-echo   Para completar a otimizacao, o Windows precisa reiniciar.
+REM ---- Reinicio automatico confiavel ----
+echo ================================================================================
+echo   O Windows vai REINICIAR automaticamente em 60 segundos
+echo   para aplicar a otimizacao. Salve seus arquivos AGORA.
 echo.
-choice /C SN /N /M "   Reiniciar AGORA? Aperte  S = Sim  ou  N = Depois: "
-if errorlevel 2 goto :depois
-if errorlevel 1 goto :agora
-
-:agora
+echo   Nao quer reiniciar agora? Abra o menu Iniciar, digite:
+echo        shutdown /a
+echo   e tecle Enter para CANCELAR o reinicio.
+echo ================================================================================
+shutdown /r /t 60 /c "Otimizacao concluida - reiniciando" >nul 2>&1
 echo.
-echo   Reiniciando em 15 segundos... Salve seus arquivos!
-echo   ^(Para cancelar: feche esta janela^)
-shutdown /r /t 15 /c "Otimizacao concluida - reiniciando"
-timeout /t 16 /nobreak >nul
-exit /b 0
-
-:depois
-echo.
-echo   Ok! Reinicie voce mesmo quando puder para completar.
-echo.
-pause
+echo   Contagem de 60 segundos iniciada. Pode aguardar aqui.
+timeout /t 62 /nobreak >nul
 exit /b 0

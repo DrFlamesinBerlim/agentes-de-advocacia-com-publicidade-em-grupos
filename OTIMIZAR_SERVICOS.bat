@@ -63,14 +63,16 @@ echo      sc config XblAuthManager start= demand
 echo ================================================================================
 echo.
 
-set "RESP="
-set /p "RESP=   Reiniciar AGORA? Digite S para Sim ou N para depois: "
-if /i "!RESP!"=="S" (
-    echo   Reiniciando em 15 segundos... Salve seus arquivos!
-    shutdown /r /t 15 /c "Otimizacao concluida"
-)
-
+echo ================================================================================
+echo   O Windows vai REINICIAR automaticamente em 60 segundos
+echo   para os servicos fazerem efeito. Salve seus arquivos AGORA.
 echo.
-echo   Pronto. Pode fechar esta janela.
-pause
+echo   Nao quer reiniciar agora? Abra o menu Iniciar, digite:
+echo        shutdown /a
+echo   e tecle Enter para CANCELAR o reinicio.
+echo ================================================================================
+shutdown /r /t 60 /c "Otimizacao concluida - reiniciando" >nul 2>&1
+echo.
+echo   Contagem de 60 segundos iniciada. Pode aguardar aqui.
+timeout /t 62 /nobreak >nul
 exit /b 0
