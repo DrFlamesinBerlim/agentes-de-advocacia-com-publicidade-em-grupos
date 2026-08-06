@@ -19,12 +19,16 @@ function setupAnalisadorPrazos() {
     .filter(t => t.getHandlerFunction() === 'analisarPrazosCriticos')
     .forEach(t => ScriptApp.deleteTrigger(t));
 
-  ScriptApp.newTrigger('analisarPrazosCriticos')
+  ScriptApp.newTrigger('analisarPrazosCriticos_protegido')
     .timeBased()
     .everyHours(1)
     .create();
 
   Logger.log('Analisador de Prazos ativado — verifica a cada hora.');
+}
+
+function analisarPrazosCriticos_protegido() {
+  executarComProtecao('analisarPrazosCriticos', analisarPrazosCriticos);
 }
 
 function lerProcessosPrazo() {

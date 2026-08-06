@@ -19,13 +19,17 @@ function setupPlanificadorAgenda() {
     .filter(t => t.getHandlerFunction() === 'planificarAgenda')
     .forEach(t => ScriptApp.deleteTrigger(t));
 
-  ScriptApp.newTrigger('planificarAgenda')
+  ScriptApp.newTrigger('planificarAgenda_protegido')
     .timeBased()
     .everyDays(1)
     .atHour(8)
     .create();
 
   Logger.log('Planejador de Agenda ativado — sugestões diárias às 8h.');
+}
+
+function planificarAgenda_protegido() {
+  executarComProtecao('planificarAgenda', planificarAgenda);
 }
 
 function lerProcessosAgenda() {

@@ -102,34 +102,45 @@ testarConsultaUnicaDataJud('7070726-82.2023.8.22.0001')  // Testa 1 processo
 
 ---
 
-## 🚀 Instalação Rápida (3 passos)
+## 🚀 Instalação Rápida (4 passos)
 
 ### Passo 1: Criar Projeto Apps Script
 1. Acesse [script.google.com](https://script.google.com)
 2. Novo projeto → Salve como "CC001_MABIOS"
 
 ### Passo 2: Colar Código
-Cole **TODOS OS 4 SCRIPTS** neste único projeto:
+Cole **TODOS OS 7 SCRIPTS** neste único projeto (cada um em um arquivo `.gs` novo):
 1. `CC001_EmailMonitor.gs`
 2. `CC001_PrazoAnalyzer.gs`
 3. `CC001_AgendaPlanner.gs`
-4. `CC001_PJeIngestor.gs`
+4. `CC001_PJeIngestor.gs` (legado/fallback — scraping, limitado)
+5. `CC001_DataJudIntegration.gs` ⭐ (recomendado — API oficial CNJ)
+6. `CC001_ErrorHandler.gs` (alerta por email se alguma automação falhar)
+7. `CC001_MasterSetup.gs` (instala/testa tudo com 2 chamadas)
 
-### Passo 3: Executar Setup
+### Passo 3: Configurar a API Key do DataJud
+1. Copie a APIKey pública em https://datajud-wiki.cnj.jus.br/api-publica/acesso
+2. No editor, selecione a função `setDataJudApiKey`, cole a chave no corpo temporariamente ou rode via console:
 ```javascript
-// Execute estas funções UMA VEZ CADA em ordem:
-setupTriggers()              // Email monitor
-setupAnalisadorPrazos()      // Prazos
-setupPlanificadorAgenda()    // Agenda
-setupPJeIngestor()           // PJe ingestor
+setDataJudApiKey('SUA_CHAVE_AQUI')
+```
+
+### Passo 4: Instalar e Testar Tudo
+Só duas funções — o `CC001_MasterSetup.gs` cuida do resto:
+```javascript
+instalarTudoMABIOS()   // Ativa todos os gatilhos permanentes de uma vez
+testarTudoMABIOS()     // Dispara todos os testes agora — emails chegam na hora
 ```
 
 **⚠️ IMPORTANTE:** Na primeira execução, o Google pedirá autorização para:
 - Acessar Gmail (enviar relatórios)
 - Acessar Google Drive (ler/gravar processos.json)
 - Acessar Google Calendar (criar eventos)
+- Fazer chamadas externas (UrlFetchApp, para consultar o DataJud)
 
 Clique "Revisar permissões" → sua conta → "Avançado" → "Ir para CC001" → "Permitir"
+
+Depois disso, se **qualquer** automação falhar no futuro (silenciosamente, num trigger agendado), você recebe um email `🔴 [CC-001] Falha em automação` explicando o que quebrou — nunca mais falha invisível.
 
 ---
 

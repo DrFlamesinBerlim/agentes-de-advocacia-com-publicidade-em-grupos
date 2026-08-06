@@ -41,12 +41,16 @@ function setupDataJudIngestor() {
     .filter(t => t.getHandlerFunction() === 'ingerirAndamentosDataJud')
     .forEach(t => ScriptApp.deleteTrigger(t));
 
-  ScriptApp.newTrigger('ingerirAndamentosDataJud')
+  ScriptApp.newTrigger('ingerirAndamentosDataJud_protegido')
     .timeBased()
     .everyMinutes(30)
     .create();
 
   Logger.log('Ingestor DataJud ativado — consulta oficial a cada 30 minutos.');
+}
+
+function ingerirAndamentosDataJud_protegido() {
+  executarComProtecao('ingerirAndamentosDataJud', ingerirAndamentosDataJud);
 }
 
 // ─────────────────────────────────────────────

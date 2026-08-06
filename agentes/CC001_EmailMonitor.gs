@@ -29,19 +29,28 @@ function setupTriggers() {
   ScriptApp.getProjectTriggers().forEach(t => ScriptApp.deleteTrigger(t));
 
   // Relatório diário completo às 07h
-  ScriptApp.newTrigger('enviarRelatorioDiario')
+  ScriptApp.newTrigger('enviarRelatorioDiario_protegido')
     .timeBased()
     .everyDays(1)
     .atHour(CONFIG.HORA_RELATORIO_DIARIO)
     .create();
 
   // Monitoramento de alterações a cada hora
-  ScriptApp.newTrigger('monitorarAlteracoes')
+  ScriptApp.newTrigger('monitorarAlteracoes_protegido')
     .timeBased()
     .everyHours(1)
     .create();
 
   Logger.log('Gatilhos criados com sucesso. CC-001 ativo permanentemente.');
+}
+
+// Wrappers protegidos — chamados pelos triggers, avisam por email se falharem
+function enviarRelatorioDiario_protegido() {
+  executarComProtecao('enviarRelatorioDiario', enviarRelatorioDiario);
+}
+
+function monitorarAlteracoes_protegido() {
+  executarComProtecao('monitorarAlteracoes', monitorarAlteracoes);
 }
 
 // ─────────────────────────────────────────────
