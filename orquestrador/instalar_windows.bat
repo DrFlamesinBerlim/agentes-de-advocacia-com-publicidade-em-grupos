@@ -24,9 +24,10 @@ venv\Scripts\pip.exe install -r requirements.txt
 echo.
 echo ============================================================
 echo Instalacao concluida.
-echo Proximo passo: coloque credentials.json nesta pasta e rode
-echo    venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
-echo para autorizar (abre o navegador, voce clica Permitir).
-echo Depois disso, veja LEIA-ME.txt para deixar rodando sempre.
+echo Proximo passo: veja LEIA-ME.txt para:
+echo 1. Instalar gcloud CLI (se ainda nao tiver)
+echo 2. Autorizar com: gcloud auth application-default login
+echo 3. Testar com: venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
+echo 4. Deixar rodando sempre (startup folder)
 echo ============================================================
 pause
