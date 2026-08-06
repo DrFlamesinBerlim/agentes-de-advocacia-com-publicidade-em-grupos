@@ -8,7 +8,7 @@
  *   instalarTudoMABIOS()   → ativa todos os gatilhos permanentes
  *   testarTudoMABIOS()     → dispara todos os testes agora, envia emails
  *
- * Não precisa rodar cada setup*/testar* individualmente.
+ * Não precisa rodar cada função de setup ou de teste individualmente.
  */
 
 function instalarTudoMABIOS() {
