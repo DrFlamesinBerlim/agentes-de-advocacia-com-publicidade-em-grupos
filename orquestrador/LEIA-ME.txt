@@ -10,28 +10,32 @@ Ele cria o ambiente e instala as dependências sozinho.
 Se der erro "Python não encontrado", instale em python.org/downloads
 (marcando "Add Python to PATH") e rode instalar_windows.bat de novo.
 
-PASSO 2 — Credenciais do Google (uma vez)
--------------------------------------------
-1. Vá em https://console.cloud.google.com
-2. Escolha (ou crie) um projeto
-3. Menu → APIs e serviços → Biblioteca → ative:
-   - Google Drive API
-   - Gmail API
-4. Menu → APIs e serviços → Credenciais → Criar credenciais →
-   ID do cliente OAuth → Tipo de aplicativo: "Aplicativo para computador"
-5. Baixe o JSON gerado, RENOMEIE para credentials.json,
-   e coloque nesta mesma pasta (do lado de orquestrador_mabios.py)
+PASSO 2 — Instalar o gcloud CLI (uma vez, se ainda não tiver)
+------------------------------------------------------------------
+Baixe e instale em: https://cloud.google.com/sdk/docs/install
+(instalador do Windows, "Next" em tudo). Ele já pede pra você logar —
+entre com flamesinberlim@gmail.com quando pedir.
+
+Se já usa o Cloud Shell (console.cloud.google.com), o gcloud já está
+pronto por lá, mas o orquestrador roda no SEU PC, então precisa do gcloud
+instalado localmente também.
 
 PASSO 3 — Autorizar (uma vez)
 --------------------------------
-Abra o Prompt de Comando nesta pasta (Shift + botão direito → "Abrir
-janela do PowerShell aqui" ou "Abrir terminal aqui") e rode:
+Abra o PowerShell nesta pasta (Shift + botão direito → "Abrir janela do
+PowerShell aqui") e rode este comando (é um só, mesmo que quebre linha):
 
-    venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
+    gcloud auth application-default login --scopes="https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.modify,openid,https://www.googleapis.com/auth/userinfo.email"
 
 Vai abrir o navegador pedindo para você entrar com flamesinberlim@gmail.com
-e clicar em Permitir. Só acontece essa vez — gera um token.json que
-renova sozinho depois.
+e clicar em Permitir. Não precisa criar nada no Cloud Console — usa o
+app já verificado do próprio Google Cloud SDK. Só acontece essa vez —
+gera um arquivo que renova sozinho depois
+(%APPDATA%\gcloud\application_default_credentials.json).
+
+Depois, confirme que funcionou:
+
+    .\venv\Scripts\python.exe orquestrador_mabios.py --primeira-vez
 
 PASSO 4 — Colocar para rodar sempre, na inicialização
 --------------------------------------------------------

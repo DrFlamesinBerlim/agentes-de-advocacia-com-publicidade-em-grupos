@@ -30,12 +30,13 @@ O QUE ELE NÃO FAZ (por design, não por limitação esquecida):
     máquina sua que fique ligada — VM do Google Cloud, PC local, etc.
 
 SETUP (uma vez):
-  1. pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+  1. pip install -r requirements.txt
   2. No Google Cloud Console, ative as APIs: Drive API + Gmail API
-  3. Crie uma credencial OAuth "Desktop app", baixe como credentials.json
-     e coloque nesta mesma pasta.
-  4. Rode: python orquestrador_mabios.py --primeira-vez
-     (abre o navegador, você autoriza, gera token.json — só acontece 1x)
+  3. Rode (precisa do gcloud CLI instalado):
+     gcloud auth application-default login --scopes=https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.modify,openid,https://www.googleapis.com/auth/userinfo.email
+     (abre o navegador, você autoriza com flamesinberlim@gmail.com — só
+     acontece 1x, gera application_default_credentials.json que renova
+     sozinho depois)
 
 USO CONTÍNUO (a matriz rodando):
   python orquestrador_mabios.py
@@ -61,9 +62,8 @@ from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from pathlib import Path
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
+import google.auth
+from google.auth.exceptions import DefaultCredentialsError
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -101,8 +101,6 @@ CONFIG = {
         "https://www.googleapis.com/auth/gmail.modify",
     ],
 
-    "CREDENTIALS_FILE": str(BASE_DIR / "credentials.json"),
-    "TOKEN_FILE": str(BASE_DIR / "token.json"),
     "INDICE_FILE": str(BASE_DIR / "indice_pasta_x.json"),
     "PROPOSTAS_FILE": str(BASE_DIR / "propostas_reorganizacao.md"),
     "LOG_FILE": str(BASE_DIR / "orquestrador.log"),
@@ -130,31 +128,26 @@ log = logging.getLogger("mabios")
 # ──────────────────────────────────────────────────────────────────────────
 
 def autenticar():
-    """Fluxo OAuth padrão. Gera token.json na primeira vez, depois reutiliza
-    e renova sozinho — não pede autorização de novo a cada execução."""
-    creds = None
-    token_path = Path(CONFIG["TOKEN_FILE"])
-
-    if token_path.exists():
-        creds = Credentials.from_authorized_user_file(str(token_path), CONFIG["SCOPES"])
-
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
-            if not Path(CONFIG["CREDENTIALS_FILE"]).exists():
-                log.error(
-                    "credentials.json não encontrado. Baixe do Google Cloud "
-                    "Console (OAuth Client ID → Desktop app) e coloque em: %s",
-                    CONFIG["CREDENTIALS_FILE"],
-                )
-                sys.exit(1)
-            flow = InstalledAppFlow.from_client_secrets_file(
-                CONFIG["CREDENTIALS_FILE"], CONFIG["SCOPES"]
-            )
-            creds = flow.run_local_server(port=0)
-        token_path.write_text(creds.to_json(), encoding="utf-8")
-
+    """Usa as Application Default Credentials do gcloud (gerado por
+    `gcloud auth application-default login --scopes=...`). Não precisa de
+    credentials.json nem de criar cliente OAuth manual no Cloud Console —
+    usa o app já verificado do próprio Google Cloud SDK. O token fica em
+    ~/.config/gcloud/application_default_credentials.json (Linux/Mac) ou
+    %APPDATA%\\gcloud\\application_default_credentials.json (Windows) e
+    renova sozinho."""
+    try:
+        creds, _ = google.auth.default(scopes=CONFIG["SCOPES"])
+    except DefaultCredentialsError:
+        log.error(
+            "Application Default Credentials não encontradas. Rode uma vez:\n"
+            "  gcloud auth application-default login --scopes=%s\n"
+            "(abre o navegador, você autoriza com flamesinberlim@gmail.com)",
+            ",".join(CONFIG["SCOPES"] + [
+                "https://www.googleapis.com/auth/userinfo.email",
+                "openid",
+            ]),
+        )
+        sys.exit(1)
     return creds
 
 
@@ -487,7 +480,7 @@ def main():
     creds = autenticar()
 
     if args.primeira_vez:
-        log.info("Autorização concluída. token.json gerado.")
+        log.info("Autenticação verificada com sucesso via Application Default Credentials.")
         return
 
     drive, gmail = get_services(creds)
