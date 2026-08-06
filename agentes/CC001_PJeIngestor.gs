@@ -20,6 +20,7 @@ const CONFIG_INGESTOR = {
   NOME_COMPLETO: 'Jefferson Silva de Brito',
   CPF: '02881809928',
   PJE_URL: 'https://pje.tjro.jus.br',
+  PJE_LOGIN_URL: 'https://pje.tjro.jus.br/pje/login.seam',
   LOG_SHEET_ID: null, // Opcional: apontar para Google Sheet de logs
   INGESTOR_HASH_KEY: 'pje_ingestor_ultima_consulta',
   PRAZO_ALERTA_DIAS: 5, // Alertar X dias antes do prazo

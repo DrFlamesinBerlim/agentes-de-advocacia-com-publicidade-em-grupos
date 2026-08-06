@@ -226,8 +226,8 @@ function enviarRelatorioDiario() {
   const html = gerarRelatorioHTML(processos, hoje);
   const assunto = `[CC-001] Relatório Diário — De Brito Advocacia | ${dataStr}`;
 
-  // Deletar relatório anterior (mesmo assunto)
-  const threads = GmailApp.search('from:noreply@google.com subject:"[CC-001] Relatório Diário"');
+  // Deletar relatório anterior (mesmo assunto, enviado por mim mesmo)
+  const threads = GmailApp.search('in:sent subject:"[CC-001] Relatório Diário"');
   threads.slice(0, 5).forEach(t => {
     const msgs = t.getMessages();
     msgs.forEach(m => {
