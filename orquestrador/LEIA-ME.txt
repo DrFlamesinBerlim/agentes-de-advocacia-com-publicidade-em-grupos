@@ -25,7 +25,7 @@ PASSO 3 — Autorizar (uma vez)
 Abra o PowerShell nesta pasta (Shift + botão direito → "Abrir janela do
 PowerShell aqui") e rode este comando (é um só, mesmo que quebre linha):
 
-    gcloud auth application-default login --scopes="https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.modify,openid,https://www.googleapis.com/auth/userinfo.email"
+    gcloud auth application-default login --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/drive,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.modify,openid,https://www.googleapis.com/auth/userinfo.email"
 
 Vai abrir o navegador pedindo para você entrar com flamesinberlim@gmail.com
 e clicar em Permitir. Não precisa criar nada no Cloud Console — usa o
