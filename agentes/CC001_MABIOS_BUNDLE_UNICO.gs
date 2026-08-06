@@ -44,6 +44,17 @@
  *
  * Triggers do Apps Script falham SILENCIOSAMENTE — o erro só aparece
  * nos logs, que ninguém checa. Esta função avisa por email quando
+
+// ═══════════════════════════════════════════════════════════════
+// ORIGEM: CC001_ErrorHandler.gs
+// ═══════════════════════════════════════════════════════════════
+
+/**
+ * CC-001 — MABIOS v3 — Notificação de Erros
+ * Dr. Jefferson Silva de Brito | OAB/RO 2952
+ *
+ * Triggers do Apps Script falham SILENCIOSAMENTE — o erro só aparece
+ * nos logs, que ninguém checa. Esta função avisa por email quando
  * qualquer automação quebra, para nunca haver falha invisível.
  *
  * Usado internamente pelos outros scripts — não precisa chamar direto.
@@ -694,7 +705,9 @@ function testarAnalisadorPrazos() {
 const CONFIG_AGENDA = {
   PROCESSOS_FILE_ID: '1HpfH2bbsfbtFstygaNevn4oIl5uBeHgz',
   EMAIL_DESTINO: 'flamesinberlim@gmail.com',
-  CALENDAR_ID: 'primary', // Usar calendário padrão
+  // Calendário explícito (não usar 'primary': escreveria no calendário
+  // de qualquer conta que rodasse o script — o Dr. Jefferson tem mais de uma)
+  CALENDAR_ID: 'flamesinberlim@gmail.com',
   DIAS_UTEIS_ANTES_PRAZO: 5, // Sugerir 5 dias úteis antes do prazo
   HORARIO_PADRAO_PETICIO: 14, // Sugerir petições às 14h (depois do almoço)
 };
@@ -1147,7 +1160,10 @@ const CONFIG_INGESTOR = {
   OAB_NUMERO: '2952',
   OAB_UF: 'RO',
   NOME_COMPLETO: 'Jefferson Silva de Brito',
-  CPF: '02881809928',
+  // CPF removido: não era usado por nenhuma função deste arquivo e não deve
+  // ficar versionado. Se algum dia for necessário, guarde em
+  // PropertiesService (Configurações do projeto → Propriedades do script),
+  // nunca no código-fonte.
   PJE_URL: 'https://pje.tjro.jus.br',
   PJE_LOGIN_URL: 'https://pje.tjro.jus.br/pje/login.seam',
   LOG_SHEET_ID: null, // Opcional: apontar para Google Sheet de logs

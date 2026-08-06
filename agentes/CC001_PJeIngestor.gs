@@ -18,7 +18,10 @@ const CONFIG_INGESTOR = {
   OAB_NUMERO: '2952',
   OAB_UF: 'RO',
   NOME_COMPLETO: 'Jefferson Silva de Brito',
-  CPF: '02881809928',
+  // CPF removido: não era usado por nenhuma função deste arquivo e não deve
+  // ficar versionado. Se algum dia for necessário, guarde em
+  // PropertiesService (Configurações do projeto → Propriedades do script),
+  // nunca no código-fonte.
   PJE_URL: 'https://pje.tjro.jus.br',
   PJE_LOGIN_URL: 'https://pje.tjro.jus.br/pje/login.seam',
   LOG_SHEET_ID: null, // Opcional: apontar para Google Sheet de logs

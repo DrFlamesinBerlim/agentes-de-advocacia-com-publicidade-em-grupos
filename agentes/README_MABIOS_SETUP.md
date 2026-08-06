@@ -97,7 +97,7 @@ setupDataJudIngestor()   // Executar uma única vez
 **Teste:**
 ```javascript
 testarDataJudIngestor()                          // Roda ingestão completa
-testarConsultaUnicaDataJud('7070726-82.2023.8.22.0001')  // Testa 1 processo
+testarConsultaUnicaDataJud('0000000-00.0000.0.00.0000')  // Testa 1 processo
 ```
 
 ---
@@ -208,7 +208,7 @@ Em `CC001_PJeIngestor.gs`, função `setupPJeIngestor()`:
 ### Campo `processos.json` necessário:
 ```json
 {
-  "numero": "7070726-82.2023.8.22.0001",
+  "numero": "0000000-00.0000.0.00.0000",
   "cliente": "Nome do Cliente",
   "partes": "Autor vs Réu",
   "ultima_mov": "28/06/2026",

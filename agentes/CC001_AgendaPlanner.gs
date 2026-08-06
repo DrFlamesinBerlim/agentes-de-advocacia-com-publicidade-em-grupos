@@ -9,7 +9,9 @@
 const CONFIG_AGENDA = {
   PROCESSOS_FILE_ID: '1HpfH2bbsfbtFstygaNevn4oIl5uBeHgz',
   EMAIL_DESTINO: 'flamesinberlim@gmail.com',
-  CALENDAR_ID: 'primary', // Usar calendário padrão
+  // Calendário explícito (não usar 'primary': escreveria no calendário
+  // de qualquer conta que rodasse o script — o Dr. Jefferson tem mais de uma)
+  CALENDAR_ID: 'flamesinberlim@gmail.com',
   DIAS_UTEIS_ANTES_PRAZO: 5, // Sugerir 5 dias úteis antes do prazo
   HORARIO_PADRAO_PETICIO: 14, // Sugerir petições às 14h (depois do almoço)
 };
